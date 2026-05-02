@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 155" role="img" aria-label="Gulf Coast Development Group">
+  <defs>
+    <linearGradient id="badgeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#152538"/>
+      <stop offset="100%" style="stop-color:#0D1B2A"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#E5C97A"/>
+      <stop offset="100%" style="stop-color:#C9A84C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ===== LOGOMARK BADGE ===== -->
+  <!-- Outer badge: navy rounded square -->
+  <rect x="0" y="8" width="138" height="138" rx="7" fill="url(#badgeGrad)"/>
+  <!-- Inner gold frame -->
+  <rect x="7" y="15" width="124" height="124" rx="3.5" fill="none" stroke="#C9A84C" stroke-width="0.9" opacity="0.7"/>
+
+  <!-- ===== BUILDING SILHOUETTES (gold) ===== -->
+  <!-- Left building -->
+  <rect x="16" y="60" width="24" height="50" fill="url(#goldGrad)"/>
+  <!-- Left building flat roof cap -->
+  <rect x="14" y="57" width="28" height="4" fill="url(#goldGrad)"/>
+
+  <!-- Center tower — stepped modern commercial profile -->
+  <path d="M60,10 L73,10 L73,20 L81,20 L81,29 L85,29 L85,110 L48,110 L48,29 L52,29 L52,20 L60,20 Z"
+        fill="url(#goldGrad)"/>
+  <!-- Antenna/spire on center tower -->
+  <line x1="66.5" y1="10" x2="66.5" y2="4" stroke="#C9A84C" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="66.5" cy="4" r="1.5" fill="#C9A84C"/>
+
+  <!-- Right building -->
+  <rect x="93" y="50" width="24" height="60" fill="url(#goldGrad)"/>
+  <!-- Right building flat roof cap -->
+  <rect x="91" y="47" width="28" height="4" fill="url(#goldGrad)"/>
+
+  <!-- Ground/base line beneath buildings -->
+  <rect x="14" y="110" width="105" height="2" fill="#C9A84C" opacity="0.9"/>
+
+  <!-- ===== GULF WATER WAVES ===== -->
+  <!-- Water horizon fill -->
+  <path d="M14,112 Q32,105 51,112 Q70,119 89,112 Q108,105 124,112 L124,138 L14,138 Z"
+        fill="#C9A84C" opacity="0.12"/>
+
+  <!-- Wave 1 (primary) -->
+  <path d="M14,112 Q32,105 51,112 Q70,119 89,112 Q108,105 124,112"
+        stroke="url(#goldGrad)" stroke-width="2" fill="none"/>
+  <!-- Wave 2 (secondary) -->
+  <path d="M14,121 Q32,114 51,121 Q70,128 89,121 Q108,114 124,121"
+        stroke="#C9A84C" stroke-width="1.4" fill="none" opacity="0.55"/>
+  <!-- Wave 3 (tertiary) -->
+  <path d="M14,130 Q32,123 51,130 Q70,137 89,130 Q108,123 124,130"
+        stroke="#C9A84C" stroke-width="0.9" fill="none" opacity="0.28"/>
+
+  <!-- ===== WORDMARK ===== -->
+  <!-- Primary name: GULF COAST -->
+  <text x="158" y="78"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="46"
+        font-weight="bold"
+        fill="#0D1B2A"
+        letter-spacing="3">GULF COAST</text>
+
+  <!-- Secondary: DEVELOPMENT GROUP -->
+  <text x="159" y="106"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="17.5"
+        fill="#0D1B2A"
+        letter-spacing="10.5">DEVELOPMENT GROUP</text>
+
+  <!-- Gold accent rule -->
+  <line x1="158" y1="118" x2="572" y2="118" stroke="#C9A84C" stroke-width="1.3"/>
+
+  <!-- Tagline / markets -->
+  <text x="159" y="135"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="11"
+        fill="#C9A84C"
+        letter-spacing="3.5"
+        font-style="italic">DESTIN, FLORIDA  ·  ORANGE BEACH, ALABAMA</text>
+</svg>

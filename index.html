@@ -1,0 +1,1990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gulf Coast Development Group | Commercial Real Estate Development</title>
+  <meta name="description" content="Premier commercial real estate developer in Destin, FL and Orange Beach, AL. Connecting capital investors with the Gulf South's highest-growth coastal markets.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       CSS CUSTOM PROPERTIES
+    ============================================================ */
+    :root {
+      --navy:        #0D1B2A;
+      --navy-mid:    #152538;
+      --navy-light:  #1A3A5C;
+      --gold:        #C9A84C;
+      --gold-light:  #E5C97A;
+      --gold-dark:   #A07828;
+      --cream:       #F8F5EE;
+      --cream-dark:  #EDE8DC;
+      --white:       #FFFFFF;
+      --gray:        #8A8780;
+      --gray-dark:   #4A4742;
+      --text:        #1A1814;
+
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans:  'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --shadow-sm:  0 2px 12px rgba(13,27,42,0.08);
+      --shadow-md:  0 8px 40px rgba(13,27,42,0.14);
+      --shadow-lg:  0 24px 80px rgba(13,27,42,0.22);
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--sans);
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    ul { list-style: none; }
+
+    /* ============================================================
+       TYPOGRAPHY UTILITIES
+    ============================================================ */
+    .eyebrow {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .gold-rule {
+      display: block;
+      width: 56px;
+      height: 2px;
+      background: var(--gold);
+      margin: 1.2rem 0 1.8rem;
+    }
+    .gold-rule.centered { margin-left: auto; margin-right: auto; }
+
+    /* ============================================================
+       SCROLL ANIMATIONS
+    ============================================================ */
+    [data-animate] {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+    }
+    [data-animate].is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    [data-animate][data-delay="1"] { transition-delay: 0.1s; }
+    [data-animate][data-delay="2"] { transition-delay: 0.2s; }
+    [data-animate][data-delay="3"] { transition-delay: 0.3s; }
+    [data-animate][data-delay="4"] { transition-delay: 0.4s; }
+    [data-animate][data-delay="5"] { transition-delay: 0.5s; }
+    [data-animate][data-delay="6"] { transition-delay: 0.6s; }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 1.6rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
+    }
+    #navbar.scrolled {
+      background: rgba(13,27,42,0.97);
+      backdrop-filter: blur(12px);
+      padding: 1rem 5%;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .nav-logo svg {
+      height: 52px;
+      width: auto;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.82);
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.5rem;
+      border: 1.5px solid var(--gold);
+      color: var(--gold) !important;
+      font-size: 0.78rem !important;
+      letter-spacing: 0.14em !important;
+      border-radius: 2px;
+      transition: background 0.25s, color 0.25s !important;
+    }
+    .nav-cta:hover {
+      background: var(--gold) !important;
+      color: var(--navy) !important;
+    }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* Mobile nav */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--navy);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--serif);
+      font-size: 2rem;
+      color: var(--white);
+      transition: color 0.25s;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+    .mobile-close {
+      position: absolute;
+      top: 1.6rem; right: 5%;
+      color: var(--white);
+      font-size: 2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* ============================================================
+       HERO SECTION
+    ============================================================ */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Animated gradient background */
+    .hero-bg {
+      position: absolute;
+      inset: -15%;
+      background: linear-gradient(
+        135deg,
+        #040e1a 0%,
+        #0D1B2A 25%,
+        #0e2540 50%,
+        #091929 75%,
+        #040e1a 100%
+      );
+      background-size: 400% 400%;
+      animation: heroGradient 14s ease infinite;
+      will-change: transform;
+    }
+    @keyframes heroGradient {
+      0%, 100% { background-position: 0% 50%; }
+      50%       { background-position: 100% 50%; }
+    }
+
+    /* Subtle radial light blobs */
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 25% 65%, rgba(26,58,92,0.5) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 78% 35%, rgba(201,168,76,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 80% 40% at 50% 90%, rgba(10,30,55,0.6) 0%, transparent 80%);
+    }
+
+    /* Subtle dot grid texture */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 36px 36px;
+    }
+
+    /* Parallax content wrapper */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 5%;
+      max-width: 900px;
+      will-change: transform;
+    }
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0;
+      animation: fadeUp 1s var(--ease-out) 0.3s forwards;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 6vw, 5.2rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.12;
+      margin-top: 1.2rem;
+      opacity: 0;
+      animation: fadeUp 1s var(--ease-out) 0.55s forwards;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .hero-sub {
+      font-family: var(--sans);
+      font-size: clamp(1rem, 1.8vw, 1.18rem);
+      font-weight: 300;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.75;
+      margin-top: 1.5rem;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0;
+      animation: fadeUp 1s var(--ease-out) 0.75s forwards;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2.8rem;
+      opacity: 0;
+      animation: fadeUp 1s var(--ease-out) 0.95s forwards;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2.2rem;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.35);
+    }
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(201,168,76,0.45);
+    }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2.2rem;
+      border: 1.5px solid rgba(255,255,255,0.5);
+      color: var(--white);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: border-color 0.25s, background 0.25s, transform 0.2s;
+    }
+    .btn-outline:hover {
+      border-color: var(--white);
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-2px);
+    }
+
+    /* Animated wave at hero bottom */
+    .hero-wave {
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      z-index: 3;
+      line-height: 0;
+      overflow: hidden;
+    }
+    .hero-wave svg {
+      width: 200%;
+      height: 90px;
+      animation: waveScroll 12s linear infinite;
+    }
+    @keyframes waveScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 90px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 1s var(--ease-out) 1.4s forwards;
+    }
+    .scroll-indicator span {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+    .scroll-mouse {
+      width: 22px;
+      height: 36px;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 11px;
+      display: flex;
+      justify-content: center;
+      padding-top: 6px;
+    }
+    .scroll-mouse::before {
+      content: '';
+      width: 3px;
+      height: 7px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 2px;
+      animation: scrollDot 2s ease-in-out infinite;
+    }
+    @keyframes scrollDot {
+      0%, 100% { transform: translateY(0); opacity: 1; }
+      50%       { transform: translateY(8px); opacity: 0.3; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       STATS BAR
+    ============================================================ */
+    #stats {
+      background: var(--navy-mid);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .stat-item {
+      padding: 3rem 2rem;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      position: relative;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width 0.6s var(--ease-out);
+    }
+    .stat-item.is-visible::after { width: 40px; }
+    .stat-number {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 0.1em;
+    }
+    .stat-number .prefix,
+    .stat-number .suffix {
+      font-size: 0.6em;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .stat-label {
+      margin-top: 0.75rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ============================================================
+       SHARED SECTION STYLES
+    ============================================================ */
+    section { position: relative; }
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 7rem 5%;
+    }
+    .section-header {
+      max-width: 680px;
+    }
+    .section-header.centered {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 3.5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.18;
+      color: inherit;
+    }
+    .section-body {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--gray-dark);
+      margin-top: 1.2rem;
+    }
+    .section-body.light { color: rgba(255,255,255,0.68); }
+
+    /* ============================================================
+       OPPORTUNITY SECTION
+    ============================================================ */
+    #opportunity {
+      background: var(--cream);
+    }
+    .opportunity-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .opportunity-visual {
+      position: relative;
+    }
+    .opp-graphic {
+      background: var(--navy);
+      border-radius: 4px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+    }
+    .opp-graphic-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* CSS skyline illustration */
+    .skyline-art {
+      width: 100%;
+      height: 100%;
+    }
+    .opp-badge {
+      position: absolute;
+      bottom: -1.5rem;
+      right: -1.5rem;
+      background: var(--gold);
+      color: var(--navy);
+      padding: 1.5rem 1.8rem;
+      border-radius: 3px;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+    .opp-badge-number {
+      font-family: var(--serif);
+      font-size: 2.4rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .opp-badge-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 0.3rem;
+      opacity: 0.75;
+    }
+    .opportunity-points {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .opp-point {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .opp-point-icon {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.12);
+      border: 1.5px solid rgba(201,168,76,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+    .opp-point-icon svg { width: 16px; height: 16px; }
+    .opp-point-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .opp-point-text {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--gray);
+      margin-top: 0.25rem;
+    }
+
+    /* ============================================================
+       MARKETS SECTION
+    ============================================================ */
+    #markets {
+      background: var(--navy);
+      color: var(--white);
+    }
+    #markets .section-title { color: var(--white); }
+    .markets-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+    .market-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .market-card:hover {
+      border-color: rgba(201,168,76,0.4);
+      transform: translateY(-4px);
+    }
+    .market-card-header {
+      padding: 2.5rem 2.5rem 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      position: relative;
+      overflow: hidden;
+    }
+    /* Decorative background element in card header */
+    .market-card-header::before {
+      content: '';
+      position: absolute;
+      right: -30px;
+      top: -30px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    }
+    .market-tag {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    .market-name {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+    }
+    .market-tagline {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.5);
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .market-card-body {
+      padding: 2rem 2.5rem 2.5rem;
+    }
+    .market-desc {
+      font-size: 0.94rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.62);
+    }
+    .market-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+    .mstat {
+      background: rgba(255,255,255,0.04);
+      border-radius: 3px;
+      padding: 1.1rem;
+      border-left: 2px solid var(--gold);
+    }
+    .mstat-value {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+    }
+    .mstat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+      margin-top: 0.4rem;
+    }
+
+    /* ============================================================
+       DEVELOPMENT FOCUS
+    ============================================================ */
+    #portfolio {
+      background: var(--white);
+    }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+    .portfolio-card {
+      border: 1px solid rgba(13,27,42,0.08);
+      border-radius: 4px;
+      padding: 2.2rem 1.8rem;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .portfolio-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s var(--ease-out);
+    }
+    .portfolio-card:hover {
+      border-color: rgba(201,168,76,0.25);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-4px);
+    }
+    .portfolio-card:hover::before { transform: scaleX(1); }
+    .portfolio-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(201,168,76,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .portfolio-icon svg { width: 24px; height: 24px; }
+    .portfolio-title {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 0.8rem;
+    }
+    .portfolio-desc {
+      font-size: 0.88rem;
+      line-height: 1.72;
+      color: var(--gray);
+    }
+
+    /* ============================================================
+       INVESTMENT SECTION
+    ============================================================ */
+    #investment {
+      background: linear-gradient(160deg, #0A1620 0%, #0D1B2A 50%, #111F33 100%);
+      color: var(--white);
+    }
+    #investment .section-title { color: var(--white); }
+    .investment-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .investment-terms {
+      margin-top: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+    .term-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 3px;
+      padding: 1.4rem;
+      transition: border-color 0.3s;
+    }
+    .term-box:hover { border-color: rgba(201,168,76,0.35); }
+    .term-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .term-value {
+      font-family: var(--serif);
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-top: 0.4rem;
+      line-height: 1.15;
+    }
+    .investment-process {
+      padding-top: 0.5rem;
+    }
+    .process-title {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 2rem;
+    }
+    .process-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .process-step {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      padding-bottom: 2rem;
+      position: relative;
+    }
+    .process-step:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 40px;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, rgba(201,168,76,0.4), rgba(201,168,76,0.1));
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      background: rgba(201,168,76,0.08);
+    }
+    .step-content-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+    .step-content-text {
+      font-size: 0.86rem;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ============================================================
+       WHY US SECTION
+    ============================================================ */
+    #why-us {
+      background: var(--cream);
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+    .why-card {
+      background: var(--white);
+      border-radius: 4px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .why-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+    }
+    .why-icon {
+      flex-shrink: 0;
+      width: 56px;
+      height: 56px;
+      background: var(--navy);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .why-icon svg { width: 26px; height: 26px; }
+    .why-text-title {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.6rem;
+    }
+    .why-text-desc {
+      font-size: 0.9rem;
+      line-height: 1.72;
+      color: var(--gray);
+    }
+
+    /* ============================================================
+       CONTACT SECTION
+    ============================================================ */
+    #contact {
+      background: var(--navy);
+      color: var(--white);
+    }
+    #contact .section-title { color: var(--white); }
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .contact-info {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .contact-item {
+      display: flex;
+      gap: 1.1rem;
+      align-items: flex-start;
+    }
+    .contact-item-icon {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .contact-item-icon svg { width: 18px; height: 18px; }
+    .contact-item-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.25rem;
+    }
+    .contact-item-value {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.55;
+    }
+    .contact-form {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 4px;
+      padding: 2.5rem;
+    }
+    .form-title {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 2rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 0.5rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 2px;
+      padding: 0.85rem 1rem;
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      transition: border-color 0.25s;
+      outline: none;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(255,255,255,0.25);
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+    }
+    .form-group select option { background: var(--navy); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-submit {
+      width: 100%;
+      padding: 1.05rem;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.2s;
+      margin-top: 0.5rem;
+    }
+    .form-submit:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+    .form-disclaimer {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.25);
+      line-height: 1.6;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: #060f18;
+      border-top: 1px solid rgba(201,168,76,0.12);
+      padding: 3rem 5%;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .footer-logo svg {
+      height: 44px;
+      width: auto;
+    }
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      transition: color 0.25s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.2);
+      text-align: right;
+      line-height: 1.6;
+    }
+    .footer-disclaimer {
+      max-width: 1200px;
+      margin: 2rem auto 0;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.18);
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1024px) {
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+      .opportunity-layout { gap: 3.5rem; }
+      .investment-layout { gap: 3.5rem; }
+      .contact-layout { gap: 3.5rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(3) { border-right: none; border-top: 1px solid rgba(255,255,255,0.06); }
+      .stat-item:nth-child(4) { border-top: 1px solid rgba(255,255,255,0.06); }
+      .opportunity-layout { grid-template-columns: 1fr; }
+      .markets-grid { grid-template-columns: 1fr; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .investment-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .investment-terms { grid-template-columns: 1fr 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-copy { text-align: left; }
+      .opp-badge { bottom: 0; right: 0; }
+    }
+    @media (max-width: 480px) {
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .section-inner { padding: 5rem 5%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     MOBILE MENU
+============================================================ -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+  <a href="#opportunity" onclick="closeMobile()">About</a>
+  <a href="#markets"     onclick="closeMobile()">Markets</a>
+  <a href="#portfolio"   onclick="closeMobile()">Development</a>
+  <a href="#investment"  onclick="closeMobile()">Investment</a>
+  <a href="#contact"     onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- ============================================================
+     NAVIGATION
+============================================================ -->
+<nav id="navbar" aria-label="Main navigation">
+  <div class="nav-logo">
+    <!-- Inline logo (white/gold version for dark navbar) -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 110" role="img" aria-label="Gulf Coast Development Group">
+      <!-- Badge -->
+      <rect x="0" y="5" width="96" height="96" rx="5" fill="rgba(255,255,255,0.08)"/>
+      <rect x="4" y="9" width="88" height="88" rx="3" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.6"/>
+      <!-- Buildings (gold) -->
+      <rect x="12" y="46" width="17" height="37" fill="#C9A84C"/>
+      <rect x="11" y="43" width="19" height="3" fill="#C9A84C"/>
+      <path d="M42,9 L51,9 L51,16 L57,16 L57,22 L60,22 L60,83 L34,83 L34,22 L37,22 L37,16 L42,16 Z" fill="#C9A84C"/>
+      <line x1="47" y1="9" x2="47" y2="5" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round"/>
+      <circle cx="47" cy="5" r="1.2" fill="#C9A84C"/>
+      <rect x="67" y="38" width="17" height="45" fill="#C9A84C"/>
+      <rect x="66" y="35" width="19" height="3" fill="#C9A84C"/>
+      <!-- Horizon -->
+      <line x1="8" y1="83" x2="88" y2="83" stroke="#C9A84C" stroke-width="1.2"/>
+      <!-- Waves -->
+      <path d="M8,88 Q21,83 34,88 Q47,93 60,88 Q73,83 88,88" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+      <path d="M8,94 Q21,89 34,94 Q47,99 60,94 Q73,89 88,94" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.45"/>
+      <!-- Wordmark -->
+      <text x="108" y="55" font-family="Georgia,serif" font-size="30" font-weight="bold" fill="#FFFFFF" letter-spacing="2">GULF COAST</text>
+      <text x="109" y="73" font-family="Georgia,serif" font-size="11.5" fill="rgba(255,255,255,0.65)" letter-spacing="6.5">DEVELOPMENT GROUP</text>
+      <line x1="108" y1="80" x2="412" y2="80" stroke="#C9A84C" stroke-width="0.9"/>
+      <text x="109" y="93" font-family="Georgia,serif" font-size="7.5" fill="#C9A84C" letter-spacing="2.5" font-style="italic">DESTIN, FL  ·  ORANGE BEACH, AL</text>
+    </svg>
+  </div>
+  <ul class="nav-links" role="list">
+    <li><a href="#opportunity">About</a></li>
+    <li><a href="#markets">Markets</a></li>
+    <li><a href="#portfolio">Development</a></li>
+    <li><a href="#investment">Investment</a></li>
+    <li><a href="#contact" class="nav-cta">Investor Relations</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section id="hero" aria-label="Hero">
+  <div class="hero-bg" id="heroBg"></div>
+
+  <div class="hero-content" id="heroContent">
+    <p class="hero-eyebrow">Gulf Coast Development Group</p>
+    <h1 class="hero-title">
+      Where <em>Capital</em><br>Meets Coast
+    </h1>
+    <p class="hero-sub">
+      Premier commercial real estate development in the Gulf South's highest-growth
+      coastal markets — Destin, Florida and Orange Beach, Alabama.
+      Institutional-quality projects. Local expertise. Exceptional returns.
+    </p>
+    <div class="hero-ctas">
+      <a href="#investment" class="btn-primary">
+        Explore Opportunities
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#contact" class="btn-outline">Contact Investor Relations</a>
+    </div>
+  </div>
+
+  <!-- Animated wave transition -->
+  <div class="hero-wave" aria-hidden="true">
+    <svg viewBox="0 0 2880 90" preserveAspectRatio="none" fill="#F8F5EE">
+      <path d="M0,50 C240,90 480,10 720,50 C960,90 1200,10 1440,50 C1680,90 1920,10 2160,50 C2400,90 2640,10 2880,50 L2880,90 L0,90 Z"/>
+    </svg>
+  </div>
+
+  <div class="scroll-indicator" aria-hidden="true">
+    <div class="scroll-mouse"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     STATS BAR
+============================================================ -->
+<section id="stats" aria-label="Key statistics">
+  <div class="stats-grid">
+    <div class="stat-item" data-animate>
+      <div class="stat-number">
+        <span class="prefix">$</span>
+        <span class="counter" data-target="1200" data-suffix="">1,200</span>
+        <span class="suffix">M+</span>
+      </div>
+      <div class="stat-label">Total Development Pipeline</div>
+    </div>
+    <div class="stat-item" data-animate data-delay="2">
+      <div class="stat-number">
+        <span class="counter" data-target="25">25</span>
+        <span class="suffix">+</span>
+      </div>
+      <div class="stat-label">Years Combined Experience</div>
+    </div>
+    <div class="stat-item" data-animate data-delay="3">
+      <div class="stat-number">
+        <span class="counter" data-target="30">30</span>
+        <span class="suffix">M+</span>
+      </div>
+      <div class="stat-label">Annual Regional Visitors</div>
+    </div>
+    <div class="stat-item" data-animate data-delay="4">
+      <div class="stat-number">
+        <span class="counter" data-target="18">18</span>
+        <span class="suffix">%</span>
+      </div>
+      <div class="stat-label">Target Net IRR</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     OPPORTUNITY SECTION
+============================================================ -->
+<section id="opportunity" aria-labelledby="opp-heading">
+  <div class="section-inner">
+    <div class="opportunity-layout">
+      <div class="opportunity-left" data-animate>
+        <div class="section-header">
+          <p class="eyebrow">Market Opportunity</p>
+          <span class="gold-rule"></span>
+          <h2 class="section-title" id="opp-heading">
+            America's Most Dynamic Coastal Growth Corridor
+          </h2>
+          <p class="section-body">
+            The Destin–Orange Beach corridor has emerged as one of the nation's most
+            compelling commercial real estate opportunities — a rare convergence of
+            explosive population growth, record tourism demand, and a dramatically
+            undersupplied commercial market that rewards experienced local developers.
+          </p>
+        </div>
+        <div class="opportunity-points">
+          <div class="opp-point">
+            <div class="opp-point-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
+              </svg>
+            </div>
+            <div>
+              <div class="opp-point-title">Top 5 Fastest-Growing Coastal MSA in the Southeast</div>
+              <div class="opp-point-text">Destin ranks among the nation's fastest-growing metro areas, driven by remote-work migration and the appeal of a world-class coastal lifestyle.</div>
+            </div>
+          </div>
+          <div class="opp-point">
+            <div class="opp-point-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div>
+              <div class="opp-point-title">7.2M Annual Overnight Visitors — Up 34% in Five Years</div>
+              <div class="opp-point-text">Orange Beach set consecutive visitor records, fueling sustained demand for hospitality, dining, retail, and mixed-use commercial assets.</div>
+            </div>
+          </div>
+          <div class="opp-point">
+            <div class="opp-point-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round">
+                <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+              </svg>
+            </div>
+            <div>
+              <div class="opp-point-title">Sub-4% Commercial Vacancy with Constrained New Supply</div>
+              <div class="opp-point-text">Geographic constraints along the Gulf limit developable land, driving exceptional pricing power and cap rate compression for well-positioned assets.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="opportunity-visual" data-animate data-delay="2">
+        <div class="opp-graphic">
+          <!-- SVG coastal skyline illustration -->
+          <svg class="skyline-art" viewBox="0 0 500 375" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#040e1a"/>
+                <stop offset="60%" stop-color="#0D1B2A"/>
+                <stop offset="100%" stop-color="#0e1e30"/>
+              </linearGradient>
+              <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0a2540"/>
+                <stop offset="100%" stop-color="#061525"/>
+              </linearGradient>
+              <linearGradient id="sunsetGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="rgba(201,168,76,0.22)"/>
+                <stop offset="100%" stop-color="rgba(201,168,76,0)"/>
+              </linearGradient>
+            </defs>
+            <!-- Sky -->
+            <rect width="500" height="375" fill="url(#skyGrad)"/>
+            <!-- Stars / light dots -->
+            <circle cx="80"  cy="40"  r="1" fill="rgba(255,255,255,0.5)"/>
+            <circle cx="200" cy="25"  r="1.2" fill="rgba(255,255,255,0.6)"/>
+            <circle cx="330" cy="55"  r="0.8" fill="rgba(255,255,255,0.4)"/>
+            <circle cx="420" cy="30"  r="1" fill="rgba(255,255,255,0.5)"/>
+            <circle cx="460" cy="80"  r="0.7" fill="rgba(255,255,255,0.3)"/>
+            <circle cx="140" cy="70"  r="0.9" fill="rgba(255,255,255,0.45)"/>
+            <!-- Sunset glow -->
+            <ellipse cx="250" cy="200" rx="280" ry="120" fill="url(#sunsetGrad)"/>
+            <!-- Moon -->
+            <circle cx="420" cy="60" r="22" fill="rgba(201,168,76,0.15)"/>
+            <circle cx="420" cy="60" r="14" fill="rgba(201,168,76,0.1)" stroke="rgba(201,168,76,0.3)" stroke-width="0.5"/>
+            <!-- Background building group (far right, distant) -->
+            <rect x="370" y="160" width="18" height="60" fill="rgba(201,168,76,0.12)"/>
+            <rect x="392" y="145" width="14" height="75" fill="rgba(201,168,76,0.1)"/>
+            <rect x="410" y="168" width="22" height="52" fill="rgba(201,168,76,0.08)"/>
+            <!-- Mid buildings (left cluster) -->
+            <rect x="20"  y="185" width="28" height="50" fill="rgba(201,168,76,0.2)"/>
+            <rect x="52"  y="165" width="22" height="70" fill="rgba(201,168,76,0.18)"/>
+            <!-- Main tower cluster (center) -->
+            <path d="M190,80 L202,80 L202,92 L212,92 L212,102 L218,102 L218,230 L175,230 L175,102 L181,102 L181,92 L190,92 Z" fill="#C9A84C" opacity="0.85"/>
+            <!-- Antenna on main tower -->
+            <line x1="196.5" y1="80" x2="196.5" y2="65" stroke="#C9A84C" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="196.5" cy="65" r="2" fill="#C9A84C" opacity="0.8"/>
+            <!-- Windows on main tower (lit) -->
+            <rect x="183" y="110" width="7" height="7" fill="#0D1B2A"/>
+            <rect x="193" y="110" width="7" height="7" fill="#0D1B2A"/>
+            <rect x="203" y="110" width="7" height="7" fill="#0D1B2A"/>
+            <rect x="183" y="124" width="7" height="7" fill="rgba(255,240,180,0.6)"/>
+            <rect x="193" y="124" width="7" height="7" fill="#0D1B2A"/>
+            <rect x="203" y="124" width="7" height="7" fill="rgba(255,240,180,0.6)"/>
+            <rect x="183" y="138" width="7" height="7" fill="#0D1B2A"/>
+            <rect x="193" y="138" width="7" height="7" fill="rgba(255,240,180,0.6)"/>
+            <rect x="203" y="138" width="7" height="7" fill="#0D1B2A"/>
+            <rect x="183" y="152" width="7" height="7" fill="rgba(255,240,180,0.5)"/>
+            <rect x="193" y="152" width="7" height="7" fill="rgba(255,240,180,0.5)"/>
+            <rect x="203" y="152" width="7" height="7" fill="#0D1B2A"/>
+            <!-- Left tower -->
+            <rect x="126" y="135" width="36" height="95" fill="#C9A84C" opacity="0.7"/>
+            <rect x="122" y="130" width="44" height="6" fill="#C9A84C" opacity="0.7"/>
+            <!-- Right tower -->
+            <rect x="235" y="118" width="40" height="112" fill="#C9A84C" opacity="0.75"/>
+            <rect x="231" y="113" width="48" height="6" fill="#C9A84C" opacity="0.75"/>
+            <!-- Far right building -->
+            <rect x="300" y="155" width="32" height="75" fill="#C9A84C" opacity="0.5"/>
+            <!-- Hotel/flat building at right -->
+            <rect x="340" y="172" width="50" height="58" fill="rgba(201,168,76,0.35)"/>
+            <!-- Ground level / beach -->
+            <rect x="0" y="230" width="500" height="5" fill="#C9A84C" opacity="0.3"/>
+            <!-- Beach / sand -->
+            <path d="M0,235 Q125,225 250,230 Q375,235 500,228 L500,260 L0,260 Z" fill="rgba(201,168,76,0.06)"/>
+            <!-- Water -->
+            <rect x="0" y="255" width="500" height="120" fill="url(#waterGrad)"/>
+            <!-- Water reflection of buildings -->
+            <rect x="175" y="260" width="43" height="50" fill="rgba(201,168,76,0.08)" transform="scale(1,-1) translate(0,-570)"/>
+            <!-- Wave lines on water -->
+            <path d="M0,265 Q62.5,258 125,265 Q187.5,272 250,265 Q312.5,258 375,265 Q437.5,272 500,265" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" fill="none"/>
+            <path d="M0,278 Q62.5,271 125,278 Q187.5,285 250,278 Q312.5,271 375,278 Q437.5,285 500,278" stroke="rgba(255,255,255,0.08)" stroke-width="1" fill="none"/>
+            <path d="M0,292 Q62.5,285 125,292 Q187.5,299 250,292 Q312.5,285 375,292 Q437.5,299 500,292" stroke="rgba(255,255,255,0.05)" stroke-width="1" fill="none"/>
+            <!-- Gold shimmer on water -->
+            <ellipse cx="197" cy="268" rx="35" ry="8" fill="rgba(201,168,76,0.12)"/>
+            <!-- Gold label overlay -->
+            <rect x="0" y="328" width="500" height="47" fill="rgba(13,27,42,0.7)"/>
+            <text x="25" y="352" font-family="Georgia,serif" font-size="11" fill="rgba(201,168,76,0.9)" letter-spacing="3">GULF SOUTH COASTAL MARKET</text>
+            <text x="25" y="367" font-family="Georgia,serif" font-size="9" fill="rgba(255,255,255,0.38)" letter-spacing="2">DESTIN, FL  ·  ORANGE BEACH, AL</text>
+          </svg>
+        </div>
+        <div class="opp-badge">
+          <div class="opp-badge-number">$2.1B</div>
+          <div class="opp-badge-label">Annual Tourism Revenue</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MARKETS SECTION
+============================================================ -->
+<section id="markets" aria-labelledby="markets-heading">
+  <div class="section-inner">
+    <div class="section-header centered" data-animate>
+      <p class="eyebrow">Our Markets</p>
+      <span class="gold-rule centered"></span>
+      <h2 class="section-title" id="markets-heading" style="color:var(--white)">
+        Two Markets. One Unrivaled Coastal Corridor.
+      </h2>
+      <p class="section-body light">
+        We operate exclusively in the markets we know best — delivering developer-level
+        intelligence unavailable to out-of-market capital.
+      </p>
+    </div>
+    <div class="markets-grid">
+      <div class="market-card" data-animate data-delay="2">
+        <div class="market-card-header">
+          <div class="market-tag">Florida — Okaloosa &amp; Walton Counties</div>
+          <div class="market-name">Destin &amp; the Emerald Coast</div>
+          <div class="market-tagline">"The World's Luckiest Fishing Village" — America's Premier Beach Destination</div>
+        </div>
+        <div class="market-card-body">
+          <p class="market-desc">
+            Destin anchors a 65-mile stretch of sugar-white beaches and emerald waters that draw
+            millions annually. A booming residential migration, Hartsfield-caliber access via
+            Northwest Florida Beaches International Airport, and a maturing commercial market
+            create ideal conditions for institutional-quality development.
+          </p>
+          <div class="market-stats">
+            <div class="mstat">
+              <div class="mstat-value">$89K+</div>
+              <div class="mstat-label">Avg. Household Income</div>
+            </div>
+            <div class="mstat">
+              <div class="mstat-value">&lt;4%</div>
+              <div class="mstat-label">Commercial Vacancy</div>
+            </div>
+            <div class="mstat">
+              <div class="mstat-value">$2.1B</div>
+              <div class="mstat-label">Annual Tourism Revenue</div>
+            </div>
+            <div class="mstat">
+              <div class="mstat-value">22%</div>
+              <div class="mstat-label">Pop. Growth (5yr)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="market-card" data-animate data-delay="3">
+        <div class="market-card-header">
+          <div class="market-tag">Alabama — Baldwin County</div>
+          <div class="market-name">Orange Beach &amp; Gulf Shores</div>
+          <div class="market-tagline">Alabama's Fastest-Growing Coastal Community</div>
+        </div>
+        <div class="market-card-body">
+          <p class="market-desc">
+            Orange Beach is in the midst of a generational transformation — $1.8B in recent
+            hotel and condo investment, a rapidly expanding conference and medical corridor,
+            and Baldwin County's position as Alabama's fastest-growing county are redefining
+            what's possible in this market. First-mover advantage is still achievable for the
+            right development partner.
+          </p>
+          <div class="market-stats">
+            <div class="mstat">
+              <div class="mstat-value">7.2M</div>
+              <div class="mstat-label">Annual Visitors</div>
+            </div>
+            <div class="mstat">
+              <div class="mstat-value">34%</div>
+              <div class="mstat-label">Visitor Growth (5yr)</div>
+            </div>
+            <div class="mstat">
+              <div class="mstat-value">$1.8B</div>
+              <div class="mstat-label">Recent Development</div>
+            </div>
+            <div class="mstat">
+              <div class="mstat-value">#1</div>
+              <div class="mstat-label">Fastest-Growing AL County</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DEVELOPMENT FOCUS
+============================================================ -->
+<section id="portfolio" aria-labelledby="portfolio-heading">
+  <div class="section-inner">
+    <div class="section-header centered" data-animate>
+      <p class="eyebrow">Development Focus</p>
+      <span class="gold-rule centered"></span>
+      <h2 class="section-title" id="portfolio-heading">
+        Built for the Gulf Coast's Unique Demand Drivers
+      </h2>
+      <p class="section-body" style="color:var(--gray); max-width:580px; margin:1.2rem auto 0;">
+        Our project pipeline targets the four asset classes where Gulf Coast market dynamics
+        deliver the most compelling risk-adjusted returns.
+      </p>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-card" data-animate data-delay="1">
+        <div class="portfolio-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <div class="portfolio-title">Hospitality &amp; Hotels</div>
+        <div class="portfolio-desc">Full-service and boutique hotel development, positioned with proven hospitality operators and underwritten to the region's record RevPAR performance.</div>
+      </div>
+      <div class="portfolio-card" data-animate data-delay="2">
+        <div class="portfolio-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
+            <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><path d="M12 7v14"/>
+          </svg>
+        </div>
+        <div class="portfolio-title">Mixed-Use Development</div>
+        <div class="portfolio-desc">Live-work-play environments that stack multiple revenue streams — ground-floor retail with hospitality above residential — capturing the region's year-round economy.</div>
+      </div>
+      <div class="portfolio-card" data-animate data-delay="3">
+        <div class="portfolio-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+        </div>
+        <div class="portfolio-title">Retail &amp; Commercial</div>
+        <div class="portfolio-desc">Destination retail centers and professional office campuses strategically positioned within high-traffic corridors serving the region's growing permanent and visitor population.</div>
+      </div>
+      <div class="portfolio-card" data-animate data-delay="4">
+        <div class="portfolio-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
+            <rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+          </svg>
+        </div>
+        <div class="portfolio-title">Luxury Multifamily</div>
+        <div class="portfolio-desc">Class-A multifamily communities meeting surging demand from the region's workforce migration, retirees, and the growing professional class relocating to the Gulf Coast.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     INVESTMENT SECTION
+============================================================ -->
+<section id="investment" aria-labelledby="inv-heading">
+  <div class="section-inner">
+    <div class="investment-layout">
+      <div data-animate>
+        <p class="eyebrow">For Capital Investors</p>
+        <span class="gold-rule"></span>
+        <h2 class="section-title" id="inv-heading">
+          Structured for Institutional-Quality Returns
+        </h2>
+        <p class="section-body light">
+          Gulf Coast Development Group partners with family offices, private equity, and
+          accredited investors seeking meaningful exposure to the Gulf South's most dynamic
+          coastal markets — without the complexity of self-managed real estate.
+        </p>
+        <p class="section-body light" style="margin-top:1rem;">
+          Our capital structures are designed to protect investor principal, provide
+          preferred return priority, and deliver outsized upside through our local
+          market expertise and deal-sourcing advantage.
+        </p>
+        <div class="investment-terms">
+          <div class="term-box">
+            <div class="term-label">Minimum Investment</div>
+            <div class="term-value">$500,000</div>
+          </div>
+          <div class="term-box">
+            <div class="term-label">Target Net IRR</div>
+            <div class="term-value">15 – 22%</div>
+          </div>
+          <div class="term-box">
+            <div class="term-label">Preferred Return</div>
+            <div class="term-value">8% Cumulative</div>
+          </div>
+          <div class="term-box">
+            <div class="term-label">Hold Period</div>
+            <div class="term-value">24 – 60 Mo.</div>
+          </div>
+          <div class="term-box">
+            <div class="term-label">Structure</div>
+            <div class="term-value">LP / LLC</div>
+          </div>
+          <div class="term-box">
+            <div class="term-label">Investor Type</div>
+            <div class="term-value">Accredited</div>
+          </div>
+        </div>
+      </div>
+      <div class="investment-process" data-animate data-delay="3">
+        <div class="process-title">The Investment Process</div>
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="step-num">01</div>
+            <div>
+              <div class="step-content-title">Introductory Conversation</div>
+              <div class="step-content-text">A confidential call with our principals to discuss your investment objectives and introduce current or upcoming opportunities.</div>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">02</div>
+            <div>
+              <div class="step-content-title">Deal Review &amp; Due Diligence</div>
+              <div class="step-content-text">Access to offering memoranda, financial projections, market studies, and our development team for Q&amp;A.</div>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">03</div>
+            <div>
+              <div class="step-content-title">Capital Commitment</div>
+              <div class="step-content-text">Execute subscription agreement, fund your capital position, and receive your interest confirmation in the venture.</div>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">04</div>
+            <div>
+              <div class="step-content-title">Active Development &amp; Reporting</div>
+              <div class="step-content-text">Quarterly financial reporting, construction progress updates, and direct access to our development principals throughout.</div>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">05</div>
+            <div>
+              <div class="step-content-title">Distribution &amp; Exit</div>
+              <div class="step-content-text">Cash-on-cash distributions during operations, followed by a profitable asset sale or refinance with full proceeds distribution.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WHY US
+============================================================ -->
+<section id="why-us" aria-labelledby="why-heading">
+  <div class="section-inner">
+    <div class="section-header centered" data-animate>
+      <p class="eyebrow">Why Gulf Coast Development Group</p>
+      <span class="gold-rule centered"></span>
+      <h2 class="section-title" id="why-heading">
+        The Local Advantage That Institutional Capital Can't Replicate
+      </h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card" data-animate data-delay="1">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+          </svg>
+        </div>
+        <div>
+          <div class="why-text-title">Deep Local Market Mastery</div>
+          <div class="why-text-desc">Twenty-five-plus years building luxury homes across Destin and Orange Beach means we know every submarket, land parcel, and value driver. We've underwritten and built in conditions that out-of-market investors read about in reports.</div>
+        </div>
+      </div>
+      <div class="why-card" data-animate data-delay="2">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        <div>
+          <div class="why-text-title">Proven Execution Track Record</div>
+          <div class="why-text-desc">Hundreds of millions in successful luxury residential development provides a foundation of contractor relationships, entitlement expertise, and cost-basis discipline that translates directly into commercial project execution.</div>
+        </div>
+      </div>
+      <div class="why-card" data-animate data-delay="3">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <div>
+          <div class="why-text-title">Exclusive Off-Market Deal Flow</div>
+          <div class="why-text-desc">Our reputation and relationships in the community deliver off-market land and asset opportunities that never surface on CoStar or LoopNet — a genuine sourcing advantage that translates directly to investor returns.</div>
+        </div>
+      </div>
+      <div class="why-card" data-animate data-delay="4">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
+            <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <div>
+          <div class="why-text-title">Capital-Efficient Deal Structures</div>
+          <div class="why-text-desc">We engineer each transaction to maximize investor returns through optimized land cost basis, value-engineering discipline, and exit timing strategies built on genuine market knowledge — not models built from a distance.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT SECTION
+============================================================ -->
+<section id="contact" aria-labelledby="contact-heading">
+  <div class="section-inner">
+    <div class="contact-layout">
+      <div data-animate>
+        <p class="eyebrow">Investor Relations</p>
+        <span class="gold-rule"></span>
+        <h2 class="section-title" id="contact-heading">
+          Begin the Conversation
+        </h2>
+        <p class="section-body light">
+          Whether you're exploring a first investment or looking for a trusted development
+          partner for your Gulf Coast capital deployment, we welcome the conversation.
+          All inquiries are handled with absolute discretion.
+        </p>
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Office</div>
+              <div class="contact-item-value">4525 Legendary Drive, Suite 200<br>Destin, Florida 32541</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.34 2 2 0 0 1 3.61 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Phone</div>
+              <div class="contact-item-value">(850) 400-0200</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Email</div>
+              <div class="contact-item-value">investors@gulfcoastdg.com</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-animate data-delay="3">
+        <div class="contact-form">
+          <div class="form-title">Schedule a Confidential Consultation</div>
+          <form id="investorForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" placeholder="John" required>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Smith" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="john@example.com" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000">
+            </div>
+            <div class="form-group">
+              <label for="investmentRange">Investment Range</label>
+              <select id="investmentRange" name="investmentRange">
+                <option value="" disabled selected>Select a range</option>
+                <option>$500K – $1M</option>
+                <option>$1M – $5M</option>
+                <option>$5M – $25M</option>
+                <option>$25M+</option>
+                <option>Prefer to discuss</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Message (Optional)</label>
+              <textarea id="message" name="message" placeholder="Tell us about your investment focus or any questions you have..."></textarea>
+            </div>
+            <button type="submit" class="form-submit">Request a Consultation</button>
+            <p class="form-disclaimer">This communication is for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy any security. Investment opportunities are available only to accredited investors.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 110" role="img" aria-label="Gulf Coast Development Group">
+        <rect x="0" y="5" width="96" height="96" rx="5" fill="rgba(255,255,255,0.05)"/>
+        <rect x="4" y="9" width="88" height="88" rx="3" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
+        <rect x="12" y="46" width="17" height="37" fill="#C9A84C" opacity="0.6"/>
+        <rect x="11" y="43" width="19" height="3" fill="#C9A84C" opacity="0.6"/>
+        <path d="M42,9 L51,9 L51,16 L57,16 L57,22 L60,22 L60,83 L34,83 L34,22 L37,22 L37,16 L42,16 Z" fill="#C9A84C" opacity="0.7"/>
+        <line x1="47" y1="9" x2="47" y2="5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+        <rect x="67" y="38" width="17" height="45" fill="#C9A84C" opacity="0.55"/>
+        <rect x="66" y="35" width="19" height="3" fill="#C9A84C" opacity="0.55"/>
+        <line x1="8" y1="83" x2="88" y2="83" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+        <path d="M8,88 Q21,83 34,88 Q47,93 60,88 Q73,83 88,88" stroke="#C9A84C" stroke-width="1.3" fill="none" opacity="0.5"/>
+        <text x="108" y="55" font-family="Georgia,serif" font-size="30" font-weight="bold" fill="rgba(255,255,255,0.75)" letter-spacing="2">GULF COAST</text>
+        <text x="109" y="73" font-family="Georgia,serif" font-size="11.5" fill="rgba(255,255,255,0.3)" letter-spacing="6.5">DEVELOPMENT GROUP</text>
+        <line x1="108" y1="80" x2="412" y2="80" stroke="#C9A84C" stroke-width="0.7" opacity="0.4"/>
+        <text x="109" y="93" font-family="Georgia,serif" font-size="7.5" fill="rgba(201,168,76,0.55)" letter-spacing="2.5" font-style="italic">DESTIN, FL  ·  ORANGE BEACH, AL</text>
+      </svg>
+    </div>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="#opportunity">About</a>
+      <a href="#markets">Markets</a>
+      <a href="#portfolio">Development</a>
+      <a href="#investment">Investment</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="footer-copy">
+      &copy; 2025 Gulf Coast Development Group, LLC<br>
+      Destin, Florida &nbsp;·&nbsp; All Rights Reserved
+    </div>
+  </div>
+  <div class="footer-disclaimer">
+    <strong>Investment Disclaimer:</strong> The information presented on this website is for informational purposes only and does not constitute an offer to sell or a solicitation of any offer to buy any securities. Investment in real estate development projects involves significant risk, including the possible loss of principal. Past performance is not indicative of future results. All investment opportunities are available exclusively to accredited investors as defined under applicable securities laws. Prospective investors should carefully review all offering documents and consult with their own legal, tax, and financial advisors before making any investment decision. Gulf Coast Development Group, LLC is not a registered investment adviser or broker-dealer.
+  </div>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+(function() {
+  'use strict';
+
+  /* ---- Navbar scroll behavior ---- */
+  const navbar = document.getElementById('navbar');
+  let lastScrollY = 0;
+
+  function onScroll() {
+    const scrollY = window.scrollY;
+    if (scrollY > 60) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+    lastScrollY = scrollY;
+  }
+
+  /* ---- Parallax ---- */
+  const heroBg      = document.getElementById('heroBg');
+  const heroContent = document.getElementById('heroContent');
+  let rafPending = false;
+
+  function handleParallax() {
+    const y = window.scrollY;
+    if (heroBg)      heroBg.style.transform      = `translateY(${y * 0.45}px)`;
+    if (heroContent) heroContent.style.transform  = `translateY(${y * 0.18}px)`;
+    rafPending = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    onScroll();
+    if (!rafPending) {
+      rafPending = true;
+      requestAnimationFrame(handleParallax);
+    }
+  }, { passive: true });
+
+  /* ---- Intersection Observer for fade-in animations ---- */
+  const animateEls = document.querySelectorAll('[data-animate]');
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  animateEls.forEach(el => fadeObserver.observe(el));
+
+  /* ---- Counter animation ---- */
+  function animateCounter(el) {
+    const target   = parseInt(el.dataset.target, 10);
+    const suffix   = el.dataset.suffix || '';
+    const duration = 1800;
+    const start    = performance.now();
+
+    function tick(now) {
+      const elapsed  = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased    = 1 - Math.pow(1 - progress, 3);
+      const value    = Math.floor(eased * target);
+      el.textContent = value.toLocaleString() + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const statItems     = document.querySelectorAll('.stat-item');
+  const counterItems  = document.querySelectorAll('.counter');
+  const counterTriggered = new Set();
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        entry.target.querySelectorAll('.counter').forEach(counter => {
+          if (!counterTriggered.has(counter)) {
+            counterTriggered.add(counter);
+            animateCounter(counter);
+          }
+        });
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  statItems.forEach(el => counterObserver.observe(el));
+
+  /* ---- Mobile menu ---- */
+  const hamburger  = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileClose = document.getElementById('mobileClose');
+
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  });
+
+  function closeMobile() {
+    mobileMenu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  mobileClose.addEventListener('click', closeMobile);
+  window.closeMobile = closeMobile;
+
+  /* ---- Contact form ---- */
+  const form = document.getElementById('investorForm');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('.form-submit');
+      btn.textContent = 'Request Received — We\'ll Be in Touch';
+      btn.style.background = '#2d6a4f';
+      btn.style.color = '#fff';
+      btn.disabled = true;
+      form.querySelectorAll('input, select, textarea').forEach(el => {
+        el.disabled = true;
+      });
+    });
+  }
+
+  /* ---- Smooth scroll for anchor links ---- */
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const offset = navbar.offsetHeight + 20;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+})();
+</script>
+</body>
+</html>
