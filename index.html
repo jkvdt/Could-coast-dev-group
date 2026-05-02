@@ -1141,22 +1141,48 @@
   <div class="nav-logo">
     <!-- Inline logo (white/gold version for dark navbar) -->
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 110" role="img" aria-label="Gulf Coast Development Group">
+      <defs>
+        <radialGradient id="navGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(255,235,150,0.22)"/>
+          <stop offset="100%" stop-color="rgba(255,235,150,0)"/>
+        </radialGradient>
+      </defs>
       <!-- Badge -->
-      <rect x="0" y="5" width="96" height="96" rx="5" fill="rgba(255,255,255,0.08)"/>
-      <rect x="4" y="9" width="88" height="88" rx="3" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.6"/>
-      <!-- Buildings (gold) -->
-      <rect x="12" y="46" width="17" height="37" fill="#C9A84C"/>
-      <rect x="11" y="43" width="19" height="3" fill="#C9A84C"/>
-      <path d="M42,9 L51,9 L51,16 L57,16 L57,22 L60,22 L60,83 L34,83 L34,22 L37,22 L37,16 L42,16 Z" fill="#C9A84C"/>
-      <line x1="47" y1="9" x2="47" y2="5" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round"/>
-      <circle cx="47" cy="5" r="1.2" fill="#C9A84C"/>
-      <rect x="67" y="38" width="17" height="45" fill="#C9A84C"/>
-      <rect x="66" y="35" width="19" height="3" fill="#C9A84C"/>
+      <rect x="0" y="5" width="96" height="96" rx="5" fill="rgba(255,255,255,0.07)"/>
+      <rect x="4" y="9" width="88" height="88" rx="3" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.55"/>
+      <!-- Sun arc -->
+      <path d="M15,76 A34,34 0 0,1 81,76" fill="rgba(201,168,76,0.07)"/>
+      <path d="M15,76 A34,34 0 0,1 81,76" fill="none" stroke="rgba(201,168,76,0.18)" stroke-width="1.5"/>
+      <!-- Light glow -->
+      <ellipse cx="48" cy="27" rx="16" ry="13" fill="url(#navGlow)"/>
+      <!-- Lighthouse tower -->
+      <path d="M40,76 L43,36 L53,36 L56,76 Z" fill="#C9A84C"/>
+      <!-- Bands -->
+      <path d="M40.8,63 L41.4,56 L54.6,56 L55.2,63 Z" fill="#0D1B2A" opacity="0.3"/>
+      <!-- Gallery -->
+      <rect x="37" y="34" width="22" height="3.5" rx="0.8" fill="#C9A84C"/>
+      <!-- Lantern room -->
+      <rect x="39" y="23" width="18" height="13" rx="1" fill="#C9A84C"/>
+      <!-- Windows -->
+      <rect x="41.5" y="25.5" width="3.5" height="9" rx="0.6" fill="rgba(255,240,150,0.9)"/>
+      <rect x="46"   y="25.5" width="3.5" height="9" rx="0.6" fill="rgba(255,240,150,0.85)"/>
+      <rect x="50.5" y="25.5" width="3.5" height="9" rx="0.6" fill="rgba(255,240,150,0.9)"/>
+      <!-- Dome -->
+      <path d="M39,23 L48,14 L57,23 Z" fill="#C9A84C"/>
+      <line x1="48" y1="14" x2="48" y2="10" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="48" cy="9.5" r="1.3" fill="#C9A84C"/>
+      <!-- Light rays -->
+      <line x1="37" y1="18" x2="12" y2="11" stroke="#C9A84C" stroke-width="0.9" opacity="0.5" stroke-linecap="round"/>
+      <line x1="36" y1="22" x2="10" y2="22" stroke="#C9A84C" stroke-width="0.8" opacity="0.38" stroke-linecap="round"/>
+      <line x1="59" y1="18" x2="84" y2="11" stroke="#C9A84C" stroke-width="0.9" opacity="0.5" stroke-linecap="round"/>
+      <line x1="60" y1="22" x2="86" y2="22" stroke="#C9A84C" stroke-width="0.8" opacity="0.38" stroke-linecap="round"/>
+      <!-- Base -->
+      <rect x="34" y="76" width="28" height="4" rx="1" fill="#C9A84C"/>
       <!-- Horizon -->
-      <line x1="8" y1="83" x2="88" y2="83" stroke="#C9A84C" stroke-width="1.2"/>
+      <line x1="8" y1="80" x2="88" y2="80" stroke="#C9A84C" stroke-width="1.1" opacity="0.75"/>
       <!-- Waves -->
-      <path d="M8,88 Q21,83 34,88 Q47,93 60,88 Q73,83 88,88" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
-      <path d="M8,94 Q21,89 34,94 Q47,99 60,94 Q73,89 88,94" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.45"/>
+      <path d="M8,85 Q21,80 34,85 Q47,90 60,85 Q73,80 88,85" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+      <path d="M8,91 Q21,86 34,91 Q47,96 60,91 Q73,86 88,91" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.45"/>
       <!-- Wordmark -->
       <text x="108" y="55" font-family="Georgia,serif" font-size="30" font-weight="bold" fill="#FFFFFF" letter-spacing="2">GULF COAST</text>
       <text x="109" y="73" font-family="Georgia,serif" font-size="11.5" fill="rgba(255,255,255,0.65)" letter-spacing="6.5">DEVELOPMENT GROUP</text>
@@ -1809,20 +1835,32 @@
   <div class="footer-inner">
     <div class="footer-logo">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 110" role="img" aria-label="Gulf Coast Development Group">
-        <rect x="0" y="5" width="96" height="96" rx="5" fill="rgba(255,255,255,0.05)"/>
-        <rect x="4" y="9" width="88" height="88" rx="3" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
-        <rect x="12" y="46" width="17" height="37" fill="#C9A84C" opacity="0.6"/>
-        <rect x="11" y="43" width="19" height="3" fill="#C9A84C" opacity="0.6"/>
-        <path d="M42,9 L51,9 L51,16 L57,16 L57,22 L60,22 L60,83 L34,83 L34,22 L37,22 L37,16 L42,16 Z" fill="#C9A84C" opacity="0.7"/>
-        <line x1="47" y1="9" x2="47" y2="5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
-        <rect x="67" y="38" width="17" height="45" fill="#C9A84C" opacity="0.55"/>
-        <rect x="66" y="35" width="19" height="3" fill="#C9A84C" opacity="0.55"/>
-        <line x1="8" y1="83" x2="88" y2="83" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
-        <path d="M8,88 Q21,83 34,88 Q47,93 60,88 Q73,83 88,88" stroke="#C9A84C" stroke-width="1.3" fill="none" opacity="0.5"/>
-        <text x="108" y="55" font-family="Georgia,serif" font-size="30" font-weight="bold" fill="rgba(255,255,255,0.75)" letter-spacing="2">GULF COAST</text>
-        <text x="109" y="73" font-family="Georgia,serif" font-size="11.5" fill="rgba(255,255,255,0.3)" letter-spacing="6.5">DEVELOPMENT GROUP</text>
-        <line x1="108" y1="80" x2="412" y2="80" stroke="#C9A84C" stroke-width="0.7" opacity="0.4"/>
-        <text x="109" y="93" font-family="Georgia,serif" font-size="7.5" fill="rgba(201,168,76,0.55)" letter-spacing="2.5" font-style="italic">DESTIN, FL  ·  ORANGE BEACH, AL</text>
+        <!-- Badge -->
+        <rect x="0" y="5" width="96" height="96" rx="5" fill="rgba(255,255,255,0.04)"/>
+        <rect x="4" y="9" width="88" height="88" rx="3" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.38"/>
+        <!-- Sun arc -->
+        <path d="M15,76 A34,34 0 0,1 81,76" fill="none" stroke="rgba(201,168,76,0.13)" stroke-width="1.5"/>
+        <!-- Tower -->
+        <path d="M40,76 L43,36 L53,36 L56,76 Z" fill="#C9A84C" opacity="0.55"/>
+        <!-- Gallery -->
+        <rect x="37" y="34" width="22" height="3.5" rx="0.8" fill="#C9A84C" opacity="0.55"/>
+        <!-- Lantern room -->
+        <rect x="39" y="23" width="18" height="13" rx="1" fill="#C9A84C" opacity="0.55"/>
+        <!-- Dome -->
+        <path d="M39,23 L48,14 L57,23 Z" fill="#C9A84C" opacity="0.55"/>
+        <line x1="48" y1="14" x2="48" y2="10" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round" opacity="0.55"/>
+        <!-- Base -->
+        <rect x="34" y="76" width="28" height="4" rx="1" fill="#C9A84C" opacity="0.55"/>
+        <!-- Horizon -->
+        <line x1="8" y1="80" x2="88" y2="80" stroke="#C9A84C" stroke-width="1" opacity="0.38"/>
+        <!-- Waves -->
+        <path d="M8,85 Q21,80 34,85 Q47,90 60,85 Q73,80 88,85" stroke="#C9A84C" stroke-width="1.3" fill="none" opacity="0.42"/>
+        <path d="M8,91 Q21,86 34,91 Q47,96 60,91 Q73,86 88,91" stroke="#C9A84C" stroke-width="0.9" fill="none" opacity="0.25"/>
+        <!-- Wordmark -->
+        <text x="108" y="55" font-family="Georgia,serif" font-size="30" font-weight="bold" fill="rgba(255,255,255,0.65)" letter-spacing="2">GULF COAST</text>
+        <text x="109" y="73" font-family="Georgia,serif" font-size="11.5" fill="rgba(255,255,255,0.28)" letter-spacing="6.5">DEVELOPMENT GROUP</text>
+        <line x1="108" y1="80" x2="412" y2="80" stroke="#C9A84C" stroke-width="0.7" opacity="0.35"/>
+        <text x="109" y="93" font-family="Georgia,serif" font-size="7.5" fill="rgba(201,168,76,0.48)" letter-spacing="2.5" font-style="italic">DESTIN, FL  ·  ORANGE BEACH, AL</text>
       </svg>
     </div>
     <nav class="footer-links" aria-label="Footer navigation">
