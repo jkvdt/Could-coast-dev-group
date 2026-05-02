@@ -5,78 +5,80 @@
       <stop offset="100%" style="stop-color:#0D1B2A"/>
     </linearGradient>
     <linearGradient id="goldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#E5C97A"/>
-      <stop offset="100%" style="stop-color:#C9A84C"/>
+      <stop offset="0%" style="stop-color:#CDA94E"/>
+      <stop offset="100%" style="stop-color:#B8922A"/>
     </linearGradient>
-    <radialGradient id="lightGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="rgba(255,235,150,0.28)"/>
-      <stop offset="100%" stop-color="rgba(255,235,150,0)"/>
-    </radialGradient>
   </defs>
 
   <!-- ===== BADGE ===== -->
   <rect x="0" y="8" width="138" height="138" rx="7" fill="url(#badgeGrad)"/>
-  <rect x="7" y="15" width="124" height="124" rx="3.5" fill="none" stroke="#C9A84C" stroke-width="0.9" opacity="0.65"/>
+  <rect x="7" y="15" width="124" height="124" rx="3.5" fill="none" stroke="#B8922A" stroke-width="0.9" opacity="0.65"/>
 
-  <!-- ===== SUN ARC (rising behind lighthouse) ===== -->
-  <path d="M28,113 A41,41 0 0,1 110,113" fill="rgba(201,168,76,0.07)"/>
-  <path d="M28,113 A41,41 0 0,1 110,113" fill="none" stroke="rgba(201,168,76,0.18)" stroke-width="2"/>
+  <!-- ===== LEFT: 2-STORY COASTAL CONDO ===== -->
+  <!-- Gable roof -->
+  <polygon points="8,60 36,43 64,60" fill="url(#goldGrad)"/>
+  <!-- Chimney -->
+  <rect x="50" y="45" width="5" height="12" fill="url(#goldGrad)"/>
+  <!-- Building body -->
+  <rect x="10" y="60" width="52" height="52" fill="url(#goldGrad)"/>
+  <!-- Floor divider / balcony band -->
+  <rect x="10" y="83" width="52" height="2.5" fill="#0D1B2A" opacity="0.3"/>
+  <!-- Balcony rail posts (subtle) -->
+  <rect x="16" y="83" width="1.2" height="3.5" fill="#0D1B2A" opacity="0.22"/>
+  <rect x="22" y="83" width="1.2" height="3.5" fill="#0D1B2A" opacity="0.22"/>
+  <rect x="28" y="83" width="1.2" height="3.5" fill="#0D1B2A" opacity="0.22"/>
+  <rect x="34" y="83" width="1.2" height="3.5" fill="#0D1B2A" opacity="0.22"/>
+  <rect x="40" y="83" width="1.2" height="3.5" fill="#0D1B2A" opacity="0.22"/>
+  <rect x="46" y="83" width="1.2" height="3.5" fill="#0D1B2A" opacity="0.22"/>
+  <rect x="52" y="83" width="1.2" height="3.5" fill="#0D1B2A" opacity="0.22"/>
+  <!-- Upper floor windows (3) -->
+  <rect x="14" y="64" width="10" height="13" rx="0.8" fill="#0D1B2A" opacity="0.72"/>
+  <rect x="30" y="64" width="10" height="13" rx="0.8" fill="#0D1B2A" opacity="0.72"/>
+  <rect x="46" y="64" width="10" height="13" rx="0.8" fill="#0D1B2A" opacity="0.72"/>
+  <!-- Lower floor: 2 windows + centered door -->
+  <rect x="13" y="89" width="10" height="13" rx="0.8" fill="#0D1B2A" opacity="0.72"/>
+  <rect x="48" y="89" width="10" height="13" rx="0.8" fill="#0D1B2A" opacity="0.72"/>
+  <!-- Door (full height to ground) -->
+  <rect x="30" y="88" width="10" height="24" rx="0.8" fill="#0D1B2A" opacity="0.72"/>
+  <!-- Door knob -->
+  <circle cx="38.5" cy="101" r="1" fill="url(#goldGrad)" opacity="0.6"/>
 
-  <!-- Light glow around lantern -->
-  <ellipse cx="69" cy="36" rx="22" ry="18" fill="url(#lightGlow)"/>
+  <!-- ===== RIGHT: SMALL COMMERCIAL STRIP ===== -->
+  <!-- Bay 1 — left anchor (tallest) -->
+  <rect x="70" y="74" width="22" height="38" fill="url(#goldGrad)"/>
+  <rect x="68" y="70" width="26" height="5" fill="url(#goldGrad)"/> <!-- parapet cap -->
+  <!-- Bay 2 — center (medium) -->
+  <rect x="92" y="80" width="16" height="32" fill="url(#goldGrad)"/>
+  <rect x="90" y="76" width="20" height="5" fill="url(#goldGrad)"/> <!-- parapet cap -->
+  <!-- Bay 3 — right -->
+  <rect x="108" y="77" width="20" height="35" fill="url(#goldGrad)"/>
+  <rect x="106" y="73" width="24" height="5" fill="url(#goldGrad)"/> <!-- parapet cap -->
 
-  <!-- ===== LIGHTHOUSE ===== -->
-  <!-- Tower body — tapered trapezoid -->
-  <path d="M57,108 L61,50 L77,50 L81,108 Z" fill="url(#goldGrad)"/>
+  <!-- Awning bands -->
+  <rect x="70" y="77" width="20" height="2.5" fill="#0D1B2A" opacity="0.28"/>
+  <rect x="91" y="83" width="16" height="2"   fill="#0D1B2A" opacity="0.24"/>
+  <rect x="108" y="80" width="18" height="2"  fill="#0D1B2A" opacity="0.24"/>
 
-  <!-- Decorative band 1 -->
-  <path d="M58.5,88 L59.5,78 L78.5,78 L79.5,88 Z" fill="#0D1B2A" opacity="0.32"/>
-  <!-- Decorative band 2 -->
-  <path d="M59.5,70 L60.5,62 L77.5,62 L78.5,70 Z" fill="#0D1B2A" opacity="0.28"/>
+  <!-- Storefront windows (tall, commercial style) -->
+  <!-- Bay 1: window left + door right -->
+  <rect x="72" y="81" width="8"  height="21" rx="0.5" fill="#0D1B2A" opacity="0.7"/>
+  <rect x="82" y="81" width="8"  height="31" rx="0.5" fill="#0D1B2A" opacity="0.7"/>
+  <!-- Bay 2: wide storefront -->
+  <rect x="93" y="86" width="13" height="16" rx="0.5" fill="#0D1B2A" opacity="0.7"/>
+  <!-- Bay 3: two panels -->
+  <rect x="110" y="83" width="7" height="19" rx="0.5" fill="#0D1B2A" opacity="0.7"/>
+  <rect x="119" y="83" width="7" height="19" rx="0.5" fill="#0D1B2A" opacity="0.7"/>
 
-  <!-- Gallery / balcony platform -->
-  <rect x="53" y="47" width="32" height="4.5" rx="1" fill="url(#goldGrad)"/>
+  <!-- ===== GROUND LINE ===== -->
+  <line x1="10" y1="112" x2="128" y2="112" stroke="#B8922A" stroke-width="1.5" opacity="0.8"/>
 
-  <!-- Lantern room housing -->
-  <rect x="56" y="30" width="26" height="19" rx="1.5" fill="url(#goldGrad)"/>
-
-  <!-- Lantern windows (warm light) -->
-  <rect x="59.5" y="33" width="5"   height="13" rx="1" fill="rgba(255,240,150,0.9)"/>
-  <rect x="66.5" y="33" width="5"   height="13" rx="1" fill="rgba(255,240,150,0.85)"/>
-  <rect x="73"   y="33" width="5"   height="13" rx="1" fill="rgba(255,240,150,0.9)"/>
-
-  <!-- Dome / cap -->
-  <path d="M56,30 L69,17 L82,30 Z" fill="url(#goldGrad)"/>
-  <!-- Finial (tip) -->
-  <line x1="69" y1="17" x2="69" y2="12" stroke="#C9A84C" stroke-width="2" stroke-linecap="round"/>
-  <circle cx="69" cy="11.5" r="1.8" fill="#C9A84C"/>
-
-  <!-- Light rays -->
-  <line x1="54"  y1="24" x2="16"  y2="14"  stroke="#C9A84C" stroke-width="1.1" opacity="0.5" stroke-linecap="round"/>
-  <line x1="52"  y1="30" x2="12"  y2="30"  stroke="#C9A84C" stroke-width="1"   opacity="0.38" stroke-linecap="round"/>
-  <line x1="84"  y1="24" x2="122" y2="14"  stroke="#C9A84C" stroke-width="1.1" opacity="0.5" stroke-linecap="round"/>
-  <line x1="86"  y1="30" x2="126" y2="30"  stroke="#C9A84C" stroke-width="1"   opacity="0.38" stroke-linecap="round"/>
-
-  <!-- Foundation / base -->
-  <rect x="50" y="108" width="38" height="5.5" rx="1.5" fill="url(#goldGrad)"/>
-
-  <!-- ===== HORIZON & WATER ===== -->
-  <!-- Horizon line -->
-  <line x1="9" y1="113.5" x2="129" y2="113.5" stroke="#C9A84C" stroke-width="1.5" opacity="0.8"/>
-
-  <!-- Water fill -->
-  <path d="M9,113.5 Q36,107 63,113.5 Q90,120 117,113.5 L129,113.5 L129,142 L9,142 Z"
-        fill="#C9A84C" opacity="0.07"/>
-
-  <!-- Wave 1 -->
-  <path d="M9,120 Q27,113 46,120 Q65,127 84,120 Q103,113 122,120"
+  <!-- ===== GULF WAVES ===== -->
+  <path d="M9,120 Q27,114 46,120 Q65,127 84,120 Q103,114 122,120"
         stroke="url(#goldGrad)" stroke-width="2" fill="none"/>
-  <!-- Wave 2 -->
   <path d="M9,129 Q27,122 46,129 Q65,136 84,129 Q103,122 122,129"
-        stroke="#C9A84C" stroke-width="1.3" fill="none" opacity="0.52"/>
-  <!-- Wave 3 -->
+        stroke="#B8922A" stroke-width="1.3" fill="none" opacity="0.52"/>
   <path d="M9,137 Q27,130 46,137 Q65,144 84,137 Q103,130 122,137"
-        stroke="#C9A84C" stroke-width="0.85" fill="none" opacity="0.26"/>
+        stroke="#B8922A" stroke-width="0.85" fill="none" opacity="0.26"/>
 
   <!-- ===== WORDMARK ===== -->
   <text x="158" y="78"
@@ -88,9 +90,9 @@
         font-family="Georgia, 'Times New Roman', serif"
         font-size="17.5" fill="#0D1B2A" letter-spacing="10.5">DEVELOPMENT GROUP</text>
 
-  <line x1="158" y1="118" x2="572" y2="118" stroke="#C9A84C" stroke-width="1.3"/>
+  <line x1="158" y1="118" x2="572" y2="118" stroke="#B8922A" stroke-width="1.3"/>
 
   <text x="159" y="135"
         font-family="Georgia, 'Times New Roman', serif"
-        font-size="11" fill="#C9A84C" letter-spacing="3.5" font-style="italic">DESTIN, FLORIDA  ·  ORANGE BEACH, ALABAMA</text>
+        font-size="11" fill="#B8922A" letter-spacing="3.5" font-style="italic">DESTIN, FLORIDA  ·  ORANGE BEACH, ALABAMA</text>
 </svg>
