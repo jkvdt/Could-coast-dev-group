@@ -905,6 +905,65 @@
     }
 
     /* ============================================================
+       EXPERTISE SECTION
+    ============================================================ */
+    #expertise {
+      background: var(--navy);
+    }
+    #expertise .eyebrow { color: var(--gold); }
+    #expertise .section-title { color: var(--white); }
+    #expertise .gold-rule { background: var(--gold); }
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+    .expertise-card {
+      border: 1px solid rgba(184,146,42,0.28);
+      border-radius: 4px;
+      padding: 2.5rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .expertise-card:hover {
+      border-color: var(--gold);
+      background: rgba(255,255,255,0.04);
+    }
+    .expertise-card .why-icon {
+      background: rgba(184,146,42,0.14);
+    }
+    .expertise-title {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+    .expertise-desc {
+      font-size: 0.9rem;
+      line-height: 1.72;
+      color: rgba(255,255,255,0.62);
+      margin-bottom: 1.1rem;
+    }
+    .expertise-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .expertise-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 0.22rem 0.6rem;
+      border: 1px solid rgba(184,146,42,0.35);
+      border-radius: 2px;
+      color: var(--gold-light);
+    }
+
+    /* ============================================================
        CONTACT SECTION
     ============================================================ */
     #contact {
@@ -1107,6 +1166,7 @@
       .investment-layout { grid-template-columns: 1fr; gap: 3rem; }
       .investment-terms { grid-template-columns: 1fr 1fr; }
       .why-grid { grid-template-columns: 1fr; }
+      .expertise-grid { grid-template-columns: 1fr; }
       .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
       .form-row { grid-template-columns: 1fr; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
@@ -1715,6 +1775,106 @@
           <div class="why-text-desc">We co-invest, we share risk, and our interests are aligned with yours from day one. We engineer each deal for optimal land cost basis, construction efficiency, and exit timing — because our returns depend on yours.</div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     EXPERTISE SECTION
+============================================================ -->
+<section id="expertise" aria-labelledby="expertise-heading">
+  <div class="section-inner">
+    <div class="section-header centered" data-animate>
+      <p class="eyebrow">How We Execute</p>
+      <span class="gold-rule centered"></span>
+      <h2 class="section-title" id="expertise-heading">
+        Full-Cycle Development Expertise
+      </h2>
+      <p class="section-body" style="color:rgba(255,255,255,0.62);max-width:640px;margin:1.5rem auto 0;">
+        From raw land to certificate of occupancy, we own every stage of the process.
+        That end-to-end control is what protects your capital and your timeline.
+      </p>
+    </div>
+    <div class="expertise-grid">
+
+      <!-- Acquisition -->
+      <div class="expertise-card" data-animate data-delay="1">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#B8922A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </div>
+        <div>
+          <div class="expertise-title">Site Acquisition &amp; Deal Sourcing</div>
+          <div class="expertise-desc">We identify commercial opportunities before they reach the open market — raw land, underutilized parcels, distressed assets, and assemblage plays. Our process covers off-market sourcing through 20 years of local relationships, rigorous due diligence (title, survey, environmental, traffic), accurate land valuation, and skilled negotiation through closing.</div>
+          <div class="expertise-tags">
+            <span class="expertise-tag">Off-Market Sourcing</span>
+            <span class="expertise-tag">Due Diligence</span>
+            <span class="expertise-tag">Land Valuation</span>
+            <span class="expertise-tag">Negotiation</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Design -->
+      <div class="expertise-card" data-animate data-delay="2">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#B8922A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><polyline points="3 20 21 20"/>
+          </svg>
+        </div>
+        <div>
+          <div class="expertise-title">Design &amp; Architectural Management</div>
+          <div class="expertise-desc">We coordinate the full design team — civil engineers, land planners, architects, and interior designers — selecting the right firm for each project type and market. We manage the process from concept through construction documents, keeping the design vision and the pro forma aligned at every stage so there are no surprises when ground breaks.</div>
+          <div class="expertise-tags">
+            <span class="expertise-tag">Architect Selection</span>
+            <span class="expertise-tag">Civil Engineering</span>
+            <span class="expertise-tag">Land Planning</span>
+            <span class="expertise-tag">Design Management</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Permitting -->
+      <div class="expertise-card" data-animate data-delay="3">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#B8922A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/>
+          </svg>
+        </div>
+        <div>
+          <div class="expertise-title">Coastal &amp; Regulatory Permitting</div>
+          <div class="expertise-desc">Gulf Coast development means navigating a layered regulatory environment that stops out-of-market developers cold. We handle FDEP coastal construction setback permits, Army Corps of Engineers Section 404/408 authorizations, local building department approvals, and variance and entitlement applications across Okaloosa, Walton, and Baldwin Counties.</div>
+          <div class="expertise-tags">
+            <span class="expertise-tag">FDEP Coastal</span>
+            <span class="expertise-tag">Army Corps 404/408</span>
+            <span class="expertise-tag">Local Building Dept</span>
+            <span class="expertise-tag">Entitlements &amp; Variances</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Construction -->
+      <div class="expertise-card" data-animate data-delay="4">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#B8922A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="expertise-title">General Contracting &amp; Construction</div>
+          <div class="expertise-desc">We are the GC. We hold the license, employ the superintendents, and manage the subcontractors directly. Our trade partner network — built over 20 years of selecting for quality and reliability — represents the best craftsmen on the Gulf Coast. On-site superintendents keep every project on schedule, on budget, and built to spec, eliminating the middleman risk that inflates costs on other developers' jobs.</div>
+          <div class="expertise-tags">
+            <span class="expertise-tag">Licensed GC</span>
+            <span class="expertise-tag">Field Superintendents</span>
+            <span class="expertise-tag">Subcontractor Network</span>
+            <span class="expertise-tag">Quality Control</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
