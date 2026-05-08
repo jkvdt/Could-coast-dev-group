@@ -3,36 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Real Estate Services | Gulf Coast Development Group</title>
-  <meta name="description" content="Licensed Gulf Coast real estate services — residential, commercial, and investment properties in Destin, FL and Orange Beach, AL. Buy, sell, or invest with a local expert who knows the market from the inside.">
+  <title>Real Estate Services | VDT Construction</title>
+  <meta name="description" content="Justin Knowles — Licensed real estate agent serving the Destin, 30A, and Orange Beach corridor. Buy, sell, or invest on the Gulf Coast with insider construction knowledge.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
+
     /* ============================================================
-       CSS CUSTOM PROPERTIES
+       DESIGN TOKENS — VDT Palette
     ============================================================ */
     :root {
-      --navy:        #0D1B2A;
-      --navy-mid:    #152538;
-      --navy-light:  #1A3A5C;
-      --gold:        #C9A84C;
-      --gold-light:  #E5C97A;
-      --gold-dark:   #A07828;
-      --cream:       #F8F5EE;
-      --cream-dark:  #EDE8DC;
-      --white:       #FFFFFF;
-      --gray:        #8A8780;
-      --gray-dark:   #4A4742;
-      --text:        #1A1814;
+      --white:      #FFFFFF;
+      --off-white:  #F6F6F4;
+      --gray-line:  #E0DFDC;
+      --gray-light: #B8B8B4;
+      --gray:       #787876;   /* body text on white */
+      --gray-warm:  #737373;   /* dark section background */
+      --gray-mid:   #646462;
+      --gray-dark:  #3A3A38;
+      --text:       #2C2C2A;
 
-      --serif: 'Playfair Display', Georgia, serif;
-      --sans:  'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
 
-      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-      --shadow-sm:  0 2px 12px rgba(13,27,42,0.08);
-      --shadow-md:  0 8px 40px rgba(13,27,42,0.14);
-      --shadow-lg:  0 24px 80px rgba(13,27,42,0.22);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --shadow: 0 4px 32px rgba(0,0,0,0.08);
+      --shadow-lg: 0 12px 60px rgba(0,0,0,0.14);
     }
 
     /* ============================================================
@@ -42,7 +39,7 @@
     html { scroll-behavior: smooth; font-size: 16px; }
     body {
       font-family: var(--sans);
-      color: var(--text);
+      color: var(--gray);
       background: var(--white);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
@@ -53,102 +50,99 @@
     ul { list-style: none; }
 
     /* ============================================================
-       TYPOGRAPHY UTILITIES
-    ============================================================ */
-    .eyebrow {
-      font-family: var(--sans);
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-    .gold-rule {
-      display: block;
-      width: 56px;
-      height: 2px;
-      background: var(--gold);
-      margin: 1.2rem 0 1.8rem;
-    }
-    .gold-rule.centered { margin-left: auto; margin-right: auto; }
-
-    /* ============================================================
        SCROLL ANIMATIONS
     ============================================================ */
-    [data-animate] {
+    [data-fade] {
       opacity: 0;
-      transform: translateY(36px);
-      transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+      transform: translateY(24px);
+      transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
     }
-    [data-animate].is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    [data-animate][data-delay="1"] { transition-delay: 0.1s; }
-    [data-animate][data-delay="2"] { transition-delay: 0.2s; }
-    [data-animate][data-delay="3"] { transition-delay: 0.3s; }
-    [data-animate][data-delay="4"] { transition-delay: 0.4s; }
-    [data-animate][data-delay="5"] { transition-delay: 0.5s; }
-    [data-animate][data-delay="6"] { transition-delay: 0.6s; }
+    [data-fade].visible { opacity: 1; transform: translateY(0); }
+    [data-fade][data-d="1"] { transition-delay: 0.1s; }
+    [data-fade][data-d="2"] { transition-delay: 0.2s; }
+    [data-fade][data-d="3"] { transition-delay: 0.3s; }
+    [data-fade][data-d="4"] { transition-delay: 0.4s; }
+    [data-fade][data-d="5"] { transition-delay: 0.5s; }
 
     /* ============================================================
        NAVIGATION
     ============================================================ */
-    #navbar {
+    #nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 1000;
-      padding: 1.6rem 5%;
+      z-index: 100;
+      padding: 1.4rem 5%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: background 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
+      transition: background 0.4s, padding 0.4s, border-color 0.4s;
+      border-bottom: 1px solid transparent;
     }
-    #navbar.scrolled {
-      background: rgba(13,27,42,0.97);
-      backdrop-filter: blur(12px);
+    #nav.scrolled {
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(10px);
       padding: 1rem 5%;
-      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+      border-bottom-color: var(--gray-line);
     }
-    .nav-logo {
+    .nav-brand {
       display: flex;
-      align-items: center;
-      gap: 0.75rem;
+      flex-direction: column;
+      gap: 0.15rem;
     }
-    .nav-logo svg {
-      height: 52px;
-      width: auto;
+    .nav-brand-name {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: var(--white);
+      transition: color 0.4s;
     }
+    #nav.scrolled .nav-brand-name { color: var(--gray-dark); }
+    .nav-brand-sub {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      transition: color 0.4s;
+    }
+    #nav.scrolled .nav-brand-sub { color: var(--gray-light); }
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 2.5rem;
+      gap: 2.4rem;
     }
     .nav-links a {
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.82);
       transition: color 0.25s;
     }
-    .nav-links a:hover { color: var(--gold); }
-    .nav-links a.active { color: var(--gold); }
-    .nav-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.65rem 1.5rem;
-      border: 1.5px solid var(--gold);
-      color: var(--gold) !important;
-      font-size: 0.78rem !important;
-      letter-spacing: 0.14em !important;
-      border-radius: 2px;
-      transition: background 0.25s, color 0.25s !important;
+    #nav.scrolled .nav-links a { color: var(--gray); }
+    .nav-links a:hover,
+    #nav.scrolled .nav-links a:hover { color: var(--gray-dark); }
+    .nav-links a.nav-btn {
+      padding: 0.55rem 1.3rem;
+      border: 1px solid rgba(255,255,255,0.6);
+      border-radius: 1px;
+      color: rgba(255,255,255,0.9) !important;
+      transition: background 0.25s, border-color 0.25s, color 0.25s !important;
     }
-    .nav-cta:hover {
-      background: var(--gold) !important;
-      color: var(--navy) !important;
+    #nav.scrolled .nav-links a.nav-btn {
+      border-color: var(--gray);
+      color: var(--gray) !important;
+    }
+    .nav-links a.nav-btn:hover {
+      background: var(--white);
+      border-color: var(--white);
+      color: var(--gray-dark) !important;
+    }
+    #nav.scrolled .nav-links a.nav-btn:hover {
+      background: var(--gray-dark);
+      border-color: var(--gray-dark);
+      color: var(--white) !important;
     }
     .nav-hamburger {
       display: none;
@@ -158,927 +152,809 @@
     }
     .nav-hamburger span {
       display: block;
-      width: 24px;
-      height: 2px;
+      width: 22px;
+      height: 1.5px;
       background: var(--white);
       border-radius: 2px;
-      transition: all 0.3s;
+      transition: background 0.4s;
     }
+    #nav.scrolled .nav-hamburger span { background: var(--gray-dark); }
 
-    /* Mobile nav */
-    .mobile-menu {
+    /* Mobile overlay */
+    .mobile-nav {
       display: none;
       position: fixed;
       inset: 0;
-      background: var(--navy);
-      z-index: 999;
+      background: var(--white);
+      z-index: 99;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 2.5rem;
+      gap: 2.2rem;
     }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
       font-family: var(--serif);
       font-size: 2rem;
-      color: var(--white);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--gray-dark);
       transition: color 0.25s;
     }
-    .mobile-menu a:hover { color: var(--gold); }
+    .mobile-nav a:hover { color: var(--gray-warm); }
     .mobile-close {
       position: absolute;
-      top: 1.6rem; right: 5%;
-      color: var(--white);
-      font-size: 2rem;
+      top: 1.4rem; right: 5%;
+      font-size: 1.8rem;
+      color: var(--gray);
       background: none;
       border: none;
       cursor: pointer;
     }
 
     /* ============================================================
-       HERO SECTION
+       HERO
     ============================================================ */
     #hero {
       position: relative;
       height: 100vh;
-      min-height: 700px;
+      min-height: 640px;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: center;
       overflow: hidden;
     }
-    .hero-bg {
-      position: absolute;
-      inset: -15%;
-      background: linear-gradient(
-        135deg,
-        #040e1a 0%,
-        #0D1B2A 25%,
-        #0e2540 50%,
-        #091929 75%,
-        #040e1a 100%
-      );
-      background-size: 400% 400%;
-      animation: heroGradient 14s ease infinite;
-      will-change: transform;
-    }
-    @keyframes heroGradient {
-      0%, 100% { background-position: 0% 50%; }
-      50%       { background-position: 100% 50%; }
-    }
-    .hero-bg::before {
-      content: '';
+    .hero-photo {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 70% 60% at 25% 65%, rgba(26,58,92,0.5) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 50% at 78% 35%, rgba(201,168,76,0.07) 0%, transparent 55%),
-        radial-gradient(ellipse 80% 40% at 50% 90%, rgba(10,30,55,0.6) 0%, transparent 80%);
+        linear-gradient(to bottom, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.52) 100%),
+        /* Placeholder — replace with an actual coastal property image */
+        linear-gradient(160deg, #4a5568 0%, #718096 40%, #a0aec0 70%, #cbd5e0 100%);
+      background-size: cover;
+      background-position: center;
     }
-    .hero-bg::after {
+    /* Subtle photo texture overlay */
+    .hero-photo::after {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
-      background-size: 36px 36px;
+      background: rgba(0,0,0,0.12);
     }
     .hero-content {
       position: relative;
       z-index: 2;
       text-align: center;
-      padding: 0 5%;
-      max-width: 900px;
-      will-change: transform;
+      padding: 0 5% 7rem;
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto;
     }
-    .hero-eyebrow {
-      font-family: var(--sans);
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.28em;
+    .hero-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: rgba(255,255,255,0.7);
       opacity: 0;
-      animation: fadeUp 1s var(--ease-out) 0.3s forwards;
+      animation: riseIn 1.1s var(--ease) 0.3s forwards;
+    }
+    .hero-rule {
+      display: block;
+      width: 36px;
+      height: 1px;
+      background: rgba(255,255,255,0.5);
+      margin: 1.1rem auto 1.4rem;
+      opacity: 0;
+      animation: riseIn 1.1s var(--ease) 0.45s forwards;
     }
     .hero-title {
       font-family: var(--serif);
-      font-size: clamp(2.6rem, 6vw, 5.2rem);
-      font-weight: 700;
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 300;
       color: var(--white);
-      line-height: 1.12;
-      margin-top: 1.2rem;
+      line-height: 1.1;
+      letter-spacing: 0.04em;
       opacity: 0;
-      animation: fadeUp 1s var(--ease-out) 0.55s forwards;
+      animation: riseIn 1.1s var(--ease) 0.6s forwards;
     }
     .hero-title em {
       font-style: italic;
-      color: var(--gold-light);
+      font-weight: 300;
     }
     .hero-sub {
-      font-family: var(--sans);
-      font-size: clamp(1rem, 1.8vw, 1.18rem);
+      font-size: clamp(0.82rem, 1.4vw, 0.95rem);
       font-weight: 300;
+      letter-spacing: 0.1em;
       color: rgba(255,255,255,0.72);
-      line-height: 1.75;
-      margin-top: 1.5rem;
-      max-width: 640px;
+      line-height: 1.8;
+      margin-top: 1.6rem;
+      max-width: 540px;
       margin-left: auto;
       margin-right: auto;
       opacity: 0;
-      animation: fadeUp 1s var(--ease-out) 0.75s forwards;
+      animation: riseIn 1.1s var(--ease) 0.8s forwards;
     }
-    .hero-ctas {
+    .hero-actions {
       display: flex;
       gap: 1.2rem;
       justify-content: center;
       flex-wrap: wrap;
-      margin-top: 2.8rem;
+      margin-top: 2.4rem;
       opacity: 0;
-      animation: fadeUp 1s var(--ease-out) 0.95s forwards;
+      animation: riseIn 1.1s var(--ease) 1s forwards;
     }
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 1rem 2.2rem;
-      background: var(--gold);
-      color: var(--navy);
-      font-size: 0.82rem;
+    .btn {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 0.68rem;
       font-weight: 700;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      border-radius: 2px;
-      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
-      box-shadow: 0 4px 20px rgba(201,168,76,0.35);
-    }
-    .btn-primary:hover {
-      background: var(--gold-light);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(201,168,76,0.45);
-    }
-    .btn-outline {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 1rem 2.2rem;
-      border: 1.5px solid rgba(255,255,255,0.5);
+      padding: 0.9rem 2rem;
+      border: 1px solid var(--white);
       color: var(--white);
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      border-radius: 2px;
-      transition: border-color 0.25s, background 0.25s, transform 0.2s;
+      border-radius: 1px;
+      transition: background 0.3s, color 0.3s;
     }
-    .btn-outline:hover {
-      border-color: var(--white);
-      background: rgba(255,255,255,0.08);
-      transform: translateY(-2px);
+    .btn:hover {
+      background: var(--white);
+      color: var(--gray-dark);
     }
-    .hero-wave {
+    .btn-fill {
+      background: var(--white);
+      color: var(--gray-dark);
+    }
+    .btn-fill:hover {
+      background: var(--off-white);
+      color: var(--gray-dark);
+    }
+    .hero-scroll {
       position: absolute;
-      bottom: -2px;
-      left: 0;
-      right: 0;
-      z-index: 3;
-      line-height: 0;
-      overflow: hidden;
-    }
-    .hero-wave svg {
-      width: 200%;
-      height: 90px;
-      animation: waveScroll 12s linear infinite;
-    }
-    @keyframes waveScroll {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    .scroll-indicator {
-      position: absolute;
-      bottom: 90px;
+      bottom: 2.2rem;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 4;
+      z-index: 3;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 0.5rem;
       opacity: 0;
-      animation: fadeUp 1s var(--ease-out) 1.4s forwards;
+      animation: riseIn 1s var(--ease) 1.3s forwards;
     }
-    .scroll-indicator span {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
+    .hero-scroll span {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.45);
     }
-    .scroll-mouse {
-      width: 22px;
-      height: 36px;
-      border: 1.5px solid rgba(255,255,255,0.3);
-      border-radius: 11px;
-      display: flex;
-      justify-content: center;
-      padding-top: 6px;
+    .chevron-down {
+      color: rgba(255,255,255,0.5);
+      font-size: 1.1rem;
+      animation: chevronBounce 2.2s ease-in-out infinite;
     }
-    .scroll-mouse::before {
-      content: '';
-      width: 3px;
-      height: 7px;
-      background: rgba(255,255,255,0.5);
-      border-radius: 2px;
-      animation: scrollDot 2s ease-in-out infinite;
+    @keyframes chevronBounce {
+      0%, 100% { transform: translateY(0); opacity: 0.5; }
+      50%       { transform: translateY(6px); opacity: 1; }
     }
-    @keyframes scrollDot {
-      0%, 100% { transform: translateY(0); opacity: 1; }
-      50%       { transform: translateY(8px); opacity: 0.3; }
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(28px); }
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
     /* ============================================================
-       STATS BAR
+       DIVIDER UTILITY
     ============================================================ */
-    #stats {
-      background: var(--navy-mid);
-      border-bottom: 1px solid rgba(201,168,76,0.15);
+    .section-divider {
+      display: block;
+      width: 36px;
+      height: 1px;
+      background: var(--gray-light);
+      margin: 1.4rem auto 1.8rem;
     }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .stat-item {
-      padding: 3rem 2rem;
-      text-align: center;
-      border-right: 1px solid rgba(255,255,255,0.06);
-      position: relative;
-    }
-    .stat-item:last-child { border-right: none; }
-    .stat-item::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 2px;
-      background: var(--gold);
-      transition: width 0.6s var(--ease-out);
-    }
-    .stat-item.is-visible::after { width: 40px; }
-    .stat-number {
-      font-family: var(--serif);
-      font-size: clamp(2rem, 3.5vw, 3rem);
+    .section-divider.left { margin-left: 0; margin-right: 0; }
+    .section-label {
+      font-size: 0.63rem;
       font-weight: 700;
-      color: var(--white);
-      line-height: 1;
-      display: flex;
-      align-items: baseline;
-      justify-content: center;
-      gap: 0.1em;
-    }
-    .stat-number .prefix,
-    .stat-number .suffix {
-      font-size: 0.6em;
-      color: var(--gold);
-      font-weight: 600;
-    }
-    .stat-label {
-      margin-top: 0.75rem;
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
+      color: var(--gray-light);
     }
 
     /* ============================================================
-       SHARED SECTION STYLES
+       INTRO SECTION
     ============================================================ */
-    section { position: relative; }
-    .section-inner {
-      max-width: 1200px;
-      margin: 0 auto;
+    #intro {
+      background: var(--white);
+      text-align: center;
       padding: 7rem 5%;
     }
-    .section-header {
-      max-width: 680px;
-    }
-    .section-header.centered {
+    .intro-inner {
       max-width: 680px;
       margin: 0 auto;
-      text-align: center;
     }
-    .section-title {
+    .intro-title {
       font-family: var(--serif);
-      font-size: clamp(1.9rem, 3.5vw, 3rem);
-      font-weight: 700;
-      line-height: 1.18;
-      color: inherit;
-    }
-    .section-body {
-      font-size: 1.05rem;
-      line-height: 1.8;
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      letter-spacing: 0.08em;
       color: var(--gray-dark);
-      margin-top: 1.2rem;
+      line-height: 1.25;
     }
-    .section-body.light { color: rgba(255,255,255,0.68); }
+    .intro-body {
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--gray);
+      margin-top: 1.5rem;
+    }
 
     /* ============================================================
        SERVICES SECTION
     ============================================================ */
     #services {
-      background: var(--cream);
+      background: var(--off-white);
+      padding: 7rem 5%;
+    }
+    .services-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-header-centered {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .section-title-serif {
+      font-family: var(--serif);
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--gray-dark);
+      line-height: 1.2;
+    }
+    .section-body-text {
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--gray);
+      margin-top: 1.2rem;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .services-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 4rem;
+      gap: 1.5px;
+      background: var(--gray-line);
+      border: 1.5px solid var(--gray-line);
     }
     .service-card {
       background: var(--white);
-      border-radius: 4px;
-      padding: 2.5rem 2rem;
-      border: 1px solid rgba(13,27,42,0.07);
-      box-shadow: var(--shadow-sm);
-      transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s;
-      position: relative;
-      overflow: hidden;
+      padding: 2.8rem 2.2rem;
+      transition: background 0.3s;
     }
-    .service-card::before {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--gold);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s var(--ease-out);
+    .service-card:hover { background: var(--off-white); }
+    .service-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--gray-line);
+      line-height: 1;
+      margin-bottom: 1.4rem;
     }
-    .service-card:hover {
-      box-shadow: var(--shadow-md);
-      transform: translateY(-5px);
-      border-color: rgba(201,168,76,0.2);
-    }
-    .service-card:hover::before { transform: scaleX(1); }
-    .service-icon {
-      width: 58px;
-      height: 58px;
-      background: var(--navy);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1.8rem;
-    }
-    .service-icon svg { width: 26px; height: 26px; }
     .service-title {
       font-family: var(--serif);
       font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--navy);
-      line-height: 1.2;
-      margin-bottom: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--gray-dark);
+      line-height: 1.25;
+      margin-bottom: 1rem;
     }
     .service-desc {
-      font-size: 0.9rem;
-      line-height: 1.75;
+      font-size: 0.85rem;
+      font-weight: 300;
+      line-height: 1.85;
       color: var(--gray);
     }
     .service-list {
       margin-top: 1.2rem;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.45rem;
     }
     .service-list li {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.84rem;
-      color: var(--gray-dark);
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--gray);
+      padding-left: 1rem;
+      position: relative;
     }
     .service-list li::before {
-      content: '';
-      flex-shrink: 0;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--gold);
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--gray-light);
+      font-size: 0.75rem;
     }
 
     /* ============================================================
-       MARKET EXPERTISE SECTION
+       GRAY WELCOME SECTION (matching VDT style)
     ============================================================ */
-    #expertise {
-      background: var(--navy);
-      color: var(--white);
-    }
-    #expertise .section-title { color: var(--white); }
-    .expertise-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: center;
-    }
-    .expertise-visual {
-      position: relative;
-    }
-    .expertise-graphic {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(201,168,76,0.2);
-      border-radius: 4px;
-      overflow: hidden;
-      aspect-ratio: 4/3;
-      position: relative;
-      box-shadow: var(--shadow-lg);
-    }
-    .expertise-badge {
-      position: absolute;
-      bottom: -1.5rem;
-      right: -1.5rem;
-      background: var(--gold);
-      color: var(--navy);
-      padding: 1.5rem 1.8rem;
-      border-radius: 3px;
-      box-shadow: var(--shadow-md);
+    #advantage {
+      background: var(--gray-warm);
+      padding: 7rem 5%;
       text-align: center;
     }
-    .expertise-badge-number {
+    .advantage-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .advantage-heading {
       font-family: var(--serif);
-      font-size: 2.4rem;
-      font-weight: 700;
-      line-height: 1;
-    }
-    .expertise-badge-label {
-      font-size: 0.68rem;
-      font-weight: 600;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
       letter-spacing: 0.12em;
+      color: var(--white);
+      line-height: 1.2;
       text-transform: uppercase;
-      margin-top: 0.3rem;
-      opacity: 0.75;
     }
-    .market-points {
-      margin-top: 2.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-    .market-point {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-    }
-    .market-point-icon {
-      flex-shrink: 0;
+    .advantage-rule {
+      display: block;
       width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: rgba(201,168,76,0.12);
-      border: 1.5px solid rgba(201,168,76,0.3);
+      height: 1px;
+      background: rgba(255,255,255,0.35);
+      margin: 1.8rem auto;
+    }
+    .advantage-body {
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.95;
+      color: rgba(255,255,255,0.75);
+    }
+    .advantage-points {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      margin-top: 4rem;
+      text-align: left;
+    }
+    .adv-point-num {
+      font-family: var(--serif);
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.2);
+      line-height: 1;
+      margin-bottom: 0.8rem;
+    }
+    .adv-point-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.6rem;
+    }
+    .adv-point-text {
+      font-size: 0.82rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ============================================================
+       MARKETS SECTION
+    ============================================================ */
+    #markets {
+      background: var(--white);
+      padding: 7rem 5%;
+    }
+    .markets-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .markets-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      margin-top: 4rem;
+    }
+    .market-visual {
+      position: relative;
+      aspect-ratio: 4/3;
+      background: var(--off-white);
+      border: 1px solid var(--gray-line);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 2px;
+      overflow: hidden;
     }
-    .market-point-icon svg { width: 16px; height: 16px; }
-    .market-point-title {
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: var(--white);
+    .market-visual-inner {
+      text-align: center;
+      padding: 2rem;
     }
-    .market-point-text {
-      font-size: 0.9rem;
-      line-height: 1.65;
-      color: rgba(255,255,255,0.55);
-      margin-top: 0.25rem;
-    }
-    .expertise-markets-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.2rem;
-      margin-top: 2rem;
-    }
-    .exp-market-box {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-left: 3px solid var(--gold);
-      border-radius: 3px;
-      padding: 1.2rem 1.4rem;
-      transition: background 0.3s, border-color 0.3s;
-    }
-    .exp-market-box:hover {
-      background: rgba(201,168,76,0.06);
-      border-color: rgba(201,168,76,0.4);
-    }
-    .exp-market-name {
-      font-family: var(--serif);
-      font-size: 1.05rem;
+    .market-visual-label {
+      font-size: 0.63rem;
       font-weight: 700;
-      color: var(--white);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gray-light);
+      margin-bottom: 0.6rem;
     }
-    .exp-market-sub {
-      font-size: 0.76rem;
-      color: rgba(255,255,255,0.38);
-      letter-spacing: 0.08em;
-      margin-top: 0.25rem;
+    /* Simple SVG map illustration placeholder */
+    .market-svg {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+    }
+    .market-caption {
+      position: absolute;
+      bottom: 1.2rem;
+      left: 1.5rem;
+      right: 1.5rem;
+      font-size: 0.63rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gray-light);
+    }
+    .market-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .market-item {
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--gray-line);
+    }
+    .market-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .market-item-location {
+      font-size: 0.63rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gray-light);
+      margin-bottom: 0.5rem;
+    }
+    .market-item-name {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--gray-dark);
+      line-height: 1.2;
+      margin-bottom: 0.6rem;
+    }
+    .market-item-desc {
+      font-size: 0.84rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--gray);
     }
 
     /* ============================================================
-       AGENT PROFILE SECTION
+       AGENT PROFILE
     ============================================================ */
     #agent {
-      background: var(--white);
+      background: var(--off-white);
+      padding: 7rem 5%;
+    }
+    .agent-inner {
+      max-width: 1000px;
+      margin: 0 auto;
     }
     .agent-layout {
       display: grid;
-      grid-template-columns: 1fr 1.5fr;
-      gap: 6rem;
-      align-items: center;
-    }
-    .agent-photo-wrap {
-      position: relative;
+      grid-template-columns: 2fr 3fr;
+      gap: 5rem;
+      align-items: start;
+      margin-top: 4rem;
     }
     .agent-photo-frame {
-      background: var(--navy);
-      border-radius: 4px;
-      overflow: hidden;
-      aspect-ratio: 3/4;
       position: relative;
-      box-shadow: var(--shadow-lg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      aspect-ratio: 3/4;
+      background: var(--gray-line);
+      overflow: hidden;
     }
-    .agent-photo-placeholder {
+    .agent-photo-bg {
       width: 100%;
       height: 100%;
+      background: linear-gradient(160deg, #c8c8c4 0%, #ddddd8 100%);
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      align-items: flex-end;
       justify-content: center;
-      gap: 1rem;
-      background: linear-gradient(160deg, #0A1620 0%, #0D1B2A 60%, #111F33 100%);
+      padding-bottom: 1.5rem;
     }
-    .agent-photo-placeholder svg {
-      width: 80px;
-      height: 80px;
-      opacity: 0.3;
-    }
-    .agent-photo-placeholder span {
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.2);
-    }
-    .agent-accent-bar {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 4px;
-      background: var(--gold);
-    }
-    .agent-credential-badge {
-      position: absolute;
-      bottom: -1.2rem;
-      right: -1.2rem;
-      background: var(--gold);
-      color: var(--navy);
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      box-shadow: var(--shadow-md);
-    }
-    .agent-badge-top {
+    .agent-photo-placeholder-text {
       font-size: 0.6rem;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      opacity: 0.75;
+      color: rgba(255,255,255,0.7);
     }
-    .agent-badge-main {
-      font-family: var(--serif);
-      font-size: 1rem;
-      font-weight: 800;
-      line-height: 1;
-      margin-top: 0.15rem;
+    .agent-photo-tag {
+      position: absolute;
+      bottom: 1.2rem;
+      left: 1.2rem;
+      background: var(--white);
+      padding: 0.7rem 1rem;
     }
-    .agent-badge-sub {
+    .agent-photo-tag-top {
       font-size: 0.56rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
+      font-weight: 700;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      margin-top: 0.15rem;
-      opacity: 0.75;
+      color: var(--gray-light);
+    }
+    .agent-photo-tag-name {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--gray-dark);
+      margin-top: 0.2rem;
     }
     .agent-info {
       padding-top: 0.5rem;
     }
+    .agent-eyebrow {
+      font-size: 0.63rem;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gray-light);
+    }
     .agent-name {
       font-family: var(--serif);
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      font-weight: 700;
-      color: var(--navy);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: var(--gray-dark);
       line-height: 1.15;
+      margin-top: 0.6rem;
+    }
+    .agent-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray-warm);
       margin-top: 0.5rem;
     }
-    .agent-title-tag {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      background: rgba(201,168,76,0.1);
-      border: 1px solid rgba(201,168,76,0.25);
-      padding: 0.35rem 0.9rem;
-      border-radius: 2px;
-      margin-top: 1rem;
-    }
     .agent-bio {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: var(--gray-dark);
-      margin-top: 1.5rem;
+      font-size: 0.92rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--gray);
+      margin-top: 1.8rem;
     }
     .agent-bio + .agent-bio { margin-top: 1rem; }
-    .agent-credentials {
+    .agent-creds {
+      margin-top: 2.4rem;
+      padding-top: 2.4rem;
+      border-top: 1px solid var(--gray-line);
       display: flex;
       flex-direction: column;
-      gap: 0.8rem;
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(13,27,42,0.08);
+      gap: 0.7rem;
     }
-    .credential-item {
+    .cred-item {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-    }
-    .credential-dot {
-      flex-shrink: 0;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--gold);
-    }
-    .credential-text {
-      font-size: 0.88rem;
-      font-weight: 500;
-      color: var(--text);
-    }
-
-    /* ============================================================
-       WHY WORK WITH ME
-    ============================================================ */
-    #why-me {
-      background: var(--cream);
-    }
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-      margin-top: 4rem;
-    }
-    .why-card {
-      background: var(--white);
-      border-radius: 4px;
-      padding: 2.5rem;
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      gap: 1.5rem;
-      align-items: flex-start;
-      transition: box-shadow 0.3s, transform 0.3s;
-    }
-    .why-card:hover {
-      box-shadow: var(--shadow-md);
-      transform: translateY(-3px);
-    }
-    .why-icon {
-      flex-shrink: 0;
-      width: 56px;
-      height: 56px;
-      background: var(--navy);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .why-icon svg { width: 26px; height: 26px; }
-    .why-text-title {
-      font-family: var(--serif);
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 0.6rem;
-    }
-    .why-text-desc {
-      font-size: 0.9rem;
-      line-height: 1.72;
+      gap: 0.9rem;
+      font-size: 0.82rem;
+      font-weight: 300;
       color: var(--gray);
+    }
+    .cred-dash {
+      flex-shrink: 0;
+      width: 18px;
+      height: 1px;
+      background: var(--gray-light);
     }
 
     /* ============================================================
        PROCESS SECTION
     ============================================================ */
     #process {
-      background: linear-gradient(160deg, #0A1620 0%, #0D1B2A 50%, #111F33 100%);
-      color: var(--white);
+      background: var(--white);
+      padding: 7rem 5%;
     }
-    #process .section-title { color: var(--white); }
-    .process-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: start;
+    .process-inner {
+      max-width: 900px;
+      margin: 0 auto;
     }
     .process-steps {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
       gap: 0;
-      margin-top: 2.5rem;
-    }
-    .process-step {
-      display: flex;
-      gap: 1.5rem;
-      align-items: flex-start;
-      padding-bottom: 2rem;
+      margin-top: 4rem;
       position: relative;
     }
-    .process-step:not(:last-child)::before {
+    .process-steps::before {
       content: '';
       position: absolute;
-      left: 19px;
-      top: 40px;
-      bottom: 0;
-      width: 1px;
-      background: linear-gradient(to bottom, rgba(201,168,76,0.4), rgba(201,168,76,0.1));
+      top: 1.1rem;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: var(--gray-line);
     }
-    .step-num {
-      flex-shrink: 0;
-      width: 40px;
-      height: 40px;
+    .process-step {
+      text-align: center;
+      padding: 0 0.8rem;
+    }
+    .step-circle {
+      width: 2.2rem;
+      height: 2.2rem;
+      border: 1px solid var(--gray-line);
       border-radius: 50%;
-      border: 1.5px solid var(--gold);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--gold);
-      background: rgba(201,168,76,0.08);
-    }
-    .step-content-title {
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: var(--white);
-      margin-bottom: 0.3rem;
-    }
-    .step-content-text {
-      font-size: 0.86rem;
-      line-height: 1.65;
-      color: rgba(255,255,255,0.5);
-    }
-    .process-highlights {
-      padding-top: 0.5rem;
-    }
-    .process-highlight-title {
-      font-family: var(--serif);
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--white);
-      margin-bottom: 1.8rem;
-    }
-    .highlight-items {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
-    .highlight-item {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 3px;
-      padding: 1.4rem;
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
+      margin: 0 auto 1.5rem;
+      background: var(--white);
+      position: relative;
+      z-index: 1;
       transition: border-color 0.3s, background 0.3s;
     }
-    .highlight-item:hover {
-      border-color: rgba(201,168,76,0.3);
-      background: rgba(201,168,76,0.04);
+    .process-step:hover .step-circle {
+      border-color: var(--gray-warm);
+      background: var(--gray-warm);
     }
-    .highlight-icon {
-      flex-shrink: 0;
-      width: 36px;
-      height: 36px;
-      background: rgba(201,168,76,0.12);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .step-circle-num {
+      font-family: var(--serif);
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--gray-light);
+      transition: color 0.3s;
     }
-    .highlight-icon svg { width: 16px; height: 16px; }
-    .highlight-label {
-      font-weight: 600;
-      font-size: 0.88rem;
-      color: var(--white);
-      line-height: 1.2;
+    .process-step:hover .step-circle-num { color: var(--white); }
+    .step-title {
+      font-family: var(--serif);
+      font-size: 0.95rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      color: var(--gray-dark);
+      line-height: 1.3;
+      margin-bottom: 0.6rem;
     }
-    .highlight-sub {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.45);
-      margin-top: 0.2rem;
-      line-height: 1.5;
+    .step-text {
+      font-size: 0.75rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--gray);
+    }
+
+    /* ============================================================
+       TESTIMONIALS / TRUST SECTION
+    ============================================================ */
+    #trust {
+      background: var(--off-white);
+      padding: 5rem 5%;
+      text-align: center;
+    }
+    .trust-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .trust-quote {
+      font-family: var(--serif);
+      font-size: clamp(1.3rem, 2.5vw, 1.85rem);
+      font-weight: 300;
+      font-style: italic;
+      letter-spacing: 0.03em;
+      color: var(--gray-dark);
+      line-height: 1.55;
+    }
+    .trust-attr {
+      margin-top: 1.8rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gray-light);
     }
 
     /* ============================================================
        CONTACT SECTION
     ============================================================ */
     #contact {
-      background: var(--navy);
-      color: var(--white);
+      background: var(--gray-warm);
+      padding: 7rem 5%;
     }
-    #contact .section-title { color: var(--white); }
+    .contact-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
     .contact-layout {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
       align-items: start;
+      margin-top: 4rem;
     }
-    .contact-info {
+    .contact-side-label {
+      font-size: 0.63rem;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+    .contact-side-heading {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      line-height: 1.2;
+      margin-top: 0.8rem;
+    }
+    .contact-side-body {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.6);
+      margin-top: 1.4rem;
+    }
+    .contact-details {
       margin-top: 2.5rem;
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1.2rem;
     }
-    .contact-item {
+    .contact-detail {
       display: flex;
-      gap: 1.1rem;
+      gap: 1rem;
       align-items: flex-start;
     }
-    .contact-item-icon {
-      flex-shrink: 0;
-      width: 40px;
-      height: 40px;
-      border: 1px solid rgba(201,168,76,0.3);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .contact-item-icon svg { width: 18px; height: 18px; }
-    .contact-item-label {
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
+    .contact-detail-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.25rem;
+      color: rgba(255,255,255,0.35);
+      padding-top: 0.1rem;
+      min-width: 50px;
     }
-    .contact-item-value {
-      font-size: 0.95rem;
-      color: rgba(255,255,255,0.8);
+    .contact-detail-value {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.75);
       line-height: 1.55;
     }
-    .contact-note {
-      margin-top: 2.5rem;
-      padding: 1.5rem;
-      background: rgba(201,168,76,0.07);
-      border: 1px solid rgba(201,168,76,0.2);
-      border-radius: 3px;
+    .contact-detail-value a {
+      color: rgba(255,255,255,0.75);
+      transition: color 0.25s;
     }
-    .contact-note-title {
-      font-weight: 600;
-      font-size: 0.88rem;
-      color: var(--gold);
-      letter-spacing: 0.08em;
-      margin-bottom: 0.5rem;
+    .contact-detail-value a:hover { color: var(--white); }
+    .license-note {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.72rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.35);
     }
-    .contact-note-text {
-      font-size: 0.84rem;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.65;
-    }
+
+    /* Form */
     .contact-form {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 4px;
-      padding: 2.5rem;
+      background: var(--white);
+      padding: 2.8rem;
     }
-    .form-title {
+    .form-heading {
       font-family: var(--serif);
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: var(--white);
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--gray-dark);
       margin-bottom: 2rem;
     }
     .form-row {
@@ -1091,60 +967,64 @@
     }
     .form-group label {
       display: block;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
+      color: var(--gray-light);
       margin-bottom: 0.5rem;
     }
     .form-group input,
     .form-group select,
     .form-group textarea {
       width: 100%;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 2px;
-      padding: 0.85rem 1rem;
-      color: var(--white);
+      background: var(--white);
+      border: none;
+      border-bottom: 1px solid var(--gray-line);
+      padding: 0.7rem 0;
+      color: var(--gray-dark);
       font-family: var(--sans);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
+      font-weight: 300;
       transition: border-color 0.25s;
       outline: none;
+      border-radius: 0;
+      appearance: none;
+      -webkit-appearance: none;
     }
     .form-group input::placeholder,
     .form-group textarea::placeholder {
-      color: rgba(255,255,255,0.25);
+      color: var(--gray-light);
+      font-weight: 300;
     }
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus {
-      border-color: var(--gold);
+      border-bottom-color: var(--gray-warm);
     }
-    .form-group select option { background: var(--navy); }
-    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-group select option { background: var(--white); color: var(--gray-dark); }
     .form-submit {
       width: 100%;
-      padding: 1.05rem;
-      background: var(--gold);
-      color: var(--navy);
+      padding: 1rem;
+      background: var(--gray-warm);
+      color: var(--white);
       font-family: var(--sans);
-      font-size: 0.82rem;
+      font-size: 0.68rem;
       font-weight: 700;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      border-radius: 2px;
+      border-radius: 0;
       cursor: pointer;
-      transition: background 0.25s, transform 0.2s;
-      margin-top: 0.5rem;
+      transition: background 0.25s;
+      margin-top: 0.8rem;
+      border: none;
     }
-    .form-submit:hover {
-      background: var(--gold-light);
-      transform: translateY(-1px);
-    }
-    .form-disclaimer {
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.25);
+    .form-submit:hover { background: var(--gray-mid); }
+    .form-note {
+      font-size: 0.68rem;
+      font-weight: 300;
+      color: var(--gray-light);
       line-height: 1.6;
       margin-top: 1rem;
       text-align: center;
@@ -1154,335 +1034,247 @@
        FOOTER
     ============================================================ */
     footer {
-      background: #060f18;
-      border-top: 1px solid rgba(201,168,76,0.12);
+      background: #1e1e1c;
       padding: 3rem 5%;
     }
     .footer-inner {
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 2rem;
+      gap: 1.5rem;
     }
-    .footer-logo svg {
-      height: 44px;
-      width: auto;
+    .footer-brand {
+      font-family: var(--serif);
+      font-size: 0.95rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.45);
     }
-    .footer-links {
+    .footer-nav {
       display: flex;
       gap: 2rem;
       flex-wrap: wrap;
     }
-    .footer-links a {
-      font-size: 0.78rem;
-      letter-spacing: 0.1em;
+    .footer-nav a {
+      font-size: 0.63rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.25);
       transition: color 0.25s;
     }
-    .footer-links a:hover { color: var(--gold); }
+    .footer-nav a:hover { color: rgba(255,255,255,0.6); }
     .footer-copy {
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.2);
+      font-size: 0.68rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.18);
       text-align: right;
       line-height: 1.6;
     }
     .footer-disclaimer {
-      max-width: 1200px;
-      margin: 2rem auto 0;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255,255,255,0.05);
-      font-size: 0.7rem;
-      color: rgba(255,255,255,0.18);
-      line-height: 1.7;
+      max-width: 1100px;
+      margin: 1.8rem auto 0;
+      padding-top: 1.8rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.65rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.15);
+      line-height: 1.75;
     }
 
     /* ============================================================
        RESPONSIVE
     ============================================================ */
     @media (max-width: 1024px) {
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
-      .expertise-layout { gap: 3.5rem; }
-      .agent-layout { gap: 3.5rem; }
-      .process-layout { gap: 3.5rem; }
-      .contact-layout { gap: 3.5rem; }
+      .advantage-points { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .markets-layout { gap: 3rem; }
+      .contact-layout { gap: 3rem; }
     }
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .nav-hamburger { display: flex; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .stat-item:nth-child(2) { border-right: none; }
-      .stat-item:nth-child(3) { border-right: none; border-top: 1px solid rgba(255,255,255,0.06); }
-      .stat-item:nth-child(4) { border-top: 1px solid rgba(255,255,255,0.06); }
       .services-grid { grid-template-columns: 1fr; }
-      .expertise-layout { grid-template-columns: 1fr; }
-      .agent-layout { grid-template-columns: 1fr; }
-      .why-grid { grid-template-columns: 1fr; }
-      .process-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .advantage-points { grid-template-columns: 1fr; }
+      .markets-layout { grid-template-columns: 1fr; }
+      .agent-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .process-steps {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .process-steps::before { display: none; }
+      .process-step { text-align: left; display: flex; gap: 1.2rem; align-items: flex-start; }
+      .step-circle { margin: 0; flex-shrink: 0; }
       .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
       .form-row { grid-template-columns: 1fr; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
       .footer-copy { text-align: left; }
-      .expertise-badge { bottom: 0; right: 0; }
-      .expertise-markets-grid { grid-template-columns: 1fr; }
+      .market-visual { display: none; }
+      .markets-layout { grid-template-columns: 1fr; }
     }
     @media (max-width: 480px) {
-      .hero-ctas { flex-direction: column; align-items: center; }
-      .stats-grid { grid-template-columns: 1fr 1fr; }
-      .section-inner { padding: 5rem 5%; }
+      .hero-actions { flex-direction: column; align-items: center; }
+      #intro, #services, #advantage, #markets, #agent, #process, #trust, #contact { padding: 5rem 5%; }
+      .contact-form { padding: 2rem 1.5rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- ============================================================
-     MOBILE MENU
-============================================================ -->
-<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true">
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
   <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
-  <a href="index.html"      onclick="closeMobile()">Home</a>
-  <a href="#services"       onclick="closeMobile()">Services</a>
-  <a href="#expertise"      onclick="closeMobile()">Markets</a>
-  <a href="#agent"          onclick="closeMobile()">About</a>
-  <a href="#contact"        onclick="closeMobile()">Contact</a>
+  <a href="https://www.vdtconstruction.com"  onclick="closeMobile()">Home</a>
+  <a href="#services"   onclick="closeMobile()">Services</a>
+  <a href="#markets"    onclick="closeMobile()">Markets</a>
+  <a href="#agent"      onclick="closeMobile()">About</a>
+  <a href="#contact"    onclick="closeMobile()">Contact</a>
 </div>
 
-<!-- ============================================================
-     NAVIGATION
-============================================================ -->
-<nav id="navbar" aria-label="Main navigation">
-  <div class="nav-logo">
-    <a href="index.html" aria-label="Gulf Coast Development Group home">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 110" role="img" aria-label="Gulf Coast Development Group">
-        <rect x="0" y="5" width="96" height="96" rx="5" fill="rgba(255,255,255,0.08)"/>
-        <rect x="4" y="9" width="88" height="88" rx="3" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.6"/>
-        <rect x="12" y="46" width="17" height="37" fill="#C9A84C"/>
-        <rect x="11" y="43" width="19" height="3" fill="#C9A84C"/>
-        <path d="M42,9 L51,9 L51,16 L57,16 L57,22 L60,22 L60,83 L34,83 L34,22 L37,22 L37,16 L42,16 Z" fill="#C9A84C"/>
-        <line x1="47" y1="9" x2="47" y2="5" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round"/>
-        <circle cx="47" cy="5" r="1.2" fill="#C9A84C"/>
-        <rect x="67" y="38" width="17" height="45" fill="#C9A84C"/>
-        <rect x="66" y="35" width="19" height="3" fill="#C9A84C"/>
-        <line x1="8" y1="83" x2="88" y2="83" stroke="#C9A84C" stroke-width="1.2"/>
-        <path d="M8,88 Q21,83 34,88 Q47,93 60,88 Q73,83 88,88" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
-        <path d="M8,94 Q21,89 34,94 Q47,99 60,94 Q73,89 88,94" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.45"/>
-        <text x="108" y="55" font-family="Georgia,serif" font-size="30" font-weight="bold" fill="#FFFFFF" letter-spacing="2">GULF COAST</text>
-        <text x="109" y="73" font-family="Georgia,serif" font-size="11.5" fill="rgba(255,255,255,0.65)" letter-spacing="6.5">DEVELOPMENT GROUP</text>
-        <line x1="108" y1="80" x2="412" y2="80" stroke="#C9A84C" stroke-width="0.9"/>
-        <text x="109" y="93" font-family="Georgia,serif" font-size="7.5" fill="#C9A84C" letter-spacing="2.5" font-style="italic">DESTIN, FL  ·  ORANGE BEACH, AL</text>
-      </svg>
-    </a>
+<!-- Navigation -->
+<nav id="nav" aria-label="Main navigation">
+  <a href="https://www.vdtconstruction.com" class="nav-brand" aria-label="VDT Construction home">
+    <span class="nav-brand-name">Vlahos, DeBogory &amp; Tuck</span>
+    <span class="nav-brand-sub">Construction &middot; Real Estate</span>
+  </a>
+  <div class="nav-links">
+    <a href="https://www.vdtconstruction.com">Home</a>
+    <a href="#services">Services</a>
+    <a href="#markets">Markets</a>
+    <a href="#agent">About</a>
+    <a href="#contact" class="nav-btn">Contact</a>
   </div>
-  <ul class="nav-links" role="list">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#expertise">Markets</a></li>
-    <li><a href="#agent">About</a></li>
-    <li><a href="#contact" class="nav-cta">Schedule a Consultation</a></li>
-  </ul>
   <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<!-- ============================================================
-     HERO
-============================================================ -->
-<section id="hero" aria-label="Real Estate Services Hero">
-  <div class="hero-bg" id="heroBg"></div>
-
-  <div class="hero-content" id="heroContent">
-    <p class="hero-eyebrow">Gulf Coast Real Estate Services</p>
+<!-- Hero -->
+<section id="hero" aria-label="Real Estate Services">
+  <div class="hero-photo" id="heroPhoto"></div>
+  <div class="hero-content">
+    <p class="hero-label">Real Estate Services</p>
+    <span class="hero-rule"></span>
     <h1 class="hero-title">
-      Your Coast.<br>Your <em>Trusted Agent.</em>
+      Your Gulf Coast<br><em>Real Estate Agent</em>
     </h1>
     <p class="hero-sub">
-      Licensed Gulf Coast real estate agent with deep developer insight — buying, selling,
-      and investing in Destin, the Emerald Coast, Orange Beach, and Gulf Shores.
-      Local knowledge. Institutional standards. Exceptional results.
+      Licensed representation for buyers, sellers, and investors — from the Destin and
+      30A corridor in Florida to Orange Beach and Gulf Shores, Alabama.
     </p>
-    <div class="hero-ctas">
-      <a href="#services" class="btn-primary">
-        Explore Services
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-      <a href="#contact" class="btn-outline">Schedule a Consultation</a>
+    <div class="hero-actions">
+      <a href="#services" class="btn btn-fill">Our Services</a>
+      <a href="#contact" class="btn">Schedule a Consultation</a>
     </div>
   </div>
-
-  <div class="hero-wave" aria-hidden="true">
-    <svg viewBox="0 0 2880 90" preserveAspectRatio="none" fill="#F8F5EE">
-      <path d="M0,50 C240,90 480,10 720,50 C960,90 1200,10 1440,50 C1680,90 1920,10 2160,50 C2400,90 2640,10 2880,50 L2880,90 L0,90 Z"/>
-    </svg>
-  </div>
-
-  <div class="scroll-indicator" aria-hidden="true">
-    <div class="scroll-mouse"></div>
+  <div class="hero-scroll" aria-hidden="true">
     <span>Scroll</span>
+    <span class="chevron-down">&#8964;</span>
   </div>
 </section>
 
-<!-- ============================================================
-     STATS BAR
-============================================================ -->
-<section id="stats" aria-label="Key statistics">
-  <div class="stats-grid">
-    <div class="stat-item" data-animate>
-      <div class="stat-number">
-        <span class="counter" data-target="30">30</span>
-        <span class="suffix">M+</span>
-      </div>
-      <div class="stat-label">Annual Regional Visitors</div>
-    </div>
-    <div class="stat-item" data-animate data-delay="2">
-      <div class="stat-number">
-        <span class="counter" data-target="22">22</span>
-        <span class="suffix">%</span>
-      </div>
-      <div class="stat-label">Population Growth (5yr)</div>
-    </div>
-    <div class="stat-item" data-animate data-delay="3">
-      <div class="stat-number">
-        <span class="prefix">$</span>
-        <span class="counter" data-target="2">2</span>
-        <span class="suffix">.1B</span>
-      </div>
-      <div class="stat-label">Annual Tourism Revenue</div>
-    </div>
-    <div class="stat-item" data-animate data-delay="4">
-      <div class="stat-number">
-        <span class="counter" data-target="25">25</span>
-        <span class="suffix">+</span>
-      </div>
-      <div class="stat-label">Years Combined Experience</div>
-    </div>
+<!-- Intro -->
+<section id="intro">
+  <div class="intro-inner">
+    <p class="section-label" data-fade>Real Estate</p>
+    <span class="section-divider" data-fade data-d="1"></span>
+    <h2 class="intro-title" data-fade data-d="2">
+      Construction Insight.<br>Real Estate Expertise.
+    </h2>
+    <p class="intro-body" data-fade data-d="3">
+      As a member of the VDT Construction team and a licensed real estate agent, Justin Knowles
+      brings something few agents can offer: a builder's understanding of every property he touches.
+      Whether you are buying a custom home, selling a coastal investment, or searching for the
+      right land to build on — you work with someone who knows this market from the ground up.
+    </p>
   </div>
 </section>
 
-<!-- ============================================================
-     SERVICES SECTION
-============================================================ -->
+<!-- Services -->
 <section id="services" aria-labelledby="services-heading">
-  <div class="section-inner">
-    <div class="section-header centered" data-animate>
-      <p class="eyebrow">What I Offer</p>
-      <span class="gold-rule centered"></span>
-      <h2 class="section-title" id="services-heading">
-        Full-Service Gulf Coast Real Estate
-      </h2>
-      <p class="section-body" style="color:var(--gray); max-width:560px; margin:1.2rem auto 0;">
-        Whether you're buying your first coastal property, selling a Gulf-front investment,
-        or looking to add real estate to your portfolio — I bring developer-level market
-        intelligence to every transaction.
+  <div class="services-inner">
+    <div class="section-header-centered" data-fade>
+      <p class="section-label">What We Offer</p>
+      <span class="section-divider"></span>
+      <h2 class="section-title-serif" id="services-heading">Services</h2>
+      <p class="section-body-text">
+        Full-service real estate representation across all property types along the
+        Gulf Coast corridor.
       </p>
     </div>
     <div class="services-grid">
 
-      <div class="service-card" data-animate data-delay="1">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-            <polyline points="9 22 9 12 15 12 15 22"/>
-          </svg>
-        </div>
+      <div class="service-card" data-fade data-d="1">
+        <div class="service-num">01</div>
         <div class="service-title">Residential Buying</div>
-        <div class="service-desc">Find your perfect Gulf Coast home with a guide who knows every neighborhood, market cycle, and hidden opportunity along the coast.</div>
+        <div class="service-desc">Expert guidance through every step of purchasing your Gulf Coast home — from first showing to closing day.</div>
         <ul class="service-list">
-          <li>Primary residences &amp; relocation</li>
-          <li>Vacation &amp; second homes</li>
-          <li>New construction &amp; pre-sale access</li>
+          <li>Primary &amp; second homes</li>
+          <li>New construction &amp; custom builds</li>
+          <li>Vacation &amp; beach properties</li>
           <li>Buyer representation &amp; negotiation</li>
         </ul>
       </div>
 
-      <div class="service-card" data-animate data-delay="2">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="12" y1="8" x2="12" y2="12"/>
-            <line x1="12" y1="16" x2="12.01" y2="16"/>
-          </svg>
-        </div>
+      <div class="service-card" data-fade data-d="2">
+        <div class="service-num">02</div>
         <div class="service-title">Property Sales</div>
-        <div class="service-desc">Strategic marketing and pricing powered by real development data — ensuring your property commands premium value in today's coastal market.</div>
+        <div class="service-desc">Strategic pricing, professional marketing, and skilled negotiation to help you achieve top value for your property.</div>
         <ul class="service-list">
-          <li>Comparative market analysis</li>
-          <li>Professional marketing &amp; photography</li>
-          <li>Qualified buyer network</li>
-          <li>Negotiation &amp; closing management</li>
+          <li>Comprehensive market analysis</li>
+          <li>Professional photography &amp; marketing</li>
+          <li>Qualified buyer outreach</li>
+          <li>Full-service listing management</li>
         </ul>
       </div>
 
-      <div class="service-card" data-animate data-delay="3">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-            <polyline points="17 6 23 6 23 12"/>
-          </svg>
-        </div>
+      <div class="service-card" data-fade data-d="3">
+        <div class="service-num">03</div>
         <div class="service-title">Investment Properties</div>
-        <div class="service-desc">Identify income-producing assets with strong short-term rental potential or long-term appreciation in the Gulf South's highest-demand corridors.</div>
+        <div class="service-desc">Income property analysis backed by real construction cost knowledge — identifying the best returns on the Gulf Coast.</div>
         <ul class="service-list">
-          <li>Short-term rental analysis (Airbnb / VRBO)</li>
-          <li>Cap rate &amp; cash-flow underwriting</li>
+          <li>Short-term rental analysis</li>
+          <li>Cap rate &amp; cash-flow modeling</li>
           <li>1031 exchange coordination</li>
           <li>Portfolio growth strategy</li>
         </ul>
       </div>
 
-      <div class="service-card" data-animate data-delay="2">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="7" width="20" height="14" rx="2"/>
-            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-          </svg>
-        </div>
-        <div class="service-title">Commercial Real Estate</div>
-        <div class="service-desc">Leverage developer-grade insight to evaluate and transact commercial assets — from retail pads and office suites to mixed-use and hospitality properties.</div>
+      <div class="service-card" data-fade data-d="1">
+        <div class="service-num">04</div>
+        <div class="service-title">Land &amp; Lot Sales</div>
+        <div class="service-desc">Find the right site for your build, or sell your land at its true potential value — with a builder's eye for what each parcel is worth.</div>
         <ul class="service-list">
-          <li>Commercial acquisitions &amp; dispositions</li>
-          <li>Site selection &amp; land sourcing</li>
-          <li>Lease advisory &amp; tenant rep</li>
-          <li>Development-adjacent opportunities</li>
+          <li>Buildable lot sourcing</li>
+          <li>Site evaluation &amp; feasibility</li>
+          <li>Zoning &amp; utility assessment</li>
+          <li>Custom home site selection</li>
         </ul>
       </div>
 
-      <div class="service-card" data-animate data-delay="3">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-            <circle cx="12" cy="10" r="3"/>
-          </svg>
-        </div>
-        <div class="service-title">Luxury Coastal Properties</div>
-        <div class="service-desc">Discreet representation for high-value Gulf-front, bay-front, and luxury coastal transactions — with the market depth to protect your interests at every step.</div>
+      <div class="service-card" data-fade data-d="2">
+        <div class="service-num">05</div>
+        <div class="service-title">Luxury &amp; Waterfront</div>
+        <div class="service-desc">Discreet, experienced representation for high-value Gulf-front, bay-front, and luxury coastal transactions.</div>
         <ul class="service-list">
-          <li>Waterfront &amp; Gulf-front homes</li>
-          <li>Luxury condominiums &amp; penthouses</li>
-          <li>Private &amp; off-market listings</li>
-          <li>Confidential buyer &amp; seller representation</li>
+          <li>Gulf-front &amp; bay-front homes</li>
+          <li>Luxury condominiums</li>
+          <li>Off-market &amp; private listings</li>
+          <li>Confidential representation</li>
         </ul>
       </div>
 
-      <div class="service-card" data-animate data-delay="4">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-            <circle cx="9" cy="7" r="4"/>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-          </svg>
-        </div>
-        <div class="service-title">Relocation Concierge</div>
-        <div class="service-desc">Moving to the Gulf Coast? I provide a complete concierge experience — from neighborhood orientation and school research to trusted vendor referrals and community introductions.</div>
+      <div class="service-card" data-fade data-d="3">
+        <div class="service-num">06</div>
+        <div class="service-title">Relocation Services</div>
+        <div class="service-desc">Moving to the Gulf Coast? A full concierge experience — neighborhood guidance, community introductions, and trusted local referrals.</div>
         <ul class="service-list">
-          <li>Neighborhood &amp; lifestyle matching</li>
+          <li>Lifestyle &amp; neighborhood matching</li>
           <li>Virtual &amp; in-person tours</li>
           <li>School &amp; community research</li>
-          <li>Preferred vendor network access</li>
+          <li>Preferred contractor referrals</li>
         </ul>
       </div>
 
@@ -1490,485 +1282,272 @@
   </div>
 </section>
 
-<!-- ============================================================
-     MARKET EXPERTISE SECTION
-============================================================ -->
-<section id="expertise" aria-labelledby="expertise-heading">
-  <div class="section-inner">
-    <div class="expertise-layout">
-      <div class="expertise-visual" data-animate>
-        <div class="expertise-graphic">
-          <svg viewBox="0 0 500 375" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%;">
-            <defs>
-              <linearGradient id="skyGrad2" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#040e1a"/>
-                <stop offset="60%" stop-color="#0D1B2A"/>
-                <stop offset="100%" stop-color="#0e1e30"/>
-              </linearGradient>
-              <linearGradient id="waterGrad2" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#0a2540"/>
-                <stop offset="100%" stop-color="#061525"/>
-              </linearGradient>
-              <linearGradient id="sunGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="rgba(201,168,76,0.25)"/>
-                <stop offset="100%" stop-color="rgba(201,168,76,0)"/>
-              </linearGradient>
-            </defs>
-            <rect width="500" height="375" fill="url(#skyGrad2)"/>
-            <circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.5)"/>
-            <circle cx="200" cy="25" r="1.2" fill="rgba(255,255,255,0.6)"/>
-            <circle cx="330" cy="55" r="0.8" fill="rgba(255,255,255,0.4)"/>
-            <circle cx="420" cy="30" r="1" fill="rgba(255,255,255,0.5)"/>
-            <circle cx="140" cy="70" r="0.9" fill="rgba(255,255,255,0.45)"/>
-            <ellipse cx="250" cy="200" rx="280" ry="120" fill="url(#sunGrad)"/>
-            <!-- Sun/moon glow -->
-            <circle cx="60" cy="55" r="20" fill="rgba(201,168,76,0.12)"/>
-            <circle cx="60" cy="55" r="12" fill="rgba(201,168,76,0.09)" stroke="rgba(201,168,76,0.28)" stroke-width="0.5"/>
-            <!-- Coastal homes / lower buildings -->
-            <rect x="20" y="200" width="28" height="35" fill="rgba(201,168,76,0.22)"/>
-            <rect x="52" y="190" width="22" height="45" fill="rgba(201,168,76,0.18)"/>
-            <!-- Central tower -->
-            <path d="M190,80 L202,80 L202,92 L212,92 L212,102 L218,102 L218,230 L175,230 L175,102 L181,102 L181,92 L190,92 Z" fill="#C9A84C" opacity="0.82"/>
-            <line x1="196.5" y1="80" x2="196.5" y2="65" stroke="#C9A84C" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="196.5" cy="65" r="2" fill="#C9A84C" opacity="0.8"/>
-            <rect x="183" y="110" width="7" height="7" fill="#0D1B2A"/>
-            <rect x="193" y="110" width="7" height="7" fill="#0D1B2A"/>
-            <rect x="203" y="110" width="7" height="7" fill="#0D1B2A"/>
-            <rect x="183" y="124" width="7" height="7" fill="rgba(255,240,180,0.6)"/>
-            <rect x="193" y="124" width="7" height="7" fill="#0D1B2A"/>
-            <rect x="203" y="124" width="7" height="7" fill="rgba(255,240,180,0.6)"/>
-            <rect x="183" y="138" width="7" height="7" fill="#0D1B2A"/>
-            <rect x="193" y="138" width="7" height="7" fill="rgba(255,240,180,0.6)"/>
-            <rect x="183" y="152" width="7" height="7" fill="rgba(255,240,180,0.5)"/>
-            <rect x="203" y="152" width="7" height="7" fill="#0D1B2A"/>
-            <!-- Left tower -->
-            <rect x="126" y="135" width="36" height="95" fill="#C9A84C" opacity="0.68"/>
-            <rect x="122" y="130" width="44" height="6" fill="#C9A84C" opacity="0.68"/>
-            <!-- Right tower -->
-            <rect x="235" y="118" width="40" height="112" fill="#C9A84C" opacity="0.72"/>
-            <rect x="231" y="113" width="48" height="6" fill="#C9A84C" opacity="0.72"/>
-            <!-- Far buildings -->
-            <rect x="300" y="155" width="32" height="75" fill="#C9A84C" opacity="0.5"/>
-            <rect x="340" y="172" width="50" height="58" fill="rgba(201,168,76,0.35)"/>
-            <!-- Beach house silhouettes -->
-            <path d="M380,200 L395,182 L410,200 Z" fill="rgba(201,168,76,0.4)"/>
-            <rect x="383" y="200" width="24" height="18" fill="rgba(201,168,76,0.35)"/>
-            <path d="M430,208 L442,194 L454,208 Z" fill="rgba(201,168,76,0.3)"/>
-            <rect x="432" y="208" width="20" height="15" fill="rgba(201,168,76,0.25)"/>
-            <!-- Ground/sand -->
-            <rect x="0" y="230" width="500" height="5" fill="#C9A84C" opacity="0.3"/>
-            <path d="M0,235 Q125,225 250,230 Q375,235 500,228 L500,260 L0,260 Z" fill="rgba(201,168,76,0.05)"/>
-            <!-- Water -->
-            <rect x="0" y="255" width="500" height="120" fill="url(#waterGrad2)"/>
-            <path d="M0,265 Q62.5,258 125,265 Q187.5,272 250,265 Q312.5,258 375,265 Q437.5,272 500,265" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" fill="none"/>
-            <path d="M0,278 Q62.5,271 125,278 Q187.5,285 250,278 Q312.5,271 375,278 Q437.5,285 500,278" stroke="rgba(255,255,255,0.08)" stroke-width="1" fill="none"/>
-            <ellipse cx="197" cy="268" rx="35" ry="8" fill="rgba(201,168,76,0.12)"/>
-            <!-- Label overlay -->
-            <rect x="0" y="328" width="500" height="47" fill="rgba(13,27,42,0.75)"/>
-            <text x="25" y="352" font-family="Georgia,serif" font-size="11" fill="rgba(201,168,76,0.9)" letter-spacing="3">GULF COAST REAL ESTATE MARKET</text>
-            <text x="25" y="367" font-family="Georgia,serif" font-size="9" fill="rgba(255,255,255,0.38)" letter-spacing="2">DESTIN, FL  ·  ORANGE BEACH, AL</text>
-          </svg>
-        </div>
-        <div class="expertise-badge">
-          <div class="expertise-badge-number">65mi</div>
-          <div class="expertise-badge-label">Coastal Corridor Coverage</div>
-        </div>
+<!-- Advantage / Gray Section -->
+<section id="advantage" aria-labelledby="advantage-heading">
+  <div class="advantage-inner">
+    <p class="section-label" style="color:rgba(255,255,255,0.35);" data-fade>The VDT Difference</p>
+    <span class="advantage-rule" data-fade data-d="1"></span>
+    <h2 class="advantage-heading" id="advantage-heading" data-fade data-d="2">
+      The Builder's Advantage
+    </h2>
+    <p class="advantage-body" data-fade data-d="3">
+      Most agents know the Gulf Coast. Justin Knowles helped build it. Working alongside
+      the VDT Construction team every day means an understanding of property condition,
+      construction cost, renovation potential, and market timing that no other agent can match.
+    </p>
+    <div class="advantage-points">
+      <div data-fade data-d="1">
+        <div class="adv-point-num">01</div>
+        <div class="adv-point-title">Construction Knowledge</div>
+        <div class="adv-point-text">Assess any property's true condition and renovation potential — knowing what work costs before you make an offer is an invaluable negotiating tool.</div>
       </div>
-
-      <div data-animate data-delay="2">
-        <div class="section-header">
-          <p class="eyebrow">Market Expertise</p>
-          <span class="gold-rule"></span>
-          <h2 class="section-title" id="expertise-heading" style="color:var(--white)">
-            Inside Knowledge of the Gulf's Most Sought-After Markets
-          </h2>
-          <p class="section-body light">
-            As an active member of the Gulf Coast Development Group team, I work in these
-            markets every day — evaluating land, underwriting deals, and tracking trends
-            before they hit the MLS. That edge translates directly into better outcomes
-            for every buyer and seller I represent.
-          </p>
-        </div>
-        <div class="market-points">
-          <div class="market-point">
-            <div class="market-point-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round">
-                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
-              </svg>
-            </div>
-            <div>
-              <div class="market-point-title">Developer-Level Market Data</div>
-              <div class="market-point-text">Access to pipeline intelligence, zoning shifts, and infrastructure investment that shapes property values months before public announcements.</div>
-            </div>
-          </div>
-          <div class="market-point">
-            <div class="market-point-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
-              </svg>
-            </div>
-            <div>
-              <div class="market-point-title">Deep Local Network</div>
-              <div class="market-point-text">Relationships with builders, lenders, title companies, and off-market sellers that open doors unavailable through traditional searches.</div>
-            </div>
-          </div>
-          <div class="market-point">
-            <div class="market-point-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round">
-                <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-              </svg>
-            </div>
-            <div>
-              <div class="market-point-title">Commercial &amp; Residential Crossover</div>
-              <div class="market-point-text">Understanding both asset classes means I see opportunities — and risks — that most residential-only agents simply miss.</div>
-            </div>
-          </div>
-        </div>
-        <div class="expertise-markets-grid">
-          <div class="exp-market-box">
-            <div class="exp-market-name">Destin &amp; Emerald Coast</div>
-            <div class="exp-market-sub">Okaloosa &amp; Walton Counties, FL</div>
-          </div>
-          <div class="exp-market-box">
-            <div class="exp-market-name">Orange Beach &amp; Gulf Shores</div>
-            <div class="exp-market-sub">Baldwin County, AL</div>
-          </div>
-          <div class="exp-market-box">
-            <div class="exp-market-name">30A Corridor</div>
-            <div class="exp-market-sub">South Walton, FL</div>
-          </div>
-          <div class="exp-market-box">
-            <div class="exp-market-name">Fort Walton &amp; Navarre</div>
-            <div class="exp-market-sub">Okaloosa County, FL</div>
-          </div>
-        </div>
+      <div data-fade data-d="2">
+        <div class="adv-point-num">02</div>
+        <div class="adv-point-title">Trusted Contractor Network</div>
+        <div class="adv-point-text">Access to VDT's vetted network of subcontractors, inspectors, and trades — the same professionals who build the finest homes on the Gulf Coast.</div>
+      </div>
+      <div data-fade data-d="3">
+        <div class="adv-point-num">03</div>
+        <div class="adv-point-title">New Construction Access</div>
+        <div class="adv-point-text">Pre-sale access and preferred insight on new builds along the Destin–30A–Orange Beach corridor, often before they reach the open market.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     AGENT PROFILE SECTION
-============================================================ -->
-<section id="agent" aria-labelledby="agent-heading">
-  <div class="section-inner">
-    <div class="agent-layout">
-      <div class="agent-photo-wrap" data-animate>
-        <div class="agent-photo-frame">
-          <div class="agent-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
-            </svg>
-            <span>Agent Photo</span>
-          </div>
-          <div class="agent-accent-bar"></div>
-        </div>
-        <div class="agent-credential-badge">
-          <div class="agent-badge-top">Licensed</div>
-          <div class="agent-badge-main">FL · AL</div>
-          <div class="agent-badge-sub">Realtor</div>
-        </div>
-      </div>
-
-      <div class="agent-info" data-animate data-delay="2">
-        <p class="eyebrow">Your Agent</p>
-        <span class="gold-rule"></span>
-        <h2 class="agent-name" id="agent-heading">[Agent Name]</h2>
-        <span class="agent-title-tag">Licensed Real Estate Agent · Gulf Coast Development Group</span>
-
-        <p class="agent-bio">
-          I bring a rare combination to the Gulf Coast real estate market: the day-to-day
-          insight of an active commercial developer and the licensed expertise of a dedicated
-          real estate agent. Working alongside the Gulf Coast Development Group team means
-          I see this market from the inside — evaluating properties, tracking infrastructure,
-          and building relationships that benefit every client I represent.
-        </p>
-        <p class="agent-bio">
-          Whether you're relocating to the Emerald Coast, searching for the right vacation
-          home, building a rental portfolio, or selling your Gulf-front property for maximum
-          value — I combine institutional market knowledge with a personal commitment to
-          your goals. Every transaction, every time.
-        </p>
-
-        <div class="agent-credentials">
-          <div class="credential-item">
-            <div class="credential-dot"></div>
-            <span class="credential-text">Licensed Realtor — Florida &amp; Alabama</span>
-          </div>
-          <div class="credential-item">
-            <div class="credential-dot"></div>
-            <span class="credential-text">Member, Gulf Coast Development Group</span>
-          </div>
-          <div class="credential-item">
-            <div class="credential-dot"></div>
-            <span class="credential-text">Residential &amp; Commercial Specialist</span>
-          </div>
-          <div class="credential-item">
-            <div class="credential-dot"></div>
-            <span class="credential-text">Investment &amp; Short-Term Rental Advisor</span>
-          </div>
-          <div class="credential-item">
-            <div class="credential-dot"></div>
-            <span class="credential-text">Destin, Orange Beach &amp; 30A Market Expert</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     WHY WORK WITH ME
-============================================================ -->
-<section id="why-me" aria-labelledby="why-heading">
-  <div class="section-inner">
-    <div class="section-header centered" data-animate>
-      <p class="eyebrow">The Difference</p>
-      <span class="gold-rule centered"></span>
-      <h2 class="section-title" id="why-heading">
-        Why Clients Choose a Developer-Connected Agent
-      </h2>
-      <p class="section-body" style="color:var(--gray); max-width:580px; margin:1.2rem auto 0;">
-        Most agents know the Gulf Coast. I know what's being built next.
+<!-- Markets -->
+<section id="markets" aria-labelledby="markets-heading">
+  <div class="markets-inner">
+    <div class="section-header-centered" data-fade>
+      <p class="section-label">Coverage Area</p>
+      <span class="section-divider"></span>
+      <h2 class="section-title-serif" id="markets-heading">Gulf Coast Markets</h2>
+      <p class="section-body-text">
+        Serving the full Destin &ndash; 30A &ndash; Orange Beach corridor across Florida and Alabama.
       </p>
     </div>
-    <div class="why-grid">
-
-      <div class="why-card" data-animate data-delay="1">
-        <div class="why-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-          </svg>
-        </div>
-        <div>
-          <div class="why-text-title">Pipeline Visibility</div>
-          <div class="why-text-desc">Know what's coming before it's public — new developments, infrastructure investments, and zoning changes that impact property values along the coast.</div>
-        </div>
+    <div class="markets-layout">
+      <div class="market-visual" data-fade>
+        <svg class="market-svg" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+          <!-- Simple Gulf Coast corridor illustration -->
+          <rect width="400" height="300" fill="#f0efec"/>
+          <!-- Water -->
+          <path d="M0,180 Q100,165 200,175 Q300,185 400,170 L400,300 L0,300 Z" fill="#c8d8e4" opacity="0.7"/>
+          <!-- Beach line -->
+          <path d="M0,178 Q100,163 200,173 Q300,183 400,168" stroke="#d4c9b0" stroke-width="2" fill="none" opacity="0.8"/>
+          <!-- 30A -->
+          <path d="M40,155 Q80,148 120,152 Q160,155 200,150 Q240,145 280,148 Q320,151 360,145" stroke="#b0a898" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/>
+          <!-- Location dots -->
+          <circle cx="120" cy="150" r="5" fill="#787876" opacity="0.7"/>
+          <circle cx="200" cy="148" r="5" fill="#787876" opacity="0.7"/>
+          <circle cx="290" cy="146" r="5" fill="#787876" opacity="0.7"/>
+          <circle cx="350" cy="142" r="5" fill="#787876" opacity="0.5"/>
+          <!-- Labels -->
+          <text x="108" y="138" font-family="Georgia,serif" font-size="9" fill="#4a4a48" letter-spacing="1">DESTIN</text>
+          <text x="183" y="136" font-family="Georgia,serif" font-size="9" fill="#4a4a48" letter-spacing="1">30A</text>
+          <text x="265" y="134" font-family="Georgia,serif" font-size="8" fill="#4a4a48" letter-spacing="1">OB/GS</text>
+          <!-- Gulf of Mexico label -->
+          <text x="200" y="240" font-family="Georgia,serif" font-size="11" fill="#9ab0c0" letter-spacing="3" text-anchor="middle" font-style="italic">Gulf of Mexico</text>
+          <!-- FL/AL state line -->
+          <line x1="262" y1="100" x2="262" y2="180" stroke="#c4c4c0" stroke-width="1" stroke-dasharray="3,3"/>
+          <text x="230" y="115" font-family="Georgia,serif" font-size="8" fill="#b0a898" letter-spacing="2">FL</text>
+          <text x="275" y="115" font-family="Georgia,serif" font-size="8" fill="#b0a898" letter-spacing="2">AL</text>
+        </svg>
+        <div class="market-caption">Destin &nbsp;·&nbsp; 30A &nbsp;·&nbsp; Orange Beach &nbsp;·&nbsp; Gulf Shores</div>
       </div>
 
-      <div class="why-card" data-animate data-delay="2">
-        <div class="why-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          </svg>
+      <div class="market-list" data-fade data-d="2">
+        <div class="market-item">
+          <div class="market-item-location">Florida &mdash; Okaloosa &amp; Walton Counties</div>
+          <div class="market-item-name">Destin &amp; the Emerald Coast</div>
+          <div class="market-item-desc">From Fort Walton Beach through Destin and east to Miramar Beach — one of Florida's most sought-after real estate markets, with world-class beaches, strong short-term rental demand, and a rapidly growing permanent population.</div>
         </div>
-        <div>
-          <div class="why-text-title">Fiduciary Commitment</div>
-          <div class="why-text-desc">Your interests come first — always. Every recommendation is backed by honest market data, transparent analysis, and a commitment to your long-term outcome.</div>
+        <div class="market-item">
+          <div class="market-item-location">Florida &mdash; South Walton County</div>
+          <div class="market-item-name">30A &amp; Scenic Highway Corridor</div>
+          <div class="market-item-desc">Rosemary Beach, WaterColor, Seaside, Alys Beach, and the towns in between — arguably the most desirable stretch of Gulf Coast real estate, where demand consistently outpaces supply.</div>
         </div>
-      </div>
-
-      <div class="why-card" data-animate data-delay="3">
-        <div class="why-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
-          </svg>
-        </div>
-        <div>
-          <div class="why-text-title">Underwriting Expertise</div>
-          <div class="why-text-desc">Investment properties analyzed with the same rigor we apply to commercial development — cash flow, cap rates, rental projections, and true cost-of-ownership modeling.</div>
+        <div class="market-item">
+          <div class="market-item-location">Alabama &mdash; Baldwin County</div>
+          <div class="market-item-name">Orange Beach &amp; Gulf Shores</div>
+          <div class="market-item-desc">Alabama's fastest-growing coastal market — a generational transformation underway, with $1.8B in recent investment creating exceptional opportunity for buyers and investors who move early.</div>
         </div>
       </div>
-
-      <div class="why-card" data-animate data-delay="4">
-        <div class="why-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-          </svg>
-        </div>
-        <div>
-          <div class="why-text-title">Trusted Network Access</div>
-          <div class="why-text-desc">Lenders, contractors, inspectors, title companies, and property managers — my network delivers the right professionals at the right time for a seamless transaction.</div>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     PROCESS SECTION
-============================================================ -->
+<!-- Agent Profile -->
+<section id="agent" aria-labelledby="agent-heading">
+  <div class="agent-inner">
+    <div class="section-header-centered" data-fade>
+      <p class="section-label">Your Agent</p>
+      <span class="section-divider"></span>
+    </div>
+    <div class="agent-layout">
+      <div class="agent-photo-frame" data-fade>
+        <div class="agent-photo-bg">
+          <span class="agent-photo-placeholder-text">Agent Photo</span>
+        </div>
+        <div class="agent-photo-tag">
+          <div class="agent-photo-tag-top">Licensed Realtor</div>
+          <div class="agent-photo-tag-name">Justin Knowles</div>
+        </div>
+      </div>
+      <div class="agent-info" data-fade data-d="2">
+        <p class="agent-eyebrow">Meet Your Agent</p>
+        <h2 class="agent-name" id="agent-heading">Justin Knowles</h2>
+        <p class="agent-title">Licensed Real Estate Agent &nbsp;&middot;&nbsp; VDT Construction</p>
+        <p class="agent-bio">
+          Justin Knowles brings a perspective to real estate that very few agents can offer — the
+          hands-on, day-to-day experience of working alongside one of the Gulf Coast's most
+          respected custom home builders. As a member of the Vlahos, DeBogory &amp; Tuck team,
+          Justin understands what makes a property exceptional, what renovation work actually
+          costs, and what separates a sound investment from a costly mistake.
+        </p>
+        <p class="agent-bio">
+          Whether you're buying your first Gulf Coast property, selling a custom home,
+          searching for the right lot to build on, or looking to expand your investment
+          portfolio in one of America's fastest-growing coastal markets — Justin brings
+          the kind of informed, honest guidance that only comes from someone who has built
+          in these communities.
+        </p>
+        <div class="agent-creds">
+          <div class="cred-item">
+            <span class="cred-dash"></span>
+            <span>Licensed Realtor — Florida &amp; Alabama</span>
+          </div>
+          <div class="cred-item">
+            <span class="cred-dash"></span>
+            <span>Member, VDT Construction (Vlahos, DeBogory &amp; Tuck)</span>
+          </div>
+          <div class="cred-item">
+            <span class="cred-dash"></span>
+            <span>Residential, Commercial &amp; Land Specialist</span>
+          </div>
+          <div class="cred-item">
+            <span class="cred-dash"></span>
+            <span>Custom Construction &amp; New Build Advisory</span>
+          </div>
+          <div class="cred-item">
+            <span class="cred-dash"></span>
+            <span>Destin · 30A · Orange Beach Market Expert</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
 <section id="process" aria-labelledby="process-heading">
-  <div class="section-inner">
-    <div class="process-layout">
-      <div data-animate>
-        <p class="eyebrow">How It Works</p>
-        <span class="gold-rule"></span>
-        <h2 class="section-title" id="process-heading">
-          A Seamless Path from Search to Close
-        </h2>
-        <p class="section-body light">
-          Every transaction is guided step-by-step with clear communication,
-          market-backed advice, and a personal commitment to protecting your interests
-          from the first conversation through closing day.
-        </p>
-        <div class="process-steps">
-          <div class="process-step">
-            <div class="step-num">01</div>
-            <div>
-              <div class="step-content-title">Discovery &amp; Goal Setting</div>
-              <div class="step-content-text">We start with a thorough conversation about your goals, timeline, budget, and lifestyle needs — so every recommendation is built around you.</div>
-            </div>
-          </div>
-          <div class="process-step">
-            <div class="step-num">02</div>
-            <div>
-              <div class="step-content-title">Market Analysis &amp; Strategy</div>
-              <div class="step-content-text">I pull developer-grade data and current comparables to define the right price range, investment thesis, or listing strategy for your situation.</div>
-            </div>
-          </div>
-          <div class="process-step">
-            <div class="step-num">03</div>
-            <div>
-              <div class="step-content-title">Search, Tour &amp; Evaluate</div>
-              <div class="step-content-text">On-market listings, off-market opportunities, and new development access — I show you the full picture with honest analysis of every property.</div>
-            </div>
-          </div>
-          <div class="process-step">
-            <div class="step-num">04</div>
-            <div>
-              <div class="step-content-title">Negotiate &amp; Execute</div>
-              <div class="step-content-text">Precise offer structuring, skilled negotiation, and diligent due diligence management from accepted offer to clear-to-close.</div>
-            </div>
-          </div>
-          <div class="process-step">
-            <div class="step-num">05</div>
-            <div>
-              <div class="step-content-title">Close &amp; Beyond</div>
-              <div class="step-content-text">I remain your Gulf Coast real estate resource after closing — for referrals, market updates, rental setup, or the next opportunity.</div>
-            </div>
-          </div>
+  <div class="process-inner">
+    <div class="section-header-centered" data-fade>
+      <p class="section-label">How It Works</p>
+      <span class="section-divider"></span>
+      <h2 class="section-title-serif" id="process-heading">From First Call to Closing</h2>
+      <p class="section-body-text">A clear, straightforward process built around your goals and timeline.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step" data-fade data-d="1">
+        <div class="step-circle"><span class="step-circle-num">1</span></div>
+        <div>
+          <div class="step-title">Discovery</div>
+          <div class="step-text">Understanding your goals, timeline, and what success looks like for you.</div>
         </div>
       </div>
-
-      <div class="process-highlights" data-animate data-delay="3">
-        <div class="process-highlight-title">What Sets This Experience Apart</div>
-        <div class="highlight-items">
-          <div class="highlight-item">
-            <div class="highlight-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-            </div>
-            <div>
-              <div class="highlight-label">Single Point of Contact</div>
-              <div class="highlight-sub">You work directly with me from first call to closing key — no handoffs, no assistants fielding your questions.</div>
-            </div>
-          </div>
-          <div class="highlight-item">
-            <div class="highlight-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-            </div>
-            <div>
-              <div class="highlight-label">Proactive Communication</div>
-              <div class="highlight-sub">Regular market updates, prompt responses, and transparent timelines — so you always know exactly where your transaction stands.</div>
-            </div>
-          </div>
-          <div class="highlight-item">
-            <div class="highlight-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-            </div>
-            <div>
-              <div class="highlight-label">No-Pressure Guidance</div>
-              <div class="highlight-sub">The right deal at the right time — I'll never push you toward a property that doesn't serve your long-term interests.</div>
-            </div>
-          </div>
-          <div class="highlight-item">
-            <div class="highlight-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-            </div>
-            <div>
-              <div class="highlight-label">Investor-Focused Analysis</div>
-              <div class="highlight-sub">Full ROI modeling for any income property — occupancy projections, seasonal revenue analysis, and expense forecasts you can trust.</div>
-            </div>
-          </div>
-          <div class="highlight-item">
-            <div class="highlight-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-            </div>
-            <div>
-              <div class="highlight-label">Developer Relationships</div>
-              <div class="highlight-sub">Pre-sale access, preferred pricing, and insider knowledge on new construction opportunities not yet available to the public.</div>
-            </div>
-          </div>
+      <div class="process-step" data-fade data-d="2">
+        <div class="step-circle"><span class="step-circle-num">2</span></div>
+        <div>
+          <div class="step-title">Strategy</div>
+          <div class="step-text">Market analysis and a clear plan — buying, selling, or investing.</div>
+        </div>
+      </div>
+      <div class="process-step" data-fade data-d="3">
+        <div class="step-circle"><span class="step-circle-num">3</span></div>
+        <div>
+          <div class="step-title">Search &amp; Evaluate</div>
+          <div class="step-text">On-market, off-market, and new construction opportunities reviewed with a builder's eye.</div>
+        </div>
+      </div>
+      <div class="process-step" data-fade data-d="4">
+        <div class="step-circle"><span class="step-circle-num">4</span></div>
+        <div>
+          <div class="step-title">Negotiate</div>
+          <div class="step-text">Precise offer structuring and skilled negotiation protecting your interests at every turn.</div>
+        </div>
+      </div>
+      <div class="process-step" data-fade data-d="5">
+        <div class="step-circle"><span class="step-circle-num">5</span></div>
+        <div>
+          <div class="step-title">Close &amp; Beyond</div>
+          <div class="step-text">Seamless closing and continued support — referrals, contractors, and your next opportunity.</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     CONTACT SECTION
-============================================================ -->
+<!-- Trust Quote -->
+<section id="trust">
+  <div class="trust-inner" data-fade>
+    <p class="section-label">Our Commitment</p>
+    <span class="section-divider"></span>
+    <p class="trust-quote">
+      "We are committed to providing our customers with the very best service and building
+      experience possible, to make their dream projects become reality."
+    </p>
+    <p class="trust-attr">Vlahos, DeBogory &amp; Tuck &nbsp;&middot;&nbsp; VDT Construction</p>
+  </div>
+</section>
+
+<!-- Contact -->
 <section id="contact" aria-labelledby="contact-heading">
-  <div class="section-inner">
+  <div class="contact-inner">
+    <div class="section-header-centered" data-fade>
+      <p class="section-label" style="color:rgba(255,255,255,0.35);">Get In Touch</p>
+      <span class="advantage-rule" style="display:block;width:36px;height:1px;background:rgba(255,255,255,0.2);margin:1.2rem auto 0;"></span>
+    </div>
     <div class="contact-layout">
-      <div data-animate>
-        <p class="eyebrow">Get In Touch</p>
-        <span class="gold-rule"></span>
-        <h2 class="section-title" id="contact-heading">
-          Let's Find Your Gulf Coast Property
+      <div data-fade>
+        <p class="contact-side-label">Let's Talk Real Estate</p>
+        <h2 class="contact-side-heading" id="contact-heading">
+          Schedule a Free Consultation
         </h2>
-        <p class="section-body light">
-          Whether you're ready to make a move or just starting to explore the Gulf Coast
-          market, I'm here to help. All consultations are confidential and obligation-free.
+        <p class="contact-side-body">
+          Whether you're ready to make a move or just exploring what's possible on
+          the Gulf Coast, reach out — all conversations are confidential and
+          completely obligation-free.
         </p>
-        <div class="contact-info">
-          <div class="contact-item">
-            <div class="contact-item-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
-              </svg>
-            </div>
-            <div>
-              <div class="contact-item-label">Office</div>
-              <div class="contact-item-value">4525 Legendary Drive, Suite 200<br>Destin, Florida 32541</div>
-            </div>
+        <div class="contact-details">
+          <div class="contact-detail">
+            <span class="contact-detail-label">Phone</span>
+            <span class="contact-detail-value">
+              <a href="tel:8504000200">(850) 400-0200</a>
+            </span>
           </div>
-          <div class="contact-item">
-            <div class="contact-item-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.34 2 2 0 0 1 3.61 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
-            </div>
-            <div>
-              <div class="contact-item-label">Phone</div>
-              <div class="contact-item-value">(850) 400-0200</div>
-            </div>
+          <div class="contact-detail">
+            <span class="contact-detail-label">Email</span>
+            <span class="contact-detail-value">
+              <a href="mailto:justin@vdtconstruction.com">justin@vdtconstruction.com</a>
+            </span>
           </div>
-          <div class="contact-item">
-            <div class="contact-item-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
-              </svg>
-            </div>
-            <div>
-              <div class="contact-item-label">Email</div>
-              <div class="contact-item-value">realestate@gulfcoastdg.com</div>
-            </div>
+          <div class="contact-detail">
+            <span class="contact-detail-label">Office</span>
+            <span class="contact-detail-value">Destin, Florida &amp; Orange Beach, Alabama</span>
           </div>
         </div>
-        <div class="contact-note">
-          <div class="contact-note-title">Licensed in Florida &amp; Alabama</div>
-          <div class="contact-note-text">I represent buyers and sellers throughout the Gulf Coast corridor — from Navarre and Fort Walton Beach through Destin, 30A, Panama City Beach, and across to Orange Beach and Gulf Shores, Alabama.</div>
-        </div>
+        <p class="license-note">
+          Justin Knowles is a licensed real estate agent in the State of Florida and the State of
+          Alabama. Real estate brokerage services provided through [Brokerage Name], Licensed
+          Real Estate Broker. All transactions subject to applicable state law.
+        </p>
       </div>
 
-      <div data-animate data-delay="3">
+      <div data-fade data-d="3">
         <div class="contact-form">
-          <div class="form-title">Schedule a Free Consultation</div>
-          <form id="realEstateForm" novalidate>
+          <div class="form-heading">Send a Message</div>
+          <form id="contactForm" novalidate>
             <div class="form-row">
               <div class="form-group">
                 <label for="firstName">First Name</label>
@@ -1980,43 +1559,31 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="email">Email Address</label>
+              <label for="email">Email</label>
               <input type="email" id="email" name="email" placeholder="john@example.com" required>
             </div>
             <div class="form-group">
-              <label for="phone">Phone Number</label>
+              <label for="phone">Phone</label>
               <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000">
             </div>
             <div class="form-group">
-              <label for="serviceType">I'm Looking To</label>
-              <select id="serviceType" name="serviceType">
-                <option value="" disabled selected>Select a service</option>
+              <label for="interest">I Am Looking To</label>
+              <select id="interest" name="interest">
+                <option value="" disabled selected>Select one</option>
                 <option>Buy a Home or Condo</option>
                 <option>Sell My Property</option>
                 <option>Purchase an Investment Property</option>
-                <option>Commercial Real Estate</option>
+                <option>Find Land to Build On</option>
                 <option>Relocate to the Gulf Coast</option>
                 <option>Explore My Options</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="priceRange">Price Range</label>
-              <select id="priceRange" name="priceRange">
-                <option value="" disabled selected>Select a range</option>
-                <option>Under $300K</option>
-                <option>$300K – $600K</option>
-                <option>$600K – $1M</option>
-                <option>$1M – $3M</option>
-                <option>$3M+</option>
-                <option>Prefer to discuss</option>
-              </select>
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell me what you're looking for or any questions you have..."></textarea>
             </div>
-            <div class="form-group">
-              <label for="message">Tell Me More (Optional)</label>
-              <textarea id="message" name="message" placeholder="Share any details about what you're looking for, your timeline, or questions you have..."></textarea>
-            </div>
-            <button type="submit" class="form-submit">Request a Consultation</button>
-            <p class="form-disclaimer">All inquiries are handled with complete confidentiality. By submitting this form you agree to be contacted regarding your real estate inquiry.</p>
+            <button type="submit" class="form-submit">Send Message</button>
+            <p class="form-note">All inquiries are handled with complete confidentiality.</p>
           </form>
         </div>
       </div>
@@ -2024,129 +1591,89 @@
   </div>
 </section>
 
-<!-- ============================================================
-     FOOTER
-============================================================ -->
+<!-- Footer -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-logo">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 110" role="img" aria-label="Gulf Coast Development Group">
-        <rect x="0" y="5" width="96" height="96" rx="5" fill="rgba(255,255,255,0.05)"/>
-        <rect x="4" y="9" width="88" height="88" rx="3" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
-        <rect x="12" y="46" width="17" height="37" fill="#C9A84C" opacity="0.6"/>
-        <rect x="11" y="43" width="19" height="3" fill="#C9A84C" opacity="0.6"/>
-        <path d="M42,9 L51,9 L51,16 L57,16 L57,22 L60,22 L60,83 L34,83 L34,22 L37,22 L37,16 L42,16 Z" fill="#C9A84C" opacity="0.7"/>
-        <line x1="47" y1="9" x2="47" y2="5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
-        <rect x="67" y="38" width="17" height="45" fill="#C9A84C" opacity="0.55"/>
-        <rect x="66" y="35" width="19" height="3" fill="#C9A84C" opacity="0.55"/>
-        <line x1="8" y1="83" x2="88" y2="83" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
-        <path d="M8,88 Q21,83 34,88 Q47,93 60,88 Q73,83 88,88" stroke="#C9A84C" stroke-width="1.3" fill="none" opacity="0.5"/>
-        <text x="108" y="55" font-family="Georgia,serif" font-size="30" font-weight="bold" fill="rgba(255,255,255,0.75)" letter-spacing="2">GULF COAST</text>
-        <text x="109" y="73" font-family="Georgia,serif" font-size="11.5" fill="rgba(255,255,255,0.3)" letter-spacing="6.5">DEVELOPMENT GROUP</text>
-        <line x1="108" y1="80" x2="412" y2="80" stroke="#C9A84C" stroke-width="0.7" opacity="0.4"/>
-        <text x="109" y="93" font-family="Georgia,serif" font-size="7.5" fill="rgba(201,168,76,0.55)" letter-spacing="2.5" font-style="italic">DESTIN, FL  ·  ORANGE BEACH, AL</text>
-      </svg>
-    </div>
-    <nav class="footer-links" aria-label="Footer navigation">
-      <a href="index.html">Home</a>
+    <div class="footer-brand">Vlahos, DeBogory &amp; Tuck</div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="https://www.vdtconstruction.com">Home</a>
       <a href="#services">Services</a>
-      <a href="#expertise">Markets</a>
+      <a href="#markets">Markets</a>
       <a href="#agent">About</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="footer-copy">
-      &copy; 2025 Gulf Coast Development Group, LLC<br>
-      Destin, Florida &nbsp;·&nbsp; All Rights Reserved
+      &copy; 2025 VDT Construction<br>
+      All Rights Reserved
     </div>
   </div>
   <div class="footer-disclaimer">
-    <strong>Real Estate Licensing Disclosure:</strong> [Agent Name] is a licensed real estate agent in the State of Florida and the State of Alabama. Gulf Coast Development Group, LLC is a real estate development company. Real estate brokerage services are provided through [Brokerage Name], Licensed Real Estate Broker. All real estate transactions are subject to applicable state laws and regulations. Information provided on this website is for general informational purposes only and does not constitute legal, financial, or real estate advice. Please consult appropriate professionals before making any real estate decision.
+    Justin Knowles is a licensed real estate agent in the State of Florida and the State of Alabama. Real estate brokerage services are provided through [Brokerage Name], Licensed Real Estate Broker. VDT Construction is a custom home building and renovation company. Information on this website is for general informational purposes only and does not constitute legal, financial, or real estate advice. Please consult appropriate professionals before making any real estate decision.
   </div>
 </footer>
 
-<!-- ============================================================
-     JAVASCRIPT
-============================================================ -->
 <script>
 (function() {
   'use strict';
 
-  /* ---- Navbar scroll behavior ---- */
-  const navbar = document.getElementById('navbar');
-
-  function onScroll() {
-    if (window.scrollY > 60) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-  }
-
-  /* ---- Parallax ---- */
-  const heroBg      = document.getElementById('heroBg');
-  const heroContent = document.getElementById('heroContent');
-  let rafPending = false;
-
-  function handleParallax() {
-    const y = window.scrollY;
-    if (heroBg)      heroBg.style.transform      = `translateY(${y * 0.45}px)`;
-    if (heroContent) heroContent.style.transform  = `translateY(${y * 0.18}px)`;
-    rafPending = false;
-  }
-
+  /* Nav scroll */
+  const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
-    onScroll();
-    if (!rafPending) {
-      rafPending = true;
-      requestAnimationFrame(handleParallax);
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+
+  /* Parallax hero */
+  const heroPhoto = document.getElementById('heroPhoto');
+  let raf = false;
+  window.addEventListener('scroll', () => {
+    if (!raf) {
+      raf = true;
+      requestAnimationFrame(() => {
+        if (heroPhoto) heroPhoto.style.transform = `translateY(${window.scrollY * 0.35}px)`;
+        raf = false;
+      });
     }
   }, { passive: true });
 
-  /* ---- Intersection Observer for fade-in animations ---- */
-  const animateEls = document.querySelectorAll('[data-animate]');
-  const fadeObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        fadeObserver.unobserve(entry.target);
+  /* Scroll fade-in */
+  const fadeEls = document.querySelectorAll('[data-fade]');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+  fadeEls.forEach(el => obs.observe(el));
 
-  animateEls.forEach(el => fadeObserver.observe(el));
-
-  /* ---- Mobile menu ---- */
+  /* Mobile menu */
   const hamburger  = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileNav  = document.getElementById('mobileNav');
   const mobileClose = document.getElementById('mobileClose');
-
-  function openMobile() {
-    mobileMenu.classList.add('open');
+  hamburger.addEventListener('click', () => {
+    mobileNav.classList.add('open');
     hamburger.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
-  }
+  });
   window.closeMobile = function() {
-    mobileMenu.classList.remove('open');
+    mobileNav.classList.remove('open');
     hamburger.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
   };
-
-  hamburger.addEventListener('click', openMobile);
   mobileClose.addEventListener('click', closeMobile);
 
-  /* ---- Form submission ---- */
-  const form = document.getElementById('realEstateForm');
+  /* Form */
+  const form = document.getElementById('contactForm');
   if (form) {
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', e => {
       e.preventDefault();
       const btn = form.querySelector('.form-submit');
-      btn.textContent = 'Message Sent — I\'ll be in touch soon!';
-      btn.style.background = '#2a6e3f';
-      btn.style.color = '#fff';
+      btn.textContent = 'Message Sent — Justin will be in touch soon.';
+      btn.style.background = '#4a5a4a';
       btn.disabled = true;
     });
   }
-
 })();
 </script>
 </body>
