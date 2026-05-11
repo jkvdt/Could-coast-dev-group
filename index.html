@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gulf Coast Development Group | Commercial Real Estate Development</title>
-  <meta name="description" content="Premier commercial real estate developer in Destin, FL and Orange Beach, AL. Connecting capital investors with the Gulf South's highest-growth coastal markets.">
+  <meta name="description" content="Gulf Coast Development Group is the trusted local development partner for capital deploying into Destin, FL and Orange Beach, AL commercial real estate markets.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,12 +13,12 @@
        CSS CUSTOM PROPERTIES
     ============================================================ */
     :root {
-      --navy:        #0D1B2A;
-      --navy-mid:    #152538;
-      --navy-light:  #1A3A5C;
-      --gold:        #C9A84C;
-      --gold-light:  #E5C97A;
-      --gold-dark:   #A07828;
+      --navy:        #060F1C;
+      --navy-mid:    #0D1B2A;
+      --navy-light:  #152538;
+      --gold:        #B8922A;
+      --gold-light:  #CDA94E;
+      --gold-dark:   #8A6A1A;
       --cream:       #F8F5EE;
       --cream-dark:  #EDE8DC;
       --white:       #FFFFFF;
@@ -73,16 +73,31 @@
     .gold-rule.centered { margin-left: auto; margin-right: auto; }
 
     /* ============================================================
-       SCROLL ANIMATIONS
+       SCROLL PROGRESS BAR
+    ============================================================ */
+    #scrollProgress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2.5px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold-light), var(--gold));
+      z-index: 99999;
+      pointer-events: none;
+      will-change: width;
+    }
+
+    /* ============================================================
+       SCROLL ANIMATIONS  (3-D entrance)
     ============================================================ */
     [data-animate] {
       opacity: 0;
-      transform: translateY(36px);
-      transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+      transform: translateY(48px) perspective(900px) rotateX(10deg);
+      transform-origin: bottom center;
+      transition: opacity 0.95s var(--ease-out), transform 0.95s var(--ease-out);
     }
     [data-animate].is-visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) perspective(900px) rotateX(0deg);
     }
     [data-animate][data-delay="1"] { transition-delay: 0.1s; }
     [data-animate][data-delay="2"] { transition-delay: 0.2s; }
@@ -213,11 +228,11 @@
       inset: -15%;
       background: linear-gradient(
         135deg,
-        #040e1a 0%,
-        #0D1B2A 25%,
-        #0e2540 50%,
-        #091929 75%,
-        #040e1a 100%
+        #020810 0%,
+        #060F1C 25%,
+        #0a1c32 50%,
+        #040b16 75%,
+        #020810 100%
       );
       background-size: 400% 400%;
       animation: heroGradient 14s ease infinite;
@@ -234,9 +249,9 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 70% 60% at 25% 65%, rgba(26,58,92,0.5) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 50% at 78% 35%, rgba(201,168,76,0.07) 0%, transparent 55%),
-        radial-gradient(ellipse 80% 40% at 50% 90%, rgba(10,30,55,0.6) 0%, transparent 80%);
+        radial-gradient(ellipse 70% 60% at 25% 65%, rgba(13,35,65,0.7) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 78% 35%, rgba(184,146,42,0.09) 0%, transparent 55%),
+        radial-gradient(ellipse 80% 40% at 50% 90%, rgba(4,14,28,0.75) 0%, transparent 80%);
     }
 
     /* Subtle dot grid texture */
@@ -255,7 +270,7 @@
       text-align: center;
       padding: 0 5%;
       max-width: 900px;
-      will-change: transform;
+      will-change: transform, opacity;
     }
     .hero-eyebrow {
       font-family: var(--sans);
@@ -905,6 +920,65 @@
     }
 
     /* ============================================================
+       EXPERTISE SECTION
+    ============================================================ */
+    #expertise {
+      background: var(--navy);
+    }
+    #expertise .eyebrow { color: var(--gold); }
+    #expertise .section-title { color: var(--white); }
+    #expertise .gold-rule { background: var(--gold); }
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+    .expertise-card {
+      border: 1px solid rgba(184,146,42,0.28);
+      border-radius: 4px;
+      padding: 2.5rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .expertise-card:hover {
+      border-color: var(--gold);
+      background: rgba(255,255,255,0.04);
+    }
+    .expertise-card .why-icon {
+      background: rgba(184,146,42,0.14);
+    }
+    .expertise-title {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+    .expertise-desc {
+      font-size: 0.9rem;
+      line-height: 1.72;
+      color: rgba(255,255,255,0.62);
+      margin-bottom: 1.1rem;
+    }
+    .expertise-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .expertise-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 0.22rem 0.6rem;
+      border: 1px solid rgba(184,146,42,0.35);
+      border-radius: 2px;
+      color: var(--gold-light);
+    }
+
+    /* ============================================================
        CONTACT SECTION
     ============================================================ */
     #contact {
@@ -1107,6 +1181,7 @@
       .investment-layout { grid-template-columns: 1fr; gap: 3rem; }
       .investment-terms { grid-template-columns: 1fr 1fr; }
       .why-grid { grid-template-columns: 1fr; }
+      .expertise-grid { grid-template-columns: 1fr; }
       .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
       .form-row { grid-template-columns: 1fr; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
@@ -1121,6 +1196,7 @@
   </style>
 </head>
 <body>
+<div id="scrollProgress" aria-hidden="true"></div>
 
 <!-- ============================================================
      MOBILE MENU
@@ -1139,29 +1215,43 @@
 ============================================================ -->
 <nav id="navbar" aria-label="Main navigation">
   <div class="nav-logo">
-    <!-- Inline logo (white/gold version for dark navbar) -->
+    <!-- Inline logo — navbar (white/gold on dark) -->
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 110" role="img" aria-label="Gulf Coast Development Group">
       <!-- Badge -->
-      <rect x="0" y="5" width="96" height="96" rx="5" fill="rgba(255,255,255,0.08)"/>
-      <rect x="4" y="9" width="88" height="88" rx="3" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.6"/>
-      <!-- Buildings (gold) -->
-      <rect x="12" y="46" width="17" height="37" fill="#C9A84C"/>
-      <rect x="11" y="43" width="19" height="3" fill="#C9A84C"/>
-      <path d="M42,9 L51,9 L51,16 L57,16 L57,22 L60,22 L60,83 L34,83 L34,22 L37,22 L37,16 L42,16 Z" fill="#C9A84C"/>
-      <line x1="47" y1="9" x2="47" y2="5" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round"/>
-      <circle cx="47" cy="5" r="1.2" fill="#C9A84C"/>
-      <rect x="67" y="38" width="17" height="45" fill="#C9A84C"/>
-      <rect x="66" y="35" width="19" height="3" fill="#C9A84C"/>
-      <!-- Horizon -->
-      <line x1="8" y1="83" x2="88" y2="83" stroke="#C9A84C" stroke-width="1.2"/>
-      <!-- Waves -->
-      <path d="M8,88 Q21,83 34,88 Q47,93 60,88 Q73,83 88,88" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
-      <path d="M8,94 Q21,89 34,94 Q47,99 60,94 Q73,89 88,94" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.45"/>
+      <rect x="0" y="5" width="96" height="96" rx="5" fill="rgba(255,255,255,0.07)"/>
+      <rect x="4" y="9" width="88" height="88" rx="3" fill="none" stroke="#B8922A" stroke-width="0.8" opacity="0.55"/>
+      <!-- Left: coastal condo (gable roof + 2 floors) -->
+      <polygon points="6,44 28,31 50,44" fill="#B8922A"/>
+      <rect x="8" y="44" width="40" height="36" fill="#B8922A"/>
+      <rect x="8" y="61" width="40" height="1.8" fill="#0D1B2A" opacity="0.3"/>
+      <rect x="11" y="47" width="7" height="10" rx="0.6" fill="#0D1B2A" opacity="0.7"/>
+      <rect x="22" y="47" width="7" height="10" rx="0.6" fill="#0D1B2A" opacity="0.7"/>
+      <rect x="33" y="47" width="7" height="10" rx="0.6" fill="#0D1B2A" opacity="0.7"/>
+      <rect x="11" y="65" width="7" height="9"  rx="0.6" fill="#0D1B2A" opacity="0.7"/>
+      <rect x="33" y="65" width="7" height="9"  rx="0.6" fill="#0D1B2A" opacity="0.7"/>
+      <rect x="22" y="65" width="7" height="15" rx="0.6" fill="#0D1B2A" opacity="0.7"/>
+      <!-- Right: commercial strip (3 stepped bays) -->
+      <rect x="52" y="52" width="16" height="28" fill="#B8922A"/>
+      <rect x="50" y="49" width="20" height="4"  fill="#B8922A"/>
+      <rect x="68" y="58" width="12" height="22" fill="#B8922A"/>
+      <rect x="66" y="55" width="16" height="4"  fill="#B8922A"/>
+      <rect x="80" y="55" width="13" height="25" fill="#B8922A"/>
+      <rect x="78" y="52" width="17" height="4"  fill="#B8922A"/>
+      <rect x="52" y="55" width="14" height="1.8" fill="#0D1B2A" opacity="0.28"/>
+      <rect x="53" y="58" width="6"  height="14" rx="0.4" fill="#0D1B2A" opacity="0.7"/>
+      <rect x="61" y="58" width="5"  height="22" rx="0.4" fill="#0D1B2A" opacity="0.7"/>
+      <rect x="70" y="62" width="8"  height="11" rx="0.4" fill="#0D1B2A" opacity="0.7"/>
+      <rect x="82" y="59" width="4"  height="14" rx="0.4" fill="#0D1B2A" opacity="0.7"/>
+      <rect x="88" y="59" width="4"  height="14" rx="0.4" fill="#0D1B2A" opacity="0.7"/>
+      <!-- Ground + waves -->
+      <line x1="7" y1="80" x2="93" y2="80" stroke="#B8922A" stroke-width="1" opacity="0.75"/>
+      <path d="M7,85 Q21,80 35,85 Q49,90 63,85 Q77,80 91,85" stroke="#B8922A" stroke-width="1.4" fill="none"/>
+      <path d="M7,91 Q21,86 35,91 Q49,96 63,91 Q77,86 91,91" stroke="#B8922A" stroke-width="0.9" fill="none" opacity="0.44"/>
       <!-- Wordmark -->
       <text x="108" y="55" font-family="Georgia,serif" font-size="30" font-weight="bold" fill="#FFFFFF" letter-spacing="2">GULF COAST</text>
       <text x="109" y="73" font-family="Georgia,serif" font-size="11.5" fill="rgba(255,255,255,0.65)" letter-spacing="6.5">DEVELOPMENT GROUP</text>
-      <line x1="108" y1="80" x2="412" y2="80" stroke="#C9A84C" stroke-width="0.9"/>
-      <text x="109" y="93" font-family="Georgia,serif" font-size="7.5" fill="#C9A84C" letter-spacing="2.5" font-style="italic">DESTIN, FL  ·  ORANGE BEACH, AL</text>
+      <line x1="108" y1="80" x2="412" y2="80" stroke="#B8922A" stroke-width="0.9"/>
+      <text x="109" y="93" font-family="Georgia,serif" font-size="7.5" fill="#B8922A" letter-spacing="2.5" font-style="italic">DESTIN, FL  ·  ORANGE BEACH, AL</text>
     </svg>
   </div>
   <ul class="nav-links" role="list">
@@ -1169,7 +1259,7 @@
     <li><a href="#markets">Markets</a></li>
     <li><a href="#portfolio">Development</a></li>
     <li><a href="#investment">Investment</a></li>
-    <li><a href="#contact" class="nav-cta">Investor Relations</a></li>
+    <li><a href="#contact" class="nav-cta">Partner With Us</a></li>
   </ul>
   <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
     <span></span><span></span><span></span>
@@ -1185,19 +1275,19 @@
   <div class="hero-content" id="heroContent">
     <p class="hero-eyebrow">Gulf Coast Development Group</p>
     <h1 class="hero-title">
-      Where <em>Capital</em><br>Meets Coast
+      Your Gulf Coast<br><em>Development Partner</em>
     </h1>
     <p class="hero-sub">
-      Premier commercial real estate development in the Gulf South's highest-growth
-      coastal markets — Destin, Florida and Orange Beach, Alabama.
-      Institutional-quality projects. Local expertise. Exceptional returns.
-    </p>
+      You have capital to deploy. We have the market knowledge, relationships,
+      and execution track record to put it to work — in Destin, Santa Rosa Beach,
+      and Orange Beach, Alabama, where we've built for 20 years.
+</p>
     <div class="hero-ctas">
       <a href="#investment" class="btn-primary">
-        Explore Opportunities
+        How We Partner
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a href="#contact" class="btn-outline">Contact Investor Relations</a>
+      <a href="#contact" class="btn-outline">Start a Conversation</a>
     </div>
   </div>
 
@@ -1222,31 +1312,29 @@
     <div class="stat-item" data-animate>
       <div class="stat-number">
         <span class="prefix">$</span>
-        <span class="counter" data-target="1200" data-suffix="">1,200</span>
+        <span class="counter" data-target="100" data-suffix="">100</span>
         <span class="suffix">M+</span>
       </div>
-      <div class="stat-label">Total Development Pipeline</div>
+      <div class="stat-label">In Completed Development</div>
     </div>
     <div class="stat-item" data-animate data-delay="2">
       <div class="stat-number">
-        <span class="counter" data-target="25">25</span>
-        <span class="suffix">+</span>
+        <span class="counter" data-target="20">20</span>
       </div>
-      <div class="stat-label">Years Combined Experience</div>
+      <div class="stat-label">Years of Gulf Coast Market Knowledge</div>
     </div>
     <div class="stat-item" data-animate data-delay="3">
       <div class="stat-number">
-        <span class="counter" data-target="30">30</span>
-        <span class="suffix">M+</span>
+        <span class="counter" data-target="6">6</span>
+        <span class="suffix">.5M+</span>
       </div>
-      <div class="stat-label">Annual Regional Visitors</div>
+      <div class="stat-label">Annual Visitors — Orange Beach &amp; Gulf Shores</div>
     </div>
     <div class="stat-item" data-animate data-delay="4">
       <div class="stat-number">
-        <span class="counter" data-target="18">18</span>
-        <span class="suffix">%</span>
+        <span class="counter" data-target="3">3</span>
       </div>
-      <div class="stat-label">Target Net IRR</div>
+      <div class="stat-label">Focused Markets — Destin · Santa Rosa Beach · Orange Beach</div>
     </div>
   </div>
 </section>
@@ -1259,50 +1347,65 @@
     <div class="opportunity-layout">
       <div class="opportunity-left" data-animate>
         <div class="section-header">
-          <p class="eyebrow">Market Opportunity</p>
+          <p class="eyebrow">Why the Gulf Coast</p>
           <span class="gold-rule"></span>
           <h2 class="section-title" id="opp-heading">
             America's Most Dynamic Coastal Growth Corridor
           </h2>
           <p class="section-body">
-            The Destin–Orange Beach corridor has emerged as one of the nation's most
-            compelling commercial real estate opportunities — a rare convergence of
-            explosive population growth, record tourism demand, and a dramatically
-            undersupplied commercial market that rewards experienced local developers.
+            Three Gulf Coast markets. All top-tier. And closer in scale than most outside capital realizes.
+          </p>
+          <p class="section-body" style="margin-top:1rem;">
+            South Walton — the 30A corridor running through Santa Rosa Beach — has become the highest-spending
+            coastal tourism economy in the Southeast. Visitors here spend more per trip than almost anywhere on
+            the Gulf Coast: $4.7 billion in direct visitor spending in 2023, with a total economic footprint of
+            $6.8 billion. In 2024, direct spending topped $4 billion again.
+          </p>
+          <p class="section-body" style="margin-top:1rem;">
+            Gulf Shores and Orange Beach likely draw more total visitors than either Florida market. Baldwin
+            County's beach communities generated $6.7 billion in visitor spending in 2023, and lodging revenue
+            alone hit $923 million in 2025 — a new record.
+          </p>
+          <p class="section-body" style="margin-top:1rem;">
+            Destin carries one of the most recognized destination brand names on the entire Gulf Coast. Its
+            visitor economy runs into the multi-billions annually through the Okaloosa County corridor, and its
+            military and defense sector provides diversification that moderates seasonal swings the other two
+            markets don't have. Capital deploying here needs a local partner who knows all three — because each
+            one requires a different playbook.
           </p>
         </div>
         <div class="opportunity-points">
           <div class="opp-point">
             <div class="opp-point-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#B8922A" stroke-width="2" stroke-linecap="round">
                 <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
               </svg>
             </div>
             <div>
-              <div class="opp-point-title">Top 5 Fastest-Growing Coastal MSA in the Southeast</div>
-              <div class="opp-point-text">Destin ranks among the nation's fastest-growing metro areas, driven by remote-work migration and the appeal of a world-class coastal lifestyle.</div>
+              <div class="opp-point-title">South Walton: $6.8B Total Economic Impact in 2023</div>
+              <div class="opp-point-text">The South Walton Tourism Development Council reported $4.7B in direct visitor spending and a $6.8B total economic impact in 2023. In 2024, direct spending exceeded $4B again — making this the highest-spending coastal tourism economy in the Southeast, driven by the affluent 30A visitor profile.</div>
             </div>
           </div>
           <div class="opp-point">
             <div class="opp-point-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#B8922A" stroke-width="2" stroke-linecap="round">
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
               </svg>
             </div>
             <div>
-              <div class="opp-point-title">7.2M Annual Overnight Visitors — Up 34% in Five Years</div>
-              <div class="opp-point-text">Orange Beach set consecutive visitor records, fueling sustained demand for hospitality, dining, retail, and mixed-use commercial assets.</div>
+              <div class="opp-point-title">Orange Beach &amp; Gulf Shores: $6.7B Visitor Spending in 2023</div>
+              <div class="opp-point-text">Alabama's Beaches Tourism Authority reported $6.7B in visitor spending for coastal Baldwin County in 2023 — and lodging revenue alone hit $923M in 2025, a new record. This market likely leads the Gulf Coast in total visitor volume and is Alabama's fastest-growing county.</div>
             </div>
           </div>
           <div class="opp-point">
             <div class="opp-point-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#B8922A" stroke-width="2" stroke-linecap="round">
                 <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
               </svg>
             </div>
             <div>
-              <div class="opp-point-title">Sub-4% Commercial Vacancy with Constrained New Supply</div>
-              <div class="opp-point-text">Geographic constraints along the Gulf limit developable land, driving exceptional pricing power and cap rate compression for well-positioned assets.</div>
+              <div class="opp-point-title">Destin: One of the Gulf Coast's Strongest Destination Brands</div>
+              <div class="opp-point-text">Tourism data for Destin rolls into the broader Okaloosa County corridor, where the visitor economy runs into the multi-billions annually. Destin's brand draws national recognition, while its military and defense sector provides economic depth that moderates the seasonal swings seen in purely tourism-dependent markets.</div>
             </div>
           </div>
         </div>
@@ -1348,10 +1451,10 @@
             <rect x="20"  y="185" width="28" height="50" fill="rgba(201,168,76,0.2)"/>
             <rect x="52"  y="165" width="22" height="70" fill="rgba(201,168,76,0.18)"/>
             <!-- Main tower cluster (center) -->
-            <path d="M190,80 L202,80 L202,92 L212,92 L212,102 L218,102 L218,230 L175,230 L175,102 L181,102 L181,92 L190,92 Z" fill="#C9A84C" opacity="0.85"/>
+            <path d="M190,80 L202,80 L202,92 L212,92 L212,102 L218,102 L218,230 L175,230 L175,102 L181,102 L181,92 L190,92 Z" fill="#B8922A" opacity="0.85"/>
             <!-- Antenna on main tower -->
-            <line x1="196.5" y1="80" x2="196.5" y2="65" stroke="#C9A84C" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="196.5" cy="65" r="2" fill="#C9A84C" opacity="0.8"/>
+            <line x1="196.5" y1="80" x2="196.5" y2="65" stroke="#B8922A" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="196.5" cy="65" r="2" fill="#B8922A" opacity="0.8"/>
             <!-- Windows on main tower (lit) -->
             <rect x="183" y="110" width="7" height="7" fill="#0D1B2A"/>
             <rect x="193" y="110" width="7" height="7" fill="#0D1B2A"/>
@@ -1366,17 +1469,17 @@
             <rect x="193" y="152" width="7" height="7" fill="rgba(255,240,180,0.5)"/>
             <rect x="203" y="152" width="7" height="7" fill="#0D1B2A"/>
             <!-- Left tower -->
-            <rect x="126" y="135" width="36" height="95" fill="#C9A84C" opacity="0.7"/>
-            <rect x="122" y="130" width="44" height="6" fill="#C9A84C" opacity="0.7"/>
+            <rect x="126" y="135" width="36" height="95" fill="#B8922A" opacity="0.7"/>
+            <rect x="122" y="130" width="44" height="6" fill="#B8922A" opacity="0.7"/>
             <!-- Right tower -->
-            <rect x="235" y="118" width="40" height="112" fill="#C9A84C" opacity="0.75"/>
-            <rect x="231" y="113" width="48" height="6" fill="#C9A84C" opacity="0.75"/>
+            <rect x="235" y="118" width="40" height="112" fill="#B8922A" opacity="0.75"/>
+            <rect x="231" y="113" width="48" height="6" fill="#B8922A" opacity="0.75"/>
             <!-- Far right building -->
-            <rect x="300" y="155" width="32" height="75" fill="#C9A84C" opacity="0.5"/>
+            <rect x="300" y="155" width="32" height="75" fill="#B8922A" opacity="0.5"/>
             <!-- Hotel/flat building at right -->
             <rect x="340" y="172" width="50" height="58" fill="rgba(201,168,76,0.35)"/>
             <!-- Ground level / beach -->
-            <rect x="0" y="230" width="500" height="5" fill="#C9A84C" opacity="0.3"/>
+            <rect x="0" y="230" width="500" height="5" fill="#B8922A" opacity="0.3"/>
             <!-- Beach / sand -->
             <path d="M0,235 Q125,225 250,230 Q375,235 500,228 L500,260 L0,260 Z" fill="rgba(201,168,76,0.06)"/>
             <!-- Water -->
@@ -1391,7 +1494,7 @@
             <ellipse cx="197" cy="268" rx="35" ry="8" fill="rgba(201,168,76,0.12)"/>
             <!-- Gold label overlay -->
             <rect x="0" y="328" width="500" height="47" fill="rgba(13,27,42,0.7)"/>
-            <text x="25" y="352" font-family="Georgia,serif" font-size="11" fill="rgba(201,168,76,0.9)" letter-spacing="3">GULF SOUTH COASTAL MARKET</text>
+            <text x="25" y="352" font-family="Georgia,serif" font-size="11" fill="rgba(201,168,76,0.9)" letter-spacing="3">GULF COAST MARKET</text>
             <text x="25" y="367" font-family="Georgia,serif" font-size="9" fill="rgba(255,255,255,0.38)" letter-spacing="2">DESTIN, FL  ·  ORANGE BEACH, AL</text>
           </svg>
         </div>
@@ -1410,80 +1513,81 @@
 <section id="markets" aria-labelledby="markets-heading">
   <div class="section-inner">
     <div class="section-header centered" data-animate>
-      <p class="eyebrow">Our Markets</p>
+      <p class="eyebrow">Where We Deploy</p>
       <span class="gold-rule centered"></span>
       <h2 class="section-title" id="markets-heading" style="color:var(--white)">
-        Two Markets. One Unrivaled Coastal Corridor.
+        Three Markets. One Coastal Corridor.
       </h2>
       <p class="section-body light">
-        We operate exclusively in the markets we know best — delivering developer-level
-        intelligence unavailable to out-of-market capital.
+        We operate exclusively in the markets we know best — giving your capital
+        access to developer-level insight that no out-of-market firm can match.
       </p>
     </div>
     <div class="markets-grid">
       <div class="market-card" data-animate data-delay="2">
         <div class="market-card-header">
-          <div class="market-tag">Florida — Okaloosa &amp; Walton Counties</div>
-          <div class="market-name">Destin &amp; the Emerald Coast</div>
-          <div class="market-tagline">"The World's Luckiest Fishing Village" — America's Premier Beach Destination</div>
+          <div class="market-tag">Okaloosa &amp; Walton Counties, Florida</div>
+          <div class="market-name">Destin &amp; Santa Rosa Beach</div>
+          <div class="market-tagline">Destin — "The World's Luckiest Fishing Village" &nbsp;·&nbsp; Santa Rosa Beach — The 30A Corridor</div>
         </div>
         <div class="market-card-body">
           <p class="market-desc">
-            Destin anchors a 65-mile stretch of sugar-white beaches and emerald waters that draw
-            millions annually. A booming residential migration, Hartsfield-caliber access via
-            Northwest Florida Beaches International Airport, and a maturing commercial market
-            create ideal conditions for institutional-quality development.
+            Destin (Okaloosa County) is one of the Gulf Coast's most recognized tourism brands — 7 miles of emerald-water city
+            beach and one of Florida's most recognized coastal destinations. Twenty miles east,
+            Santa Rosa Beach and the Walton County 30A corridor represent a separate but
+            complementary market — one of the highest-spending tourism economies in the Southeast,
+            attracting a distinctly affluent visitor profile along Scenic Highway 30A.
           </p>
           <div class="market-stats">
             <div class="mstat">
-              <div class="mstat-value">$89K+</div>
-              <div class="mstat-label">Avg. Household Income</div>
+              <div class="mstat-value">$4.7B+</div>
+              <div class="mstat-label">Direct Visitor Spending — South Walton (2023)</div>
             </div>
             <div class="mstat">
-              <div class="mstat-value">&lt;4%</div>
-              <div class="mstat-label">Commercial Vacancy</div>
+              <div class="mstat-value">$6.8B</div>
+              <div class="mstat-label">Total Economic Impact — South Walton (2023)</div>
             </div>
             <div class="mstat">
-              <div class="mstat-value">$2.1B</div>
-              <div class="mstat-label">Annual Tourism Revenue</div>
+              <div class="mstat-value">$4B+</div>
+              <div class="mstat-label">Direct Visitor Spending — South Walton (2024)</div>
             </div>
             <div class="mstat">
-              <div class="mstat-value">22%</div>
-              <div class="mstat-label">Pop. Growth (5yr)</div>
+              <div class="mstat-value">7 mi</div>
+              <div class="mstat-label">Destin City Beach — Emerald Coast</div>
             </div>
           </div>
         </div>
       </div>
       <div class="market-card" data-animate data-delay="3">
         <div class="market-card-header">
-          <div class="market-tag">Alabama — Baldwin County</div>
-          <div class="market-name">Orange Beach &amp; Gulf Shores</div>
-          <div class="market-tagline">Alabama's Fastest-Growing Coastal Community</div>
+          <div class="market-tag">Baldwin County, Alabama</div>
+          <div class="market-name">Orange Beach</div>
+          <div class="market-tagline">Baldwin County — Alabama's Fastest-Growing County &amp; a Gulf Coast Rising Star</div>
         </div>
         <div class="market-card-body">
           <p class="market-desc">
-            Orange Beach is in the midst of a generational transformation — $1.8B in recent
-            hotel and condo investment, a rapidly expanding conference and medical corridor,
-            and Baldwin County's position as Alabama's fastest-growing county are redefining
-            what's possible in this market. First-mover advantage is still achievable for the
-            right development partner.
+            Orange Beach sits within Baldwin County, Alabama's fastest-growing county, and
+            is part of a Gulf Shores/Orange Beach destination that drew 6.5 million visitors
+            and $6.7 billion in visitor spending in 2023. The market benefits from year-round
+            coastal demand, a growing conference corridor, and an influx of Florida panhandle
+            capital that is actively reshaping what's buildable here.
           </p>
           <div class="market-stats">
             <div class="mstat">
-              <div class="mstat-value">7.2M</div>
-              <div class="mstat-label">Annual Visitors</div>
+              <div class="mstat-value">6.5M</div>
+              <div class="mstat-label">Annual Beach Visitors (2023)</div>
             </div>
             <div class="mstat">
-              <div class="mstat-value">34%</div>
-              <div class="mstat-label">Visitor Growth (5yr)</div>
+              <div class="mstat-value">$6.7B</div>
+              <div class="mstat-label">Annual Visitor Spending (2023)</div>
             </div>
             <div class="mstat">
-              <div class="mstat-value">$1.8B</div>
-              <div class="mstat-label">Recent Development</div>
+              <div class="mstat-value">$923M</div>
+              <div class="mstat-label">Record Lodging Sales (2025)</div>
             </div>
             <div class="mstat">
               <div class="mstat-value">#1</div>
-              <div class="mstat-label">Fastest-Growing AL County</div>
+              <div class="mstat-label">Fastest-Growing County in Alabama</div>
             </div>
           </div>
         </div>
@@ -1498,52 +1602,52 @@
 <section id="portfolio" aria-labelledby="portfolio-heading">
   <div class="section-inner">
     <div class="section-header centered" data-animate>
-      <p class="eyebrow">Development Focus</p>
+      <p class="eyebrow">Development Capabilities</p>
       <span class="gold-rule centered"></span>
       <h2 class="section-title" id="portfolio-heading">
-        Built for the Gulf Coast's Unique Demand Drivers
+        We Execute Across Every Asset Class Your Capital Targets
       </h2>
       <p class="section-body" style="color:var(--gray); max-width:580px; margin:1.2rem auto 0;">
-        Our project pipeline targets the four asset classes where Gulf Coast market dynamics
-        deliver the most compelling risk-adjusted returns.
+        Our expertise spans the four asset classes where Gulf Coast market dynamics
+        deliver the most compelling risk-adjusted returns for capital partners.
       </p>
     </div>
     <div class="portfolio-grid">
       <div class="portfolio-card" data-animate data-delay="1">
         <div class="portfolio-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#B8922A" stroke-width="1.8" stroke-linecap="round">
             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
           </svg>
         </div>
         <div class="portfolio-title">Hospitality &amp; Hotels</div>
-        <div class="portfolio-desc">Full-service and boutique hotel development, positioned with proven hospitality operators and underwritten to the region's record RevPAR performance.</div>
+        <div class="portfolio-desc">We develop full-service and boutique hotels alongside proven operators — site-selected and underwritten against the region's record RevPAR performance.</div>
       </div>
       <div class="portfolio-card" data-animate data-delay="2">
         <div class="portfolio-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#B8922A" stroke-width="1.8" stroke-linecap="round">
             <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><path d="M12 7v14"/>
           </svg>
         </div>
         <div class="portfolio-title">Mixed-Use Development</div>
-        <div class="portfolio-desc">Live-work-play environments that stack multiple revenue streams — ground-floor retail with hospitality above residential — capturing the region's year-round economy.</div>
+        <div class="portfolio-desc">We design and execute live-work-play environments that stack revenue streams — ground-floor retail, hospitality, and residential — capturing the Gulf Coast's year-round economy.</div>
       </div>
       <div class="portfolio-card" data-animate data-delay="3">
         <div class="portfolio-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#B8922A" stroke-width="1.8" stroke-linecap="round">
             <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
           </svg>
         </div>
         <div class="portfolio-title">Retail &amp; Commercial</div>
-        <div class="portfolio-desc">Destination retail centers and professional office campuses strategically positioned within high-traffic corridors serving the region's growing permanent and visitor population.</div>
+        <div class="portfolio-desc">Our local knowledge puts your capital into the right corridors — destination retail and professional office positioned where foot traffic, growth, and timing align.</div>
       </div>
       <div class="portfolio-card" data-animate data-delay="4">
         <div class="portfolio-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#B8922A" stroke-width="1.8" stroke-linecap="round">
             <rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
           </svg>
         </div>
         <div class="portfolio-title">Luxury Multifamily</div>
-        <div class="portfolio-desc">Class-A multifamily communities meeting surging demand from the region's workforce migration, retirees, and the growing professional class relocating to the Gulf Coast.</div>
+        <div class="portfolio-desc">We deliver Class-A multifamily communities built for the wave of workforce migration, retirees, and professionals choosing the Gulf Coast — a demand story your capital can own.</div>
       </div>
     </div>
   </div>
@@ -1556,84 +1660,85 @@
   <div class="section-inner">
     <div class="investment-layout">
       <div data-animate>
-        <p class="eyebrow">For Capital Investors</p>
+        <p class="eyebrow">Capital Partnership</p>
         <span class="gold-rule"></span>
         <h2 class="section-title" id="inv-heading">
-          Structured for Institutional-Quality Returns
+          Your Capital. Our Market. Proven Execution.
         </h2>
         <p class="section-body light">
-          Gulf Coast Development Group partners with family offices, private equity, and
-          accredited investors seeking meaningful exposure to the Gulf South's most dynamic
-          coastal markets — without the complexity of self-managed real estate.
+          If you're a family office, private equity group, or high-net-worth investor
+          looking to deploy capital in Gulf Coast commercial real estate, we are your
+          boots-on-the-ground development partner. We don't come to you looking for
+          funding — we come to you as the local operator your capital needs to succeed here.
         </p>
         <p class="section-body light" style="margin-top:1rem;">
-          Our capital structures are designed to protect investor principal, provide
-          preferred return priority, and deliver outsized upside through our local
-          market expertise and deal-sourcing advantage.
+          We bring the land relationships, entitlements expertise, contractor network,
+          and market intelligence. You bring the capital. Together we execute Gulf Coast
+          projects that neither of us could optimize independently.
         </p>
         <div class="investment-terms">
           <div class="term-box">
-            <div class="term-label">Minimum Investment</div>
-            <div class="term-value">$500,000</div>
+            <div class="term-label">What We Bring</div>
+            <div class="term-value">20 Yrs Local Knowledge</div>
           </div>
           <div class="term-box">
-            <div class="term-label">Target Net IRR</div>
-            <div class="term-value">15 – 22%</div>
+            <div class="term-label">Target Partner Returns</div>
+            <div class="term-value">15 – 22% IRR</div>
           </div>
           <div class="term-box">
-            <div class="term-label">Preferred Return</div>
-            <div class="term-value">8% Cumulative</div>
+            <div class="term-label">Deal Sourcing</div>
+            <div class="term-value">Off-Market Access</div>
           </div>
           <div class="term-box">
-            <div class="term-label">Hold Period</div>
-            <div class="term-value">24 – 60 Mo.</div>
+            <div class="term-label">Partnership Structures</div>
+            <div class="term-value">JV · Co-GP · LP</div>
           </div>
           <div class="term-box">
-            <div class="term-label">Structure</div>
-            <div class="term-value">LP / LLC</div>
+            <div class="term-label">Capital Partners</div>
+            <div class="term-value">Family Offices &amp; PE</div>
           </div>
           <div class="term-box">
-            <div class="term-label">Investor Type</div>
-            <div class="term-value">Accredited</div>
+            <div class="term-label">Market Focus</div>
+            <div class="term-value">Gulf Coast Only</div>
           </div>
         </div>
       </div>
       <div class="investment-process" data-animate data-delay="3">
-        <div class="process-title">The Investment Process</div>
+        <div class="process-title">How the Partnership Works</div>
         <div class="process-steps">
           <div class="process-step">
             <div class="step-num">01</div>
             <div>
-              <div class="step-content-title">Introductory Conversation</div>
-              <div class="step-content-text">A confidential call with our principals to discuss your investment objectives and introduce current or upcoming opportunities.</div>
+              <div class="step-content-title">Discovery Call</div>
+              <div class="step-content-text">A confidential conversation with our principals about your capital deployment goals, timeline, and target asset classes in the Gulf Coast market.</div>
             </div>
           </div>
           <div class="process-step">
             <div class="step-num">02</div>
             <div>
-              <div class="step-content-title">Deal Review &amp; Due Diligence</div>
-              <div class="step-content-text">Access to offering memoranda, financial projections, market studies, and our development team for Q&amp;A.</div>
+              <div class="step-content-title">Market &amp; Opportunity Review</div>
+              <div class="step-content-text">We share our current deal pipeline, market intelligence, and site-specific analysis — the kind of ground-level insight only available through a local developer.</div>
             </div>
           </div>
           <div class="process-step">
             <div class="step-num">03</div>
             <div>
-              <div class="step-content-title">Capital Commitment</div>
-              <div class="step-content-text">Execute subscription agreement, fund your capital position, and receive your interest confirmation in the venture.</div>
+              <div class="step-content-title">Partnership Structuring</div>
+              <div class="step-content-text">Together we structure the right vehicle — JV, co-GP, or LP — to align our incentives, protect your capital, and set clear terms for the project.</div>
             </div>
           </div>
           <div class="process-step">
             <div class="step-num">04</div>
             <div>
-              <div class="step-content-title">Active Development &amp; Reporting</div>
-              <div class="step-content-text">Quarterly financial reporting, construction progress updates, and direct access to our development principals throughout.</div>
+              <div class="step-content-title">Full Development Execution</div>
+              <div class="step-content-text">We manage every phase — land acquisition, entitlements, design, construction, and lease-up — with regular reporting and direct access to our principals.</div>
             </div>
           </div>
           <div class="process-step">
             <div class="step-num">05</div>
             <div>
-              <div class="step-content-title">Distribution &amp; Exit</div>
-              <div class="step-content-text">Cash-on-cash distributions during operations, followed by a profitable asset sale or refinance with full proceeds distribution.</div>
+              <div class="step-content-title">Returns &amp; Next Opportunity</div>
+              <div class="step-content-text">Distributions as the project performs, a clean exit on disposition, and — for partners who value what we built together — a first look at the next deal.</div>
             </div>
           </div>
         </div>
@@ -1651,54 +1756,154 @@
       <p class="eyebrow">Why Gulf Coast Development Group</p>
       <span class="gold-rule centered"></span>
       <h2 class="section-title" id="why-heading">
-        The Local Advantage That Institutional Capital Can't Replicate
+        What Your Capital Gets When We're the Partner
       </h2>
     </div>
     <div class="why-grid">
       <div class="why-card" data-animate data-delay="1">
         <div class="why-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#B8922A" stroke-width="1.8" stroke-linecap="round">
             <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
           </svg>
         </div>
         <div>
-          <div class="why-text-title">Deep Local Market Mastery</div>
-          <div class="why-text-desc">Twenty-five-plus years building luxury homes across Destin and Orange Beach means we know every submarket, land parcel, and value driver. We've underwritten and built in conditions that out-of-market investors read about in reports.</div>
+          <div class="why-text-title">20 Years of Gulf Coast Market Knowledge</div>
+          <div class="why-text-desc">Two decades building luxury homes across Destin, Santa Rosa Beach, and Orange Beach means we know every submarket, land parcel, entitlement pathway, and value driver. Your capital accesses insight that out-of-market firms simply read about in reports.</div>
         </div>
       </div>
       <div class="why-card" data-animate data-delay="2">
         <div class="why-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#B8922A" stroke-width="1.8" stroke-linecap="round">
             <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
           </svg>
         </div>
         <div>
           <div class="why-text-title">Proven Execution Track Record</div>
-          <div class="why-text-desc">Hundreds of millions in successful luxury residential development provides a foundation of contractor relationships, entitlement expertise, and cost-basis discipline that translates directly into commercial project execution.</div>
+          <div class="why-text-desc">$100M+ in completed luxury residential development — from site acquisition and land use entitlements through FDEP coastal permitting, architectural design management, and Florida/Alabama building code compliance. Real contractor relationships, hard-won cost discipline, and a full-cycle process your capital can rely on.</div>
         </div>
       </div>
       <div class="why-card" data-animate data-delay="3">
         <div class="why-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#B8922A" stroke-width="1.8" stroke-linecap="round">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
           </svg>
         </div>
         <div>
-          <div class="why-text-title">Exclusive Off-Market Deal Flow</div>
-          <div class="why-text-desc">Our reputation and relationships in the community deliver off-market land and asset opportunities that never surface on CoStar or LoopNet — a genuine sourcing advantage that translates directly to investor returns.</div>
+          <div class="why-text-title">Off-Market Deal Access</div>
+          <div class="why-text-desc">The best Gulf Coast sites never hit CoStar or LoopNet. They move through relationships built over decades. Your capital gets into deals that simply aren't available to anyone without a trusted local presence.</div>
         </div>
       </div>
       <div class="why-card" data-animate data-delay="4">
         <div class="why-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#B8922A" stroke-width="1.8" stroke-linecap="round">
             <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
           </svg>
         </div>
         <div>
-          <div class="why-text-title">Capital-Efficient Deal Structures</div>
-          <div class="why-text-desc">We engineer each transaction to maximize investor returns through optimized land cost basis, value-engineering discipline, and exit timing strategies built on genuine market knowledge — not models built from a distance.</div>
+          <div class="why-text-title">A True Partner, Not a Vendor</div>
+          <div class="why-text-desc">We co-invest, we share risk, and our interests are aligned with yours from day one. We engineer each deal for optimal land cost basis, construction efficiency, and exit timing — because our returns depend on yours.</div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     EXPERTISE SECTION
+============================================================ -->
+<section id="expertise" aria-labelledby="expertise-heading">
+  <div class="section-inner">
+    <div class="section-header centered" data-animate>
+      <p class="eyebrow">How We Execute</p>
+      <span class="gold-rule centered"></span>
+      <h2 class="section-title" id="expertise-heading">
+        Full-Cycle Development Expertise
+      </h2>
+      <p class="section-body" style="color:rgba(255,255,255,0.62);max-width:640px;margin:1.5rem auto 0;">
+        From raw land to certificate of occupancy, we own every stage of the process.
+        That end-to-end control is what protects your capital and your timeline.
+      </p>
+    </div>
+    <div class="expertise-grid">
+
+      <!-- Acquisition -->
+      <div class="expertise-card" data-animate data-delay="1">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#B8922A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </div>
+        <div>
+          <div class="expertise-title">Site Acquisition &amp; Deal Sourcing</div>
+          <div class="expertise-desc">We identify commercial opportunities before they reach the open market — raw land, underutilized parcels, distressed assets, and assemblage plays. Our process covers off-market sourcing through 20 years of local relationships, rigorous due diligence (title, survey, environmental, traffic), accurate land valuation, and skilled negotiation through closing.</div>
+          <div class="expertise-tags">
+            <span class="expertise-tag">Off-Market Sourcing</span>
+            <span class="expertise-tag">Due Diligence</span>
+            <span class="expertise-tag">Land Valuation</span>
+            <span class="expertise-tag">Negotiation</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Design -->
+      <div class="expertise-card" data-animate data-delay="2">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#B8922A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><polyline points="3 20 21 20"/>
+          </svg>
+        </div>
+        <div>
+          <div class="expertise-title">Design &amp; Architectural Management</div>
+          <div class="expertise-desc">We coordinate the full design team — civil engineers, land planners, architects, and interior designers — selecting the right firm for each project type and market. We manage the process from concept through construction documents, keeping the design vision and the pro forma aligned at every stage so there are no surprises when ground breaks.</div>
+          <div class="expertise-tags">
+            <span class="expertise-tag">Architect Selection</span>
+            <span class="expertise-tag">Civil Engineering</span>
+            <span class="expertise-tag">Land Planning</span>
+            <span class="expertise-tag">Design Management</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Permitting -->
+      <div class="expertise-card" data-animate data-delay="3">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#B8922A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/>
+          </svg>
+        </div>
+        <div>
+          <div class="expertise-title">Coastal &amp; Regulatory Permitting</div>
+          <div class="expertise-desc">Gulf Coast development means navigating a layered regulatory environment that stops out-of-market developers cold. We handle FDEP coastal construction setback permits, Army Corps of Engineers Section 404/408 authorizations, local building department approvals, and variance and entitlement applications across Okaloosa, Walton, and Baldwin Counties.</div>
+          <div class="expertise-tags">
+            <span class="expertise-tag">FDEP Coastal</span>
+            <span class="expertise-tag">Army Corps 404/408</span>
+            <span class="expertise-tag">Local Building Dept</span>
+            <span class="expertise-tag">Entitlements &amp; Variances</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Construction -->
+      <div class="expertise-card" data-animate data-delay="4">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#B8922A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="expertise-title">General Contracting &amp; Construction</div>
+          <div class="expertise-desc">We are the GC. We hold the license, employ the superintendents, and manage the subcontractors directly. Our trade partner network — built over 20 years of selecting for quality and reliability — represents the best craftsmen on the Gulf Coast. On-site superintendents keep every project on schedule, on budget, and built to spec, eliminating the middleman risk that inflates costs on other developers' jobs.</div>
+          <div class="expertise-tags">
+            <span class="expertise-tag">Licensed GC</span>
+            <span class="expertise-tag">Field Superintendents</span>
+            <span class="expertise-tag">Subcontractor Network</span>
+            <span class="expertise-tag">Quality Control</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1710,20 +1915,20 @@
   <div class="section-inner">
     <div class="contact-layout">
       <div data-animate>
-        <p class="eyebrow">Investor Relations</p>
+        <p class="eyebrow">Start a Partnership</p>
         <span class="gold-rule"></span>
         <h2 class="section-title" id="contact-heading">
-          Begin the Conversation
+          Let's Talk About Your Capital
         </h2>
         <p class="section-body light">
-          Whether you're exploring a first investment or looking for a trusted development
-          partner for your Gulf Coast capital deployment, we welcome the conversation.
-          All inquiries are handled with absolute discretion.
+          If you have capital to deploy in Gulf Coast commercial real estate and want
+          a development partner who actually knows this market, we want to hear from you.
+          We're selective about who we work with, and every conversation is confidential.
         </p>
         <div class="contact-info">
           <div class="contact-item">
             <div class="contact-item-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#B8922A" stroke-width="1.8" stroke-linecap="round">
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
               </svg>
             </div>
@@ -1734,7 +1939,7 @@
           </div>
           <div class="contact-item">
             <div class="contact-item-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#B8922A" stroke-width="1.8" stroke-linecap="round">
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.34 2 2 0 0 1 3.61 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
               </svg>
             </div>
@@ -1745,7 +1950,7 @@
           </div>
           <div class="contact-item">
             <div class="contact-item-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#B8922A" stroke-width="1.8" stroke-linecap="round">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
               </svg>
             </div>
@@ -1758,7 +1963,7 @@
       </div>
       <div data-animate data-delay="3">
         <div class="contact-form">
-          <div class="form-title">Schedule a Confidential Consultation</div>
+          <div class="form-title">Connect With Our Team</div>
           <form id="investorForm" novalidate>
             <div class="form-row">
               <div class="form-group">
@@ -1779,7 +1984,7 @@
               <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000">
             </div>
             <div class="form-group">
-              <label for="investmentRange">Investment Range</label>
+              <label for="investmentRange">Capital Available for Deployment</label>
               <select id="investmentRange" name="investmentRange">
                 <option value="" disabled selected>Select a range</option>
                 <option>$500K – $1M</option>
@@ -1791,10 +1996,10 @@
             </div>
             <div class="form-group">
               <label for="message">Message (Optional)</label>
-              <textarea id="message" name="message" placeholder="Tell us about your investment focus or any questions you have..."></textarea>
+              <textarea id="message" name="message" placeholder="Tell us about your capital deployment goals, target asset classes, or timeline..."></textarea>
             </div>
-            <button type="submit" class="form-submit">Request a Consultation</button>
-            <p class="form-disclaimer">This communication is for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy any security. Investment opportunities are available only to accredited investors.</p>
+            <button type="submit" class="form-submit">Start the Conversation</button>
+            <p class="form-disclaimer">All inquiries are handled in strict confidence. This is an introductory inquiry only and does not constitute a binding agreement or commitment of any kind.</p>
           </form>
         </div>
       </div>
@@ -1809,20 +2014,40 @@
   <div class="footer-inner">
     <div class="footer-logo">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 110" role="img" aria-label="Gulf Coast Development Group">
-        <rect x="0" y="5" width="96" height="96" rx="5" fill="rgba(255,255,255,0.05)"/>
-        <rect x="4" y="9" width="88" height="88" rx="3" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
-        <rect x="12" y="46" width="17" height="37" fill="#C9A84C" opacity="0.6"/>
-        <rect x="11" y="43" width="19" height="3" fill="#C9A84C" opacity="0.6"/>
-        <path d="M42,9 L51,9 L51,16 L57,16 L57,22 L60,22 L60,83 L34,83 L34,22 L37,22 L37,16 L42,16 Z" fill="#C9A84C" opacity="0.7"/>
-        <line x1="47" y1="9" x2="47" y2="5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
-        <rect x="67" y="38" width="17" height="45" fill="#C9A84C" opacity="0.55"/>
-        <rect x="66" y="35" width="19" height="3" fill="#C9A84C" opacity="0.55"/>
-        <line x1="8" y1="83" x2="88" y2="83" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
-        <path d="M8,88 Q21,83 34,88 Q47,93 60,88 Q73,83 88,88" stroke="#C9A84C" stroke-width="1.3" fill="none" opacity="0.5"/>
-        <text x="108" y="55" font-family="Georgia,serif" font-size="30" font-weight="bold" fill="rgba(255,255,255,0.75)" letter-spacing="2">GULF COAST</text>
-        <text x="109" y="73" font-family="Georgia,serif" font-size="11.5" fill="rgba(255,255,255,0.3)" letter-spacing="6.5">DEVELOPMENT GROUP</text>
-        <line x1="108" y1="80" x2="412" y2="80" stroke="#C9A84C" stroke-width="0.7" opacity="0.4"/>
-        <text x="109" y="93" font-family="Georgia,serif" font-size="7.5" fill="rgba(201,168,76,0.55)" letter-spacing="2.5" font-style="italic">DESTIN, FL  ·  ORANGE BEACH, AL</text>
+        <!-- Badge -->
+        <rect x="0" y="5" width="96" height="96" rx="5" fill="rgba(255,255,255,0.04)"/>
+        <rect x="4" y="9" width="88" height="88" rx="3" fill="none" stroke="#B8922A" stroke-width="0.8" opacity="0.35"/>
+        <!-- Left: coastal condo -->
+        <polygon points="6,44 28,31 50,44" fill="#B8922A" opacity="0.5"/>
+        <rect x="8" y="44" width="40" height="36" fill="#B8922A" opacity="0.5"/>
+        <rect x="8" y="61" width="40" height="1.8" fill="#0D1B2A" opacity="0.2"/>
+        <rect x="11" y="47" width="7" height="10" rx="0.6" fill="#0D1B2A" opacity="0.5"/>
+        <rect x="22" y="47" width="7" height="10" rx="0.6" fill="#0D1B2A" opacity="0.5"/>
+        <rect x="33" y="47" width="7" height="10" rx="0.6" fill="#0D1B2A" opacity="0.5"/>
+        <rect x="11" y="65" width="7" height="9"  rx="0.6" fill="#0D1B2A" opacity="0.5"/>
+        <rect x="33" y="65" width="7" height="9"  rx="0.6" fill="#0D1B2A" opacity="0.5"/>
+        <rect x="22" y="65" width="7" height="15" rx="0.6" fill="#0D1B2A" opacity="0.5"/>
+        <!-- Right: commercial strip -->
+        <rect x="52" y="52" width="16" height="28" fill="#B8922A" opacity="0.45"/>
+        <rect x="50" y="49" width="20" height="4"  fill="#B8922A" opacity="0.45"/>
+        <rect x="68" y="58" width="12" height="22" fill="#B8922A" opacity="0.45"/>
+        <rect x="66" y="55" width="16" height="4"  fill="#B8922A" opacity="0.45"/>
+        <rect x="80" y="55" width="13" height="25" fill="#B8922A" opacity="0.45"/>
+        <rect x="78" y="52" width="17" height="4"  fill="#B8922A" opacity="0.45"/>
+        <rect x="53" y="58" width="6"  height="14" rx="0.4" fill="#0D1B2A" opacity="0.45"/>
+        <rect x="61" y="58" width="5"  height="22" rx="0.4" fill="#0D1B2A" opacity="0.45"/>
+        <rect x="70" y="62" width="8"  height="11" rx="0.4" fill="#0D1B2A" opacity="0.45"/>
+        <rect x="82" y="59" width="4"  height="14" rx="0.4" fill="#0D1B2A" opacity="0.45"/>
+        <rect x="88" y="59" width="4"  height="14" rx="0.4" fill="#0D1B2A" opacity="0.45"/>
+        <!-- Ground + waves -->
+        <line x1="7" y1="80" x2="93" y2="80" stroke="#B8922A" stroke-width="1" opacity="0.35"/>
+        <path d="M7,85 Q21,80 35,85 Q49,90 63,85 Q77,80 91,85" stroke="#B8922A" stroke-width="1.3" fill="none" opacity="0.4"/>
+        <path d="M7,91 Q21,86 35,91 Q49,96 63,91 Q77,86 91,91" stroke="#B8922A" stroke-width="0.9" fill="none" opacity="0.22"/>
+        <!-- Wordmark -->
+        <text x="108" y="55" font-family="Georgia,serif" font-size="30" font-weight="bold" fill="rgba(255,255,255,0.65)" letter-spacing="2">GULF COAST</text>
+        <text x="109" y="73" font-family="Georgia,serif" font-size="11.5" fill="rgba(255,255,255,0.28)" letter-spacing="6.5">DEVELOPMENT GROUP</text>
+        <line x1="108" y1="80" x2="412" y2="80" stroke="#B8922A" stroke-width="0.7" opacity="0.35"/>
+        <text x="109" y="93" font-family="Georgia,serif" font-size="7.5" fill="rgba(184,146,42,0.5)" letter-spacing="2.5" font-style="italic">DESTIN, FL  ·  ORANGE BEACH, AL</text>
       </svg>
     </div>
     <nav class="footer-links" aria-label="Footer navigation">
@@ -1838,7 +2063,7 @@
     </div>
   </div>
   <div class="footer-disclaimer">
-    <strong>Investment Disclaimer:</strong> The information presented on this website is for informational purposes only and does not constitute an offer to sell or a solicitation of any offer to buy any securities. Investment in real estate development projects involves significant risk, including the possible loss of principal. Past performance is not indicative of future results. All investment opportunities are available exclusively to accredited investors as defined under applicable securities laws. Prospective investors should carefully review all offering documents and consult with their own legal, tax, and financial advisors before making any investment decision. Gulf Coast Development Group, LLC is not a registered investment adviser or broker-dealer.
+    Gulf Coast Development Group, LLC is a private real estate development company. The information on this website is for general informational purposes only and does not constitute a solicitation, offer, or commitment of any kind. All partnership inquiries are subject to mutual agreement and appropriate legal documentation. Prospective capital partners should consult with their own legal, tax, and financial advisors. &copy; 2025 Gulf Coast Development Group, LLC. All Rights Reserved.
   </div>
 </footer>
 
@@ -1851,37 +2076,69 @@
 
   /* ---- Navbar scroll behavior ---- */
   const navbar = document.getElementById('navbar');
-  let lastScrollY = 0;
 
   function onScroll() {
-    const scrollY = window.scrollY;
-    if (scrollY > 60) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-    lastScrollY = scrollY;
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ---- Continuous RAF loop: scroll zoom + mouse parallax ---- */
+  const heroBg       = document.getElementById('heroBg');
+  const heroContent  = document.getElementById('heroContent');
+  const heroSection  = document.getElementById('hero');
+  const scrollBar    = document.getElementById('scrollProgress');
+
+  let targetMX = 0, targetMY = 0; // mouse target (-1 to 1)
+  let curMX    = 0, curMY    = 0; // lerped current
+
+  if (heroSection) {
+    heroSection.addEventListener('mousemove', (e) => {
+      const r = heroSection.getBoundingClientRect();
+      targetMX = (e.clientX - r.left - r.width  / 2) / (r.width  / 2);
+      targetMY = (e.clientY - r.top  - r.height / 2) / (r.height / 2);
+    }, { passive: true });
+    heroSection.addEventListener('mouseleave', () => {
+      targetMX = 0; targetMY = 0;
+    });
   }
 
-  /* ---- Parallax ---- */
-  const heroBg      = document.getElementById('heroBg');
-  const heroContent = document.getElementById('heroContent');
-  let rafPending = false;
+  function motionLoop() {
+    /* Lerp mouse for smoothness */
+    curMX += (targetMX - curMX) * 0.07;
+    curMY += (targetMY - curMY) * 0.07;
 
-  function handleParallax() {
-    const y = window.scrollY;
-    if (heroBg)      heroBg.style.transform      = `translateY(${y * 0.45}px)`;
-    if (heroContent) heroContent.style.transform  = `translateY(${y * 0.18}px)`;
-    rafPending = false;
-  }
+    const y     = window.scrollY;
+    const heroH = heroSection ? heroSection.offsetHeight : 800;
 
-  window.addEventListener('scroll', () => {
-    onScroll();
-    if (!rafPending) {
-      rafPending = true;
-      requestAnimationFrame(handleParallax);
+    /* Scroll progress bar */
+    if (scrollBar) {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      scrollBar.style.width = (total > 0 ? (y / total) * 100 : 0) + '%';
     }
-  }, { passive: true });
+
+    /* Hero background: translate + zoom in as user scrolls */
+    if (heroBg) {
+      const scale = 1 + y * 0.00048;
+      const bx    = curMX * -18;
+      const by    = curMY * -10;
+      heroBg.style.transform = `translateY(${y * 0.52}px) translate(${bx}px,${by}px) scale(${scale})`;
+    }
+
+    /* Hero content: drift up + fade out + subtle mouse follow */
+    if (heroContent && y < heroH) {
+      const progress = Math.min(y / (heroH * 0.6), 1);
+      const opacity  = 1 - progress * 0.92;
+      const cx = curMX * 7;
+      const cy = curMY * 4;
+      heroContent.style.transform = `translateY(${y * 0.22}px) translate(${cx}px,${cy}px)`;
+      heroContent.style.opacity   = opacity;
+    } else if (heroContent && y >= heroH) {
+      heroContent.style.opacity = '0';
+    }
+
+    requestAnimationFrame(motionLoop);
+  }
+  requestAnimationFrame(motionLoop);
 
   /* ---- Intersection Observer for fade-in animations ---- */
   const animateEls = document.querySelectorAll('[data-animate]');
