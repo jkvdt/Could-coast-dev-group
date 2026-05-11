@@ -5,77 +5,94 @@
       <stop offset="100%" style="stop-color:#0D1B2A"/>
     </linearGradient>
     <linearGradient id="goldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#E5C97A"/>
-      <stop offset="100%" style="stop-color:#C9A84C"/>
+      <stop offset="0%" style="stop-color:#CDA94E"/>
+      <stop offset="100%" style="stop-color:#B8922A"/>
     </linearGradient>
   </defs>
 
-  <!-- ===== LOGOMARK BADGE ===== -->
-  <!-- Outer badge: navy rounded square -->
+  <!-- ===== BADGE ===== -->
   <rect x="0" y="8" width="138" height="138" rx="7" fill="url(#badgeGrad)"/>
-  <!-- Inner gold frame -->
-  <rect x="7" y="15" width="124" height="124" rx="3.5" fill="none" stroke="#C9A84C" stroke-width="0.9" opacity="0.7"/>
+  <rect x="7" y="15" width="124" height="124" rx="3.5" fill="none" stroke="#B8922A" stroke-width="0.9" opacity="0.65"/>
 
-  <!-- ===== BUILDING SILHOUETTES (gold) ===== -->
-  <!-- Left building -->
-  <rect x="16" y="60" width="24" height="50" fill="url(#goldGrad)"/>
-  <!-- Left building flat roof cap -->
-  <rect x="14" y="57" width="28" height="4" fill="url(#goldGrad)"/>
+  <!-- ===== LEFT: 2-STORY COASTAL CONDO ===== -->
+  <!-- Gable roof -->
+  <polygon points="8,60 36,43 64,60" fill="url(#goldGrad)"/>
+  <!-- Chimney -->
+  <rect x="50" y="45" width="5" height="12" fill="url(#goldGrad)"/>
+  <!-- Building body -->
+  <rect x="10" y="60" width="52" height="52" fill="url(#goldGrad)"/>
+  <!-- Floor divider / balcony band -->
+  <rect x="10" y="83" width="52" height="2.5" fill="#0D1B2A" opacity="0.3"/>
+  <!-- Balcony rail posts (subtle) -->
+  <rect x="16" y="83" width="1.2" height="3.5" fill="#0D1B2A" opacity="0.22"/>
+  <rect x="22" y="83" width="1.2" height="3.5" fill="#0D1B2A" opacity="0.22"/>
+  <rect x="28" y="83" width="1.2" height="3.5" fill="#0D1B2A" opacity="0.22"/>
+  <rect x="34" y="83" width="1.2" height="3.5" fill="#0D1B2A" opacity="0.22"/>
+  <rect x="40" y="83" width="1.2" height="3.5" fill="#0D1B2A" opacity="0.22"/>
+  <rect x="46" y="83" width="1.2" height="3.5" fill="#0D1B2A" opacity="0.22"/>
+  <rect x="52" y="83" width="1.2" height="3.5" fill="#0D1B2A" opacity="0.22"/>
+  <!-- Upper floor windows (3) -->
+  <rect x="14" y="64" width="10" height="13" rx="0.8" fill="#0D1B2A" opacity="0.72"/>
+  <rect x="30" y="64" width="10" height="13" rx="0.8" fill="#0D1B2A" opacity="0.72"/>
+  <rect x="46" y="64" width="10" height="13" rx="0.8" fill="#0D1B2A" opacity="0.72"/>
+  <!-- Lower floor: 2 windows + centered door -->
+  <rect x="13" y="89" width="10" height="13" rx="0.8" fill="#0D1B2A" opacity="0.72"/>
+  <rect x="48" y="89" width="10" height="13" rx="0.8" fill="#0D1B2A" opacity="0.72"/>
+  <!-- Door (full height to ground) -->
+  <rect x="30" y="88" width="10" height="24" rx="0.8" fill="#0D1B2A" opacity="0.72"/>
+  <!-- Door knob -->
+  <circle cx="38.5" cy="101" r="1" fill="url(#goldGrad)" opacity="0.6"/>
 
-  <!-- Center tower — stepped modern commercial profile -->
-  <path d="M60,10 L73,10 L73,20 L81,20 L81,29 L85,29 L85,110 L48,110 L48,29 L52,29 L52,20 L60,20 Z"
-        fill="url(#goldGrad)"/>
-  <!-- Antenna/spire on center tower -->
-  <line x1="66.5" y1="10" x2="66.5" y2="4" stroke="#C9A84C" stroke-width="2.2" stroke-linecap="round"/>
-  <circle cx="66.5" cy="4" r="1.5" fill="#C9A84C"/>
+  <!-- ===== RIGHT: SMALL COMMERCIAL STRIP ===== -->
+  <!-- Bay 1 — left anchor (tallest) -->
+  <rect x="70" y="74" width="22" height="38" fill="url(#goldGrad)"/>
+  <rect x="68" y="70" width="26" height="5" fill="url(#goldGrad)"/> <!-- parapet cap -->
+  <!-- Bay 2 — center (medium) -->
+  <rect x="92" y="80" width="16" height="32" fill="url(#goldGrad)"/>
+  <rect x="90" y="76" width="20" height="5" fill="url(#goldGrad)"/> <!-- parapet cap -->
+  <!-- Bay 3 — right -->
+  <rect x="108" y="77" width="20" height="35" fill="url(#goldGrad)"/>
+  <rect x="106" y="73" width="24" height="5" fill="url(#goldGrad)"/> <!-- parapet cap -->
 
-  <!-- Right building -->
-  <rect x="93" y="50" width="24" height="60" fill="url(#goldGrad)"/>
-  <!-- Right building flat roof cap -->
-  <rect x="91" y="47" width="28" height="4" fill="url(#goldGrad)"/>
+  <!-- Awning bands -->
+  <rect x="70" y="77" width="20" height="2.5" fill="#0D1B2A" opacity="0.28"/>
+  <rect x="91" y="83" width="16" height="2"   fill="#0D1B2A" opacity="0.24"/>
+  <rect x="108" y="80" width="18" height="2"  fill="#0D1B2A" opacity="0.24"/>
 
-  <!-- Ground/base line beneath buildings -->
-  <rect x="14" y="110" width="105" height="2" fill="#C9A84C" opacity="0.9"/>
+  <!-- Storefront windows (tall, commercial style) -->
+  <!-- Bay 1: window left + door right -->
+  <rect x="72" y="81" width="8"  height="21" rx="0.5" fill="#0D1B2A" opacity="0.7"/>
+  <rect x="82" y="81" width="8"  height="31" rx="0.5" fill="#0D1B2A" opacity="0.7"/>
+  <!-- Bay 2: wide storefront -->
+  <rect x="93" y="86" width="13" height="16" rx="0.5" fill="#0D1B2A" opacity="0.7"/>
+  <!-- Bay 3: two panels -->
+  <rect x="110" y="83" width="7" height="19" rx="0.5" fill="#0D1B2A" opacity="0.7"/>
+  <rect x="119" y="83" width="7" height="19" rx="0.5" fill="#0D1B2A" opacity="0.7"/>
 
-  <!-- ===== GULF WATER WAVES ===== -->
-  <!-- Water horizon fill -->
-  <path d="M14,112 Q32,105 51,112 Q70,119 89,112 Q108,105 124,112 L124,138 L14,138 Z"
-        fill="#C9A84C" opacity="0.12"/>
+  <!-- ===== GROUND LINE ===== -->
+  <line x1="10" y1="112" x2="128" y2="112" stroke="#B8922A" stroke-width="1.5" opacity="0.8"/>
 
-  <!-- Wave 1 (primary) -->
-  <path d="M14,112 Q32,105 51,112 Q70,119 89,112 Q108,105 124,112"
+  <!-- ===== GULF WAVES ===== -->
+  <path d="M9,120 Q27,114 46,120 Q65,127 84,120 Q103,114 122,120"
         stroke="url(#goldGrad)" stroke-width="2" fill="none"/>
-  <!-- Wave 2 (secondary) -->
-  <path d="M14,121 Q32,114 51,121 Q70,128 89,121 Q108,114 124,121"
-        stroke="#C9A84C" stroke-width="1.4" fill="none" opacity="0.55"/>
-  <!-- Wave 3 (tertiary) -->
-  <path d="M14,130 Q32,123 51,130 Q70,137 89,130 Q108,123 124,130"
-        stroke="#C9A84C" stroke-width="0.9" fill="none" opacity="0.28"/>
+  <path d="M9,129 Q27,122 46,129 Q65,136 84,129 Q103,122 122,129"
+        stroke="#B8922A" stroke-width="1.3" fill="none" opacity="0.52"/>
+  <path d="M9,137 Q27,130 46,137 Q65,144 84,137 Q103,130 122,137"
+        stroke="#B8922A" stroke-width="0.85" fill="none" opacity="0.26"/>
 
   <!-- ===== WORDMARK ===== -->
-  <!-- Primary name: GULF COAST -->
   <text x="158" y="78"
         font-family="Georgia, 'Times New Roman', serif"
-        font-size="46"
-        font-weight="bold"
-        fill="#0D1B2A"
-        letter-spacing="3">GULF COAST</text>
+        font-size="46" font-weight="bold"
+        fill="#0D1B2A" letter-spacing="3">GULF COAST</text>
 
-  <!-- Secondary: DEVELOPMENT GROUP -->
   <text x="159" y="106"
         font-family="Georgia, 'Times New Roman', serif"
-        font-size="17.5"
-        fill="#0D1B2A"
-        letter-spacing="10.5">DEVELOPMENT GROUP</text>
+        font-size="17.5" fill="#0D1B2A" letter-spacing="10.5">DEVELOPMENT GROUP</text>
 
-  <!-- Gold accent rule -->
-  <line x1="158" y1="118" x2="572" y2="118" stroke="#C9A84C" stroke-width="1.3"/>
+  <line x1="158" y1="118" x2="572" y2="118" stroke="#B8922A" stroke-width="1.3"/>
 
-  <!-- Tagline / markets -->
   <text x="159" y="135"
         font-family="Georgia, 'Times New Roman', serif"
-        font-size="11"
-        fill="#C9A84C"
-        letter-spacing="3.5"
-        font-style="italic">DESTIN, FLORIDA  ·  ORANGE BEACH, ALABAMA</text>
+        font-size="11" fill="#B8922A" letter-spacing="3.5" font-style="italic">DESTIN, FLORIDA  ·  ORANGE BEACH, ALABAMA</text>
 </svg>
