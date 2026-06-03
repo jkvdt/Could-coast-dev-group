@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Google Sans', Arial, sans-serif; padding: 18px; font-size: 13px; color: #1a1a2e; }
+    h3 { font-size: 15px; margin: 0 0 14px; }
+    label { display: block; font-weight: bold; margin: 8px 0 3px; }
+    input, select, textarea {
+      width: 100%; padding: 7px 9px; border: 1px solid #dadce0;
+      border-radius: 4px; font-size: 13px;
+    }
+    .row { display: flex; gap: 10px; }
+    .row > div { flex: 1; }
+    .btn { padding: 9px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; }
+    .btn-primary { background: #1a1a2e; color: #fff; }
+    .btn-primary:hover { background: #2d2d5e; }
+    .btn-secondary { background: #f1f3f4; color: #333; }
+    .hint { font-size: 11px; color: #888; margin-top: 2px; }
+    .actions { margin-top: 16px; display: flex; gap: 10px; justify-content: flex-end; }
+    .status { margin-top: 10px; font-size: 12px; }
+    .ok    { color: #34a853; }
+    .error { color: #ea4335; }
+  </style>
+</head>
+<body>
+  <h3>Add Transaction</h3>
+
+  <div class="row">
+    <div>
+      <label>Date</label>
+      <input type="date" id="date" />
+    </div>
+    <div>
+      <label>Amount <span class="hint">(negative = expense)</span></label>
+      <input type="number" id="amount" step="0.01" placeholder="-45.00" />
+    </div>
+  </div>
+
+  <label>Description / Merchant</label>
+  <input type="text" id="name" placeholder="e.g. Whole Foods Market" />
+
+  <div class="row">
+    <div>
+      <label>Category</label>
+      <select id="category" onchange="loadSubcats()">
+        <option value="">Loading…</option>
+      </select>
+    </div>
+    <div>
+      <label>Subcategory</label>
+      <select id="subcat">
+        <option value="">—</option>
+      </select>
+    </div>
+  </div>
+
+  <label>Account</label>
+  <input type="text" id="account" placeholder="e.g. Chase Checking" />
+
+  <label>Notes <span class="hint">(optional)</span></label>
+  <input type="text" id="notes" placeholder="" />
+
+  <div class="actions">
+    <button class="btn btn-secondary" onclick="google.script.host.close()">Cancel</button>
+    <button class="btn btn-primary" onclick="submit()">Add Transaction</button>
+  </div>
+  <div class="status" id="status"></div>
+
+  <script>
+    let allCats = [];
+
+    // Pre-set today's date
+    document.getElementById('date').valueAsDate = new Date();
+
+    // Load categories from sheet
+    google.script.run
+      .withSuccessHandler(function(cats) {
+        allCats = cats;
+        const catSel = document.getElementById('category');
+        catSel.innerHTML = '';
+        const unique = [...new Set(cats.map(c => c[0]))];
+        unique.forEach(c => { const o = document.createElement('option'); o.value = c; o.text = c; catSel.appendChild(o); });
+        loadSubcats();
+      })
+      .getCategories();
+
+    function loadSubcats() {
+      const cat    = document.getElementById('category').value;
+      const subSel = document.getElementById('subcat');
+      subSel.innerHTML = '';
+      const subs = allCats.filter(c => c[0] === cat).map(c => c[1]);
+      subs.forEach(s => { const o = document.createElement('option'); o.value = s; o.text = s; subSel.appendChild(o); });
+
+      // Auto-guess category from description
+      const name = document.getElementById('name').value;
+      if (name) {
+        google.script.run
+          .withSuccessHandler(function(guess) {
+            if (guess && guess[0]) {
+              document.getElementById('category').value = guess[0];
+              loadSubcats();
+              // set subcat after a tick
+              setTimeout(() => { document.getElementById('subcat').value = guess[1] || ''; }, 100);
+            }
+          })
+          .categorize(name);
+      }
+    }
+
+    function submit() {
+      const data = {
+        date:     document.getElementById('date').value,
+        amount:   document.getElementById('amount').value,
+        name:     document.getElementById('name').value,
+        category: document.getElementById('category').value,
+        subcat:   document.getElementById('subcat').value,
+        account:  document.getElementById('account').value,
+        notes:    document.getElementById('notes').value,
+      };
+      if (!data.date || !data.amount || !data.name) {
+        document.getElementById('status').textContent = 'Date, Amount, and Description are required.';
+        document.getElementById('status').className = 'status error';
+        return;
+      }
+      google.script.run
+        .withSuccessHandler(function(r) {
+          if (r.ok) {
+            document.getElementById('status').textContent = '✅ Transaction added!';
+            document.getElementById('status').className = 'status ok';
+            setTimeout(() => google.script.host.close(), 1500);
+          } else {
+            document.getElementById('status').textContent = '❌ ' + r.error;
+            document.getElementById('status').className = 'status error';
+          }
+        })
+        .clientAddTransaction(data);
+    }
+  </script>
+</body>
+</html>

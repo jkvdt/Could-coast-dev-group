@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <style>
+    body { font-family: 'Google Sans', Arial, sans-serif; padding: 20px; color: #1a1a2e; }
+    h2 { font-size: 18px; margin-bottom: 4px; }
+    p  { font-size: 13px; color: #555; margin-bottom: 20px; }
+    .btn {
+      display: inline-block; padding: 12px 24px; background: #1a1a2e;
+      color: #fff; border: none; border-radius: 6px; font-size: 15px;
+      cursor: pointer; width: 100%; text-align: center;
+    }
+    .btn:hover { background: #2d2d5e; }
+    .status { margin-top: 16px; font-size: 13px; color: #555; }
+    .error  { color: #ea4335; }
+    .ok     { color: #34a853; }
+  </style>
+</head>
+<body>
+  <h2>Connect Your Bank</h2>
+  <p>Click below to securely link your bank or credit card through Plaid.<br>
+     Your credentials are never stored here — Plaid handles all authentication.</p>
+  <button class="btn" id="connectBtn" onclick="openLink()">🏦 Connect Account</button>
+  <div class="status" id="status"></div>
+
+  <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
+  <script>
+    const LINK_TOKEN = <?= JSON.stringify(linkToken) ?>;
+
+    function openLink() {
+      document.getElementById('connectBtn').disabled = true;
+      document.getElementById('status').textContent = 'Opening Plaid Link…';
+
+      const handler = Plaid.create({
+        token: LINK_TOKEN,
+        onSuccess: function(publicToken, metadata) {
+          document.getElementById('status').textContent = 'Exchanging token…';
+          google.script.run
+            .withSuccessHandler(function(result) {
+              if (result && result.ok) {
+                document.getElementById('status').innerHTML =
+                  '<span class="ok">✅ Account connected! Pulling 90 days of transactions…</span>';
+                setTimeout(() => google.script.host.close(), 3000);
+              } else {
+                document.getElementById('status').innerHTML =
+                  '<span class="error">❌ ' + (result ? result.error : 'Unknown error') + '</span>';
+                document.getElementById('connectBtn').disabled = false;
+              }
+            })
+            .withFailureHandler(function(err) {
+              document.getElementById('status').innerHTML =
+                '<span class="error">❌ ' + err.message + '</span>';
+              document.getElementById('connectBtn').disabled = false;
+            })
+            .exchangePublicToken(publicToken, metadata);
+        },
+        onExit: function(err) {
+          document.getElementById('connectBtn').disabled = false;
+          if (err) {
+            document.getElementById('status').innerHTML =
+              '<span class="error">Plaid Link closed: ' + (err.display_message || err.error_message || '') + '</span>';
+          } else {
+            document.getElementById('status').textContent = 'Link closed.';
+          }
+        }
+      });
+      handler.open();
+    }
+  </script>
+</body>
+</html>

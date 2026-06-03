@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Google Sans', Arial, sans-serif; padding: 18px; font-size: 13px; color: #1a1a2e; }
+    h3 { font-size: 15px; margin: 0 0 12px; }
+    label { display: block; font-weight: bold; margin: 10px 0 3px; }
+    input[type=text], select, textarea {
+      width: 100%; padding: 7px 9px; border: 1px solid #dadce0;
+      border-radius: 4px; font-size: 13px;
+    }
+    textarea { height: 90px; resize: vertical; font-family: monospace; font-size: 11px; }
+    .row { display: flex; gap: 10px; }
+    .row > div { flex: 1; }
+    .btn { padding: 9px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; }
+    .btn-primary { background: #1a1a2e; color: #fff; }
+    .btn-primary:hover { background: #2d2d5e; }
+    .btn-secondary { background: #f1f3f4; color: #333; }
+    .status { margin-top: 12px; font-size: 12px; }
+    .ok    { color: #34a853; }
+    .error { color: #ea4335; }
+    .hint  { font-size: 11px; color: #888; margin-top: 2px; }
+    #mappingSection { display: none; margin-top: 14px; padding: 12px; background: #f8f9fa; border-radius: 6px; }
+    #previewTable { width: 100%; border-collapse: collapse; font-size: 11px; margin-top: 8px; }
+    #previewTable th, #previewTable td { border: 1px solid #dadce0; padding: 3px 6px; text-align: left; }
+    #previewTable th { background: #f0f4ff; }
+    .actions { margin-top: 16px; display: flex; gap: 10px; justify-content: flex-end; }
+  </style>
+</head>
+<body>
+  <h3>Import Transactions from CSV</h3>
+
+  <div class="hint">Exports supported: Chase, Bank of America, Wells Fargo, Capital One, Citi, Amex, and most other banks/credit cards.</div>
+
+  <label>Account Name</label>
+  <input type="text" id="accountName" placeholder="e.g. Chase Sapphire, BofA Checking" />
+
+  <label>Paste CSV content here</label>
+  <textarea id="csvText" placeholder="Paste the full contents of your bank's exported CSV file…"></textarea>
+
+  <div class="actions" style="margin-top:8px; justify-content:flex-start;">
+    <button class="btn btn-secondary" onclick="previewCsv()">Preview &amp; Map Columns</button>
+  </div>
+
+  <div id="mappingSection">
+    <strong>Column Mapping</strong>
+    <div class="hint">Auto-detected below — adjust if your bank uses different column names.</div>
+    <table id="previewTable"></table>
+
+    <div class="row" style="margin-top: 10px;">
+      <div>
+        <label>Date column</label>
+        <select id="mapDate"></select>
+      </div>
+      <div>
+        <label>Description column</label>
+        <select id="mapDesc"></select>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label>Amount column <span class="hint">(negative = expense)</span></label>
+        <select id="mapAmount">
+          <option value="-1">— not used —</option>
+        </select>
+      </div>
+      <div>
+        <label>Debit column <span class="hint">(alternative)</span></label>
+        <select id="mapDebit">
+          <option value="-1">— not used —</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-secondary" onclick="google.script.host.close()">Cancel</button>
+    <button class="btn btn-primary" id="importBtn" onclick="doImport()" disabled>Import</button>
+  </div>
+  <div class="status" id="status"></div>
+
+  <script>
+    let headers = [];
+
+    function previewCsv() {
+      const csvText = document.getElementById('csvText').value.trim();
+      if (!csvText) { setStatus('Paste CSV text first.', 'error'); return; }
+      setStatus('Parsing…', '');
+      google.script.run
+        .withSuccessHandler(function(r) {
+          if (!r.ok) { setStatus(r.error, 'error'); return; }
+          headers = r.headers;
+          buildPreview(r.preview, r.headers);
+          populateSelects(r.headers);
+          document.getElementById('mappingSection').style.display = 'block';
+          document.getElementById('importBtn').disabled = false;
+          setStatus('Preview ready. Adjust column mapping if needed.', 'ok');
+        })
+        .withFailureHandler(function(e) { setStatus(e.message, 'error'); })
+        .previewCsv(csvText);
+    }
+
+    function buildPreview(rows, hdrs) {
+      const table = document.getElementById('previewTable');
+      table.innerHTML = '';
+      const thead = table.createTHead().insertRow();
+      hdrs.forEach(h => { const th = document.createElement('th'); th.textContent = h; thead.appendChild(th); });
+      const tbody = table.createTBody();
+      rows.forEach(r => {
+        const tr = tbody.insertRow();
+        r.forEach(c => { const td = tr.insertCell(); td.textContent = c; });
+      });
+    }
+
+    function populateSelects(hdrs) {
+      ['mapDate','mapDesc','mapAmount','mapDebit'].forEach(id => {
+        const sel = document.getElementById(id);
+        const hasNone = sel.options[0] && sel.options[0].value === '-1';
+        while (sel.options.length > (hasNone ? 1 : 0)) sel.remove(hasNone ? 1 : 0);
+        if (!hasNone) { const o = document.createElement('option'); o.value = '-1'; o.text = '— not used —'; sel.add(o, 0); }
+        hdrs.forEach((h, i) => { const o = document.createElement('option'); o.value = i; o.text = h; sel.appendChild(o); });
+      });
+      // Auto-select best guess
+      autoSelect('mapDate',   ['date','transaction date','posted']);
+      autoSelect('mapDesc',   ['description','merchant','name','payee']);
+      autoSelect('mapAmount', ['amount','transaction amount']);
+      autoSelect('mapDebit',  ['debit','withdrawal']);
+    }
+
+    function autoSelect(id, keywords) {
+      const sel = document.getElementById(id);
+      for (const kw of keywords) {
+        for (let i = 0; i < sel.options.length; i++) {
+          if (sel.options[i].text.toLowerCase().includes(kw)) { sel.selectedIndex = i; return; }
+        }
+      }
+    }
+
+    function doImport() {
+      const csvText     = document.getElementById('csvText').value.trim();
+      const accountName = document.getElementById('accountName').value.trim();
+      const mapping = {
+        date:   document.getElementById('mapDate').value,
+        desc:   document.getElementById('mapDesc').value,
+        amount: document.getElementById('mapAmount').value,
+        debit:  document.getElementById('mapDebit').value,
+      };
+      setStatus('Importing…', '');
+      document.getElementById('importBtn').disabled = true;
+      google.script.run
+        .withSuccessHandler(function(r) {
+          if (r.ok) {
+            setStatus(`✅ Done! Parsed ${r.total} rows, added ${r.inserted} new transactions (${r.total - r.inserted} duplicates skipped).`, 'ok');
+            setTimeout(() => google.script.host.close(), 3000);
+          } else {
+            setStatus('❌ ' + r.error, 'error');
+            document.getElementById('importBtn').disabled = false;
+          }
+        })
+        .withFailureHandler(function(e) {
+          setStatus('❌ ' + e.message, 'error');
+          document.getElementById('importBtn').disabled = false;
+        })
+        .importCsv(csvText, mapping, accountName, 'CSV');
+    }
+
+    function setStatus(msg, cls) {
+      const el = document.getElementById('status');
+      el.textContent = msg;
+      el.className = 'status ' + (cls || '');
+    }
+  </script>
+</body>
+</html>
