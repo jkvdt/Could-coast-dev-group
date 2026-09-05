@@ -69,13 +69,45 @@
 
   .squiggle{display:block;height:10px;width:100%;}
 
+  /* film-grain overlay */
+  body::before{
+    content:"";
+    position:fixed;inset:0;z-index:9999;pointer-events:none;
+    opacity:.05;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
   /* ===== NAV ===== */
   header.site{
     position:sticky;top:0;z-index:50;
     background:rgba(242,238,227,.92);
+    -webkit-backdrop-filter:blur(8px);
     backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);
   }
+
+  /* reveal-on-scroll */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease), transform .7s var(--ease);}
+  .reveal.is-in{opacity:1;transform:translateY(0);}
+
+  /* hazard marquee */
+  .hazard{
+    background:repeating-linear-gradient(-45deg, var(--ink), var(--ink) 22px, var(--mustard) 22px, var(--mustard) 44px);
+    overflow:hidden;padding:0;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);
+  }
+  .hazard-track{
+    display:flex;white-space:nowrap;width:max-content;
+    animation:marquee 26s linear infinite;
+  }
+  .hazard-track span{
+    font-family:var(--display);font-size:1.4rem;letter-spacing:.03em;
+    color:var(--ink);background:var(--paper);
+    padding:10px 28px;margin:8px 10px;border-radius:999px;
+    display:inline-flex;align-items:center;
+    box-shadow:0 3px 0 var(--ink);
+  }
+  @keyframes marquee{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  @media (prefers-reduced-motion: reduce){ .hazard-track{animation:none;} }
   .nav{
     display:flex;align-items:center;justify-content:space-between;
     padding:16px clamp(20px,5vw,48px);
@@ -106,12 +138,13 @@
     white-space:nowrap;
   }
   .btn:active{transform:scale(.96);}
-  .btn-snap{background:var(--snap);color:var(--ink);}
-  .btn-snap:hover{background:var(--ink);color:var(--paper);}
+  .btn-snap{background:var(--snap);color:var(--ink);box-shadow:0 4px 0 var(--snap-dim);}
+  .btn-snap:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px);box-shadow:0 6px 0 rgba(0,0,0,.35);}
+  .btn-snap:active{transform:translateY(1px) scale(.97);box-shadow:0 1px 0 rgba(0,0,0,.35);}
   .btn-outline{background:transparent;color:var(--ink);border-color:var(--ink);}
-  .btn-outline:hover{background:var(--ink);color:var(--paper);}
+  .btn-outline:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px);}
   .btn-ghost-paper{background:transparent;color:var(--paper);border-color:var(--line-soft);}
-  .btn-ghost-paper:hover{background:var(--paper);color:var(--ink);border-color:var(--paper);}
+  .btn-ghost-paper:hover{background:var(--paper);color:var(--ink);border-color:var(--paper);transform:translateY(-2px);}
   .nav-cta{display:none;}
   .hamburger{display:none;background:none;border:none;padding:8px;}
   .hamburger span{display:block;width:22px;height:2px;background:var(--ink);margin:5px 0;}
@@ -278,7 +311,9 @@
     border-radius:12px;padding:22px 20px;min-height:150px;
     display:flex;flex-direction:column;justify-content:space-between;
     position:relative;overflow:hidden;
+    transition:transform .25s var(--ease), box-shadow .25s var(--ease);
   }
+  .say-card:hover{transform:translateY(-6px) rotate(-.6deg);box-shadow:0 14px 28px rgba(21,19,15,.22);}
   .say-card .tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;opacity:.7;}
   .say-card .say{font-family:var(--display);font-size:1.28rem;line-height:1.08;letter-spacing:.005em;}
   .say-card.c1{background:var(--ink);color:var(--paper);}
@@ -296,29 +331,41 @@
   /* ===== PRICING ===== */
   .pricing{background:var(--ink);color:var(--paper);padding:clamp(60px,9vw,110px) 0;}
   .price-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,56px);align-items:start;}
-  .packs{display:flex;flex-direction:column;gap:12px;}
+  .packs{display:flex;flex-direction:column;gap:14px;}
   .pack{
-    display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;
-    border:1.5px solid rgba(242,238,227,.2);
-    border-radius:12px;padding:16px 18px;
-    background:none;color:var(--paper);text-align:left;
-    transition:border-color .18s var(--ease), background .18s var(--ease);
-    width:100%;
+    display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;
+    border:2px solid rgba(242,238,227,.2);
+    border-radius:14px;padding:18px 20px;
+    background:rgba(242,238,227,.03);color:var(--paper);text-align:left;
+    transition:border-color .18s var(--ease), background .18s var(--ease), transform .18s var(--ease);
+    width:100%;position:relative;overflow:hidden;
   }
-  .pack:hover{border-color:rgba(242,238,227,.45);}
-  .pack.active{border-color:var(--snap);background:rgba(255,67,0,.08);}
-  .pack .radio{
-    width:18px;height:18px;border-radius:50%;border:2px solid rgba(242,238,227,.5);
-    display:flex;align-items:center;justify-content:center;flex:none;
+  .pack:hover{border-color:rgba(242,238,227,.45);transform:translateX(3px);}
+  .pack:active{transform:scale(.985) translateX(3px);}
+  .pack.active{border-color:var(--snap);background:rgba(255,67,0,.1);box-shadow:0 6px 0 rgba(255,67,0,.25);}
+  .pack-icon{
+    width:52px;height:52px;border-radius:50%;flex:none;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(242,238,227,.08);color:rgba(242,238,227,.55);
+    transition:color .18s var(--ease), background .18s var(--ease);
   }
-  .pack.active .radio{border-color:var(--snap);}
-  .pack.active .radio::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--snap);}
-  .pack .name{font-weight:700;font-size:1.05rem;}
-  .pack .sub{font-family:var(--mono);font-size:.78rem;color:rgba(242,238,227,.55);margin-top:2px;}
-  .pack .price{font-family:var(--mono);font-size:1.3rem;font-variant-numeric:tabular-nums;text-align:right;}
+  .pack-icon svg{width:24px;height:24px;}
+  .pack.active .pack-icon{background:var(--snap);color:var(--ink);}
+  .pack-body{display:flex;flex-direction:column;gap:3px;min-width:0;}
+  .pack-name{
+    font-family:var(--display);font-size:1.35rem;letter-spacing:.01em;line-height:1;
+  }
+  .pack .sub{font-family:var(--mono);font-size:.76rem;color:rgba(242,238,227,.55);line-height:1.4;}
+  .pack .quote{font-size:.88rem;font-style:italic;color:rgba(242,238,227,.7);margin-top:2px;}
+  .pack-price{font-family:var(--mono);font-size:1.5rem;font-variant-numeric:tabular-nums;text-align:right;flex:none;}
   .pack .badge{
-    display:inline-block;margin-top:4px;font-family:var(--mono);font-size:.68rem;
-    background:var(--mustard);color:var(--ink);padding:2px 8px;border-radius:999px;font-weight:600;
+    display:inline-block;margin-top:5px;font-family:var(--mono);font-size:.68rem;
+    background:var(--mustard);color:var(--ink);padding:3px 9px;border-radius:999px;font-weight:600;
+    width:max-content;
+  }
+  @media (max-width:520px){
+    .pack{grid-template-columns:auto 1fr;}
+    .pack-price{grid-column:2;text-align:left;font-size:1.2rem;margin-top:4px;}
   }
 
   .summary{
@@ -380,6 +427,15 @@
   @media (max-width:760px){.foot-top{grid-template-columns:1fr;}}
 
   :focus-visible{outline:2px solid var(--snap);outline-offset:3px;}
+
+  body.shake{animation:pageshake .32s var(--ease);}
+  @keyframes pageshake{
+    0%,100%{transform:translate(0,0);}
+    20%{transform:translate(-2px,1px);}
+    40%{transform:translate(2px,-1px);}
+    60%{transform:translate(-1px,2px);}
+    80%{transform:translate(1px,-2px);}
+  }
 
   @media (prefers-reduced-motion: reduce){
     *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
@@ -457,10 +513,20 @@
         </div>
         <p class="demo-tap-hint">↑ tap the band to pop it</p>
         <p class="tally">WORDS CAUGHT TODAY: <b id="tallyCount">0</b></p>
-        <button class="tally-reset" id="tallyReset">reset counter</button>
+        <div style="display:flex;gap:16px;justify-content:center;">
+          <button class="tally-reset" id="tallyReset">reset counter</button>
+          <button class="tally-reset" id="soundToggle">sound: on</button>
+        </div>
       </div>
     </div>
   </section>
+
+  <div class="hazard" aria-hidden="true">
+    <div class="hazard-track">
+      <span>POP IT</span><span>STOP IT</span><span>MIND YOUR MOUTH</span><span>SNAP OUT OF IT</span><span>WATCH YOUR MOUTH</span>
+      <span>POP IT</span><span>STOP IT</span><span>MIND YOUR MOUTH</span><span>SNAP OUT OF IT</span><span>WATCH YOUR MOUTH</span>
+    </div>
+  </div>
 
   <!-- COMPARISON -->
   <section class="compare light">
@@ -573,37 +639,48 @@
 
       <div class="price-layout">
         <div class="packs" id="packs">
-          <button class="pack" data-qty="1" data-price="7" data-label="Single Band">
-            <span class="radio"></span>
-            <span>
-              <span class="name">Single Band</span><br>
-              <span class="sub">1 band, 1 saying of your choice</span>
+          <button class="pack pack-rookie" data-qty="1" data-price="7" data-label="The Rookie">
+            <span class="pack-icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="17" stroke="currentColor" stroke-width="2.5"/><circle cx="20" cy="20" r="5" fill="currentColor"/></svg>
             </span>
-            <span class="price">$7</span>
-          </button>
-          <button class="pack" data-qty="3" data-price="15" data-label="3-Pack">
-            <span class="radio"></span>
-            <span>
-              <span class="name">3-Pack</span><br>
-              <span class="sub">$5.00 / band</span><br>
-              <span class="badge">Save 29%</span>
+            <span class="pack-body">
+              <span class="pack-name">The Rookie</span>
+              <span class="sub">1 band · just started noticing the habit</span>
+              <span class="quote">"Wait, did I really just say that?"</span>
             </span>
-            <span class="price">$15</span>
+            <span class="pack-price">$7</span>
           </button>
-          <button class="pack" data-qty="5" data-price="20" data-label="5-Pack">
-            <span class="radio"></span>
-            <span>
-              <span class="name">5-Pack</span><br>
-              <span class="sub">$4.00 / band</span><br>
+
+          <button class="pack pack-contractor active" data-qty="3" data-price="15" data-label="The Contractor">
+            <span class="pack-icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none"><path d="M27 8l5 5-14 14-6 1 1-6z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M6 34l3-3" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+            </span>
+            <span class="pack-body">
+              <span class="pack-name">The Contractor</span>
+              <span class="sub">3 bands · $5.00 each · one for the wrist, one for the truck, one for the office</span>
+              <span class="quote">"@#$% this bid came in low."</span>
+              <span class="badge">Save 29% · Most popular</span>
+            </span>
+            <span class="pack-price">$15</span>
+          </button>
+
+          <button class="pack pack-sailor" data-qty="5" data-price="20" data-label="The Sailor">
+            <span class="pack-icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="9" r="3.2" stroke="currentColor" stroke-width="2.2"/><path d="M20 12v6m0 0c-7 0-11 5-11 12h5a6 6 0 0111.5-2.3M20 18c7 0 11 5 11 12h-5a6 6 0 00-6-5.7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M9 25h6M25 25h6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+            </span>
+            <span class="pack-body">
+              <span class="pack-name">The Sailor</span>
+              <span class="sub">5 bands · $4.00 each · cusses like a sailor, needs backup for the backup</span>
+              <span class="quote">"Every. Single. Word."</span>
               <span class="badge">Save 43% + free shipping</span>
             </span>
-            <span class="price">$20</span>
+            <span class="pack-price">$20</span>
           </button>
         </div>
 
         <div class="summary">
           <h3>Order summary</h3>
-          <div class="sum-row"><span id="sumLabel">3-Pack</span><span id="sumQty">3 bands</span></div>
+          <div class="sum-row"><span id="sumLabel">The Contractor</span><span id="sumQty">3 bands</span></div>
           <div class="sum-row"><span>Subtotal</span><span id="sumSubtotal">$15.00</span></div>
           <div class="sum-row"><span>Shipping</span><span id="sumShip">$3.99</span></div>
           <div class="sum-row total"><span>Total</span><span id="sumTotal">$18.99</span></div>
@@ -674,9 +751,9 @@
         <div class="foot-links">
           <h4>Shop</h4>
           <ul>
-            <li><a href="#pricing">Single band — $7</a></li>
-            <li><a href="#pricing">3-pack — $15</a></li>
-            <li><a href="#pricing">5-pack — $20</a></li>
+            <li><a href="#pricing">The Rookie — $7</a></li>
+            <li><a href="#pricing">The Contractor — $15</a></li>
+            <li><a href="#pricing">The Sailor — $20</a></li>
             <li><a href="#sayings">All sayings</a></li>
           </ul>
         </div>
@@ -744,12 +821,38 @@
   try { count = parseInt(localStorage.getItem('swearband_tally') || '0', 10) || 0; } catch(e){}
   tallyEl.textContent = count;
 
+  var soundOn = true;
+  var soundBtn = document.getElementById('soundToggle');
+  var audioCtx = null;
+  function snapSound(){
+    if (!soundOn) return;
+    try {
+      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+      var t = audioCtx.currentTime;
+      var osc = audioCtx.createOscillator();
+      var gain = audioCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(900, t);
+      osc.frequency.exponentialRampToValueAtTime(120, t + 0.09);
+      gain.gain.setValueAtTime(0.22, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+      osc.connect(gain).connect(audioCtx.destination);
+      osc.start(t); osc.stop(t + 0.13);
+    } catch(e){}
+  }
+  soundBtn.addEventListener('click', function(){
+    soundOn = !soundOn;
+    soundBtn.textContent = soundOn ? 'sound: on' : 'sound: off';
+  });
+
   function pop(){
     count++;
     tallyEl.textContent = count;
     try { localStorage.setItem('swearband_tally', String(count)); } catch(e){}
     ring.classList.remove('snap'); void ring.offsetWidth; ring.classList.add('snap');
     burst.classList.remove('go'); void burst.offsetWidth; burst.classList.add('go');
+    snapSound();
+    document.body.classList.remove('shake'); void document.body.offsetWidth; document.body.classList.add('shake');
   }
   document.querySelector('.band-stage').addEventListener('click', pop);
   document.querySelector('.band-stage').style.cursor = 'pointer';
@@ -758,6 +861,20 @@
     count = 0; tallyEl.textContent = 0;
     try { localStorage.setItem('swearband_tally', '0'); } catch(e){}
   });
+
+  // scroll reveal
+  document.querySelectorAll('.sec-head, .say-card, .step, .compare-table, .why-strip, .pack, .faq-list details, .foot-top > div')
+    .forEach(function(el){ el.classList.add('reveal'); });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
+      });
+    }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-in'); });
+  }
 
   // pricing calculator
   var packs = document.querySelectorAll('.pack');
