@@ -1,0 +1,807 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swear Band</title>
+<meta name="description" content="Swear Band is a snap-back wristband that turns every curse word into an instant, physical correction. Pre-order the habit tool built to break the habit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15130F;
+    --ink-soft:#3A362E;
+    --paper:#F2EEE3;
+    --paper-dim:#E7E1D2;
+    --snap:#FF4300;
+    --snap-dim:#D93A00;
+    --mustard:#D8A24A;
+    --navy:#1F3A52;
+    --teal:#1E7A7A;
+    --olive:#5C6B3F;
+    --line: rgba(21,19,15,0.14);
+    --line-soft: rgba(242,238,227,0.18);
+
+    --display: 'Anton', Impact, 'Archivo Black', sans-serif;
+    --body: 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --mono: 'IBM Plex Mono', 'SFMono-Regular', Menlo, monospace;
+
+    --ease: cubic-bezier(.22,1,.36,1);
+    --radius: 14px;
+  }
+
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;}
+  ul{list-style:none;margin:0;padding:0;}
+  h1,h2,h3,h4,p{margin:0;}
+  h1,h2,h3{text-wrap:balance;}
+  button{font-family:inherit;cursor:pointer;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,48px);}
+  section{position:relative;}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:.78rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-weight:600;
+    display:inline-flex;
+    align-items:center;
+    gap:.55em;
+  }
+  .eyebrow::before{
+    content:"";
+    width:7px;height:7px;border-radius:50%;
+    background:currentColor;
+    flex:none;
+  }
+
+  .squiggle{display:block;height:10px;width:100%;}
+
+  /* ===== NAV ===== */
+  header.site{
+    position:sticky;top:0;z-index:50;
+    background:rgba(242,238,227,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px clamp(20px,5vw,48px);
+    max-width:1180px;margin:0 auto;
+  }
+  .wordmark{
+    display:inline-flex;flex-direction:column;line-height:.82;
+    font-family:var(--display);
+    font-size:1.5rem;letter-spacing:.01em;
+    text-decoration:none;
+  }
+  .wordmark .b{color:var(--snap);}
+  .wordmark svg{margin-top:2px;width:78px;}
+  .nav-links{display:flex;align-items:center;gap:32px;}
+  .nav-links a{
+    font-size:.92rem;font-weight:600;
+    text-decoration:none;color:var(--ink-soft);
+    transition:color .2s var(--ease);
+  }
+  .nav-links a:hover{color:var(--ink);}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.5em;
+    font-family:var(--body);font-weight:700;font-size:.92rem;
+    padding:.85em 1.5em;border-radius:999px;
+    border:2px solid transparent;
+    transition:transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
+    text-decoration:none;
+    white-space:nowrap;
+  }
+  .btn:active{transform:scale(.96);}
+  .btn-snap{background:var(--snap);color:var(--ink);}
+  .btn-snap:hover{background:var(--ink);color:var(--paper);}
+  .btn-outline{background:transparent;color:var(--ink);border-color:var(--ink);}
+  .btn-outline:hover{background:var(--ink);color:var(--paper);}
+  .btn-ghost-paper{background:transparent;color:var(--paper);border-color:var(--line-soft);}
+  .btn-ghost-paper:hover{background:var(--paper);color:var(--ink);border-color:var(--paper);}
+  .nav-cta{display:none;}
+  .hamburger{display:none;background:none;border:none;padding:8px;}
+  .hamburger span{display:block;width:22px;height:2px;background:var(--ink);margin:5px 0;}
+
+  @media (min-width:761px){ .nav-cta{display:inline-flex;} }
+  @media (max-width:760px){
+    .nav-links{
+      position:fixed;inset:64px 0 auto 0;background:var(--paper);
+      flex-direction:column;align-items:flex-start;gap:0;
+      padding:8px clamp(20px,5vw,48px) 20px;
+      border-bottom:1px solid var(--line);
+      transform:translateY(-8px);opacity:0;pointer-events:none;
+      transition:transform .25s var(--ease), opacity .25s var(--ease);
+    }
+    .nav-links.open{transform:translateY(0);opacity:1;pointer-events:auto;}
+    .nav-links a{padding:12px 0;width:100%;border-bottom:1px solid var(--line);}
+    .hamburger{display:block;}
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    background:var(--ink);color:var(--paper);
+    padding:clamp(48px,8vw,88px) 0 clamp(40px,7vw,72px);
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,64px);
+    align-items:center;
+  }
+  .hero h1{
+    font-family:var(--display);
+    font-size:clamp(2.8rem,7.2vw,5.4rem);
+    line-height:.94;letter-spacing:.005em;
+    color:var(--paper);
+    margin:.4em 0 .36em;
+  }
+  .hero h1 em{font-style:normal;color:var(--snap);}
+  .hero .eyebrow{color:var(--mustard);}
+  .hero p.lede{
+    font-size:clamp(1.05rem,1.6vw,1.25rem);
+    color:rgba(242,238,227,.82);
+    max-width:46ch;line-height:1.55;
+    margin-bottom:1.8em;
+  }
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:2.2em;}
+  .hero-trust{display:flex;flex-wrap:wrap;gap:20px 28px;font-family:var(--mono);font-size:.82rem;color:rgba(242,238,227,.65);}
+  .hero-trust li{display:flex;align-items:center;gap:.55em;}
+  .hero-trust svg{width:15px;height:15px;flex:none;color:var(--mustard);}
+
+  /* pop demo */
+  .demo{
+    background:rgba(242,238,227,.05);
+    border:1px solid var(--line-soft);
+    border-radius:20px;
+    padding:clamp(20px,3vw,30px);
+    text-align:center;
+  }
+  .demo-swatches{display:flex;justify-content:center;gap:10px;margin-bottom:18px;flex-wrap:wrap;}
+  .swatch{
+    width:26px;height:26px;border-radius:50%;
+    border:2px solid rgba(242,238,227,.35);
+    padding:0;position:relative;
+    transition:transform .15s var(--ease);
+  }
+  .swatch.active{border-color:var(--paper);}
+  .swatch.active::after{
+    content:"";position:absolute;inset:-5px;border:1.5px solid var(--paper);border-radius:50%;
+  }
+  .swatch:hover{transform:scale(1.1);}
+
+  .band-stage{
+    position:relative;width:min(280px,80vw);height:min(280px,80vw);
+    margin:0 auto 16px;
+  }
+  .band-stage svg{width:100%;height:100%;overflow:visible;}
+  #bandRing{transform-origin:150px 150px;transition:transform .08s;}
+  #bandRing.snap{animation:snapring .38s var(--ease);}
+  @keyframes snapring{
+    0%{transform:scale(1,1);}
+    28%{transform:scale(1.22,.74) rotate(-3deg);}
+    55%{transform:scale(.88,1.14) rotate(2deg);}
+    78%{transform:scale(1.05,.96);}
+    100%{transform:scale(1,1);}
+  }
+  .burst line{opacity:0;stroke:var(--mustard);stroke-width:3;stroke-linecap:round;}
+  .burst.go line{animation:burstline .5s var(--ease) forwards;}
+  @keyframes burstline{
+    0%{opacity:1;transform:scale(.4);}
+    100%{opacity:0;transform:scale(1.6);}
+  }
+  .demo-tap-hint{font-family:var(--mono);font-size:.78rem;color:rgba(242,238,227,.55);margin-bottom:14px;}
+  .tally{font-family:var(--mono);font-size:.95rem;letter-spacing:.06em;color:var(--paper);margin-bottom:4px;}
+  .tally b{font-variant-numeric:tabular-nums;color:var(--snap);font-size:1.15rem;}
+  .tally-reset{font-family:var(--mono);font-size:.74rem;color:rgba(242,238,227,.5);text-decoration:underline;background:none;border:none;padding:2px;margin-top:6px;}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+  }
+
+  /* ===== SECTION HEADERS ===== */
+  .sec-head{max-width:640px;margin-bottom:clamp(32px,5vw,52px);}
+  .sec-head h2{
+    font-family:var(--display);
+    font-size:clamp(2rem,4.4vw,3.1rem);
+    line-height:1.02;
+    margin:.5em 0 .3em;
+  }
+  .sec-head p{font-size:1.05rem;color:var(--ink-soft);line-height:1.55;max-width:52ch;}
+  .light .eyebrow{color:var(--snap-dim);}
+  .dark .sec-head p{color:rgba(242,238,227,.75);}
+
+  /* ===== COMPARISON ===== */
+  .compare{padding:clamp(60px,9vw,110px) 0;}
+  .compare-table{
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+    background:var(--paper);
+  }
+  .compare-row{
+    display:grid;grid-template-columns:1.4fr 1fr 1fr;
+    border-top:1px solid var(--line);
+  }
+  .compare-row:first-child{border-top:none;background:var(--ink);color:var(--paper);}
+  .compare-row:first-child .cell{font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;padding:16px 20px;}
+  .compare-row .cell{
+    padding:18px 20px;font-size:.96rem;display:flex;align-items:center;gap:.6em;
+    border-left:1px solid var(--line);
+  }
+  .compare-row .cell:first-child{border-left:none;font-weight:600;color:var(--ink);}
+  .compare-row:first-child .cell:first-child{color:rgba(242,238,227,.6);font-weight:400;}
+  .compare-row:nth-child(even):not(:first-child){background:var(--paper-dim);}
+  .cell svg{width:17px;height:17px;flex:none;}
+  .cell.yes{color:#2E6B3E;}
+  .cell.no{color:var(--ink-soft);opacity:.55;}
+  @media (max-width:680px){
+    .compare-row{grid-template-columns:1.2fr .9fr .9fr;}
+    .compare-row .cell{padding:14px 12px;font-size:.85rem;}
+  }
+
+  .why-strip{
+    margin-top:40px;display:grid;grid-template-columns:auto 1fr;gap:24px;
+    padding:28px;border:1px dashed var(--line);border-radius:var(--radius);
+    align-items:start;
+  }
+  .why-strip svg{width:34px;height:34px;color:var(--snap);flex:none;}
+  .why-strip p{font-size:1.02rem;line-height:1.6;color:var(--ink-soft);}
+  .why-strip strong{color:var(--ink);}
+  @media (max-width:600px){.why-strip{grid-template-columns:1fr;}}
+
+  /* ===== HOW IT WORKS ===== */
+  .how{background:var(--navy);color:var(--paper);padding:clamp(60px,9vw,110px) 0;}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .step{border-top:2px solid rgba(242,238,227,.25);padding-top:20px;}
+  .step .num{font-family:var(--mono);font-size:.85rem;color:var(--mustard);letter-spacing:.1em;}
+  .step h3{font-family:var(--display);font-size:1.5rem;margin:.5em 0 .4em;letter-spacing:.01em;}
+  .step p{color:rgba(242,238,227,.75);line-height:1.55;font-size:.98rem;}
+  @media (max-width:760px){.steps{grid-template-columns:1fr;}}
+
+  /* ===== SAYINGS GALLERY ===== */
+  .sayings{padding:clamp(60px,9vw,110px) 0;}
+  .say-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  }
+  .say-card{
+    border-radius:12px;padding:22px 20px;min-height:150px;
+    display:flex;flex-direction:column;justify-content:space-between;
+    position:relative;overflow:hidden;
+  }
+  .say-card .tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;opacity:.7;}
+  .say-card .say{font-family:var(--display);font-size:1.28rem;line-height:1.08;letter-spacing:.005em;}
+  .say-card.c1{background:var(--ink);color:var(--paper);}
+  .say-card.c2{background:var(--snap);color:var(--ink);}
+  .say-card.c3{background:var(--teal);color:var(--paper);}
+  .say-card.c4{background:var(--olive);color:var(--paper);}
+  .say-card.c5{background:var(--mustard);color:var(--ink);}
+  .say-card.c6{background:var(--navy);color:var(--paper);}
+  .say-card.c7{background:var(--paper-dim);color:var(--ink);border:1px solid var(--line);}
+  .say-card.c8{background:#8A2E1F;color:var(--paper);}
+  @media (max-width:900px){.say-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:480px){.say-grid{grid-template-columns:1fr;}}
+  .say-note{margin-top:22px;font-size:.92rem;color:var(--ink-soft);}
+
+  /* ===== PRICING ===== */
+  .pricing{background:var(--ink);color:var(--paper);padding:clamp(60px,9vw,110px) 0;}
+  .price-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,56px);align-items:start;}
+  .packs{display:flex;flex-direction:column;gap:12px;}
+  .pack{
+    display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;
+    border:1.5px solid rgba(242,238,227,.2);
+    border-radius:12px;padding:16px 18px;
+    background:none;color:var(--paper);text-align:left;
+    transition:border-color .18s var(--ease), background .18s var(--ease);
+    width:100%;
+  }
+  .pack:hover{border-color:rgba(242,238,227,.45);}
+  .pack.active{border-color:var(--snap);background:rgba(255,67,0,.08);}
+  .pack .radio{
+    width:18px;height:18px;border-radius:50%;border:2px solid rgba(242,238,227,.5);
+    display:flex;align-items:center;justify-content:center;flex:none;
+  }
+  .pack.active .radio{border-color:var(--snap);}
+  .pack.active .radio::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--snap);}
+  .pack .name{font-weight:700;font-size:1.05rem;}
+  .pack .sub{font-family:var(--mono);font-size:.78rem;color:rgba(242,238,227,.55);margin-top:2px;}
+  .pack .price{font-family:var(--mono);font-size:1.3rem;font-variant-numeric:tabular-nums;text-align:right;}
+  .pack .badge{
+    display:inline-block;margin-top:4px;font-family:var(--mono);font-size:.68rem;
+    background:var(--mustard);color:var(--ink);padding:2px 8px;border-radius:999px;font-weight:600;
+  }
+
+  .summary{
+    border:1.5px solid rgba(242,238,227,.2);border-radius:14px;padding:26px;
+    position:sticky;top:96px;
+  }
+  .summary h3{font-family:var(--display);font-size:1.3rem;margin-bottom:16px;letter-spacing:.01em;}
+  .sum-row{display:flex;justify-content:space-between;font-size:.95rem;padding:9px 0;border-top:1px solid rgba(242,238,227,.14);}
+  .sum-row:first-child{border-top:none;}
+  .sum-row.total{font-weight:700;font-size:1.15rem;border-top:1.5px solid rgba(242,238,227,.35);margin-top:6px;padding-top:14px;}
+  .sum-row span:last-child{font-family:var(--mono);font-variant-numeric:tabular-nums;}
+  .ship-note{font-family:var(--mono);font-size:.8rem;color:var(--mustard);margin-top:10px;min-height:1.4em;}
+  .summary .btn{width:100%;margin-top:18px;}
+  .summary .fine{font-size:.78rem;color:rgba(242,238,227,.5);margin-top:12px;line-height:1.5;}
+  @media (max-width:820px){
+    .price-layout{grid-template-columns:1fr;}
+    .summary{position:static;}
+  }
+
+  /* ===== FAQ ===== */
+  .faq{padding:clamp(60px,9vw,110px) 0;}
+  .faq-list{border-top:1px solid var(--line);}
+  .faq-list details{border-bottom:1px solid var(--line);padding:20px 0;}
+  .faq-list summary{
+    list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;
+    cursor:pointer;font-weight:700;font-size:1.05rem;
+  }
+  .faq-list summary::-webkit-details-marker{display:none;}
+  .faq-list summary .plus{
+    flex:none;width:22px;height:22px;position:relative;
+  }
+  .faq-list summary .plus::before,.faq-list summary .plus::after{
+    content:"";position:absolute;background:var(--ink);transition:transform .2s var(--ease);
+  }
+  .faq-list summary .plus::before{left:0;top:50%;width:100%;height:2px;margin-top:-1px;}
+  .faq-list summary .plus::after{top:0;left:50%;width:2px;height:100%;margin-left:-1px;}
+  .faq-list details[open] summary .plus::after{transform:rotate(90deg);opacity:0;}
+  .faq-list p{margin-top:12px;color:var(--ink-soft);line-height:1.6;font-size:.98rem;max-width:66ch;}
+
+  /* ===== FOOTER / SIGNUP ===== */
+  footer{background:var(--olive);color:var(--paper);padding:clamp(56px,8vw,90px) 0 32px;}
+  .foot-top{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(28px,5vw,56px);padding-bottom:44px;border-bottom:1px solid rgba(242,238,227,.2);}
+  .foot-top h2{font-family:var(--display);font-size:clamp(1.9rem,3.6vw,2.6rem);margin-bottom:.4em;}
+  .foot-top p{color:rgba(242,238,227,.8);max-width:44ch;line-height:1.55;margin-bottom:22px;}
+  .signup{display:flex;gap:10px;max-width:440px;flex-wrap:wrap;}
+  .signup input{
+    flex:1;min-width:180px;padding:.9em 1.1em;border-radius:999px;border:1.5px solid rgba(242,238,227,.35);
+    background:rgba(21,19,15,.18);color:var(--paper);font-family:var(--body);font-size:.95rem;
+  }
+  .signup input::placeholder{color:rgba(242,238,227,.55);}
+  .signup input:focus{outline:2px solid var(--paper);outline-offset:2px;}
+  .signup-msg{font-family:var(--mono);font-size:.85rem;margin-top:12px;color:var(--mustard);min-height:1.4em;}
+  .foot-links h4{font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(242,238,227,.6);margin-bottom:14px;}
+  .foot-links ul{display:flex;flex-direction:column;gap:10px;}
+  .foot-links a{text-decoration:none;font-size:.95rem;}
+  .foot-links a:hover{text-decoration:underline;}
+  .foot-cols{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding-top:26px;font-family:var(--mono);font-size:.78rem;color:rgba(242,238,227,.55);}
+  @media (max-width:760px){.foot-top{grid-template-columns:1fr;}}
+
+  :focus-visible{outline:2px solid var(--snap);outline-offset:3px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <a href="#top" class="wordmark">
+      SWEAR<span class="b">BAND</span>
+      <svg viewBox="0 0 90 10" class="squiggle" aria-hidden="true"><path d="M1 6 Q 12 1, 23 6 T 45 6 T 67 6 T 89 6" fill="none" stroke="#FF4300" stroke-width="2.4" stroke-linecap="round"/></svg>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#works">How It Works</a></li>
+      <li><a href="#sayings">Sayings</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:6px;">
+      <a href="#pricing" class="btn btn-snap nav-cta">Shop Bands</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Pre-order list open · shipping soon</span>
+        <h1>SNAP OUT<br>OF <em>IT.</em></h1>
+        <p class="lede">Swear Band is a thicker, wrist-sized snap band with your reminder printed right on it. Catch the word, pop the band, feel it, remember it. It's aversion training you wear.</p>
+        <div class="hero-ctas">
+          <a href="#pricing" class="btn btn-snap">Shop Bands — from $7</a>
+          <a href="#works" class="btn btn-ghost-paper">See how it works</a>
+        </div>
+        <ul class="hero-trust">
+          <li><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>90-day snap guarantee</li>
+          <li><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Free shipping over $20</li>
+          <li><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>8 sayings to choose from</li>
+        </ul>
+      </div>
+
+      <div class="demo">
+        <div class="demo-swatches" id="swatches"></div>
+        <div class="band-stage">
+          <svg viewBox="0 0 300 300" aria-hidden="true">
+            <defs>
+              <path id="ringPath" d="M150,40 a110,110 0 1,1 -0.1,0" fill="none"/>
+            </defs>
+            <g class="burst" id="burst">
+              <line x1="150" y1="150" x2="150" y2="14" transform="rotate(0 150 150)"/>
+              <line x1="150" y1="150" x2="150" y2="14" transform="rotate(45 150 150)"/>
+              <line x1="150" y1="150" x2="150" y2="14" transform="rotate(90 150 150)"/>
+              <line x1="150" y1="150" x2="150" y2="14" transform="rotate(135 150 150)"/>
+              <line x1="150" y1="150" x2="150" y2="14" transform="rotate(180 150 150)"/>
+              <line x1="150" y1="150" x2="150" y2="14" transform="rotate(225 150 150)"/>
+              <line x1="150" y1="150" x2="150" y2="14" transform="rotate(270 150 150)"/>
+              <line x1="150" y1="150" x2="150" y2="14" transform="rotate(315 150 150)"/>
+            </g>
+            <g id="bandRing">
+              <circle cx="150" cy="150" r="110" fill="none" stroke="#FF4300" stroke-width="46" id="ringColor"/>
+              <circle cx="150" cy="150" r="110" fill="none" stroke="#000" stroke-opacity=".12" stroke-width="46" stroke-dasharray="2 14" stroke-linecap="round"/>
+              <text font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" letter-spacing="3" fill="#F2EEE3" id="ringText">
+                <textPath href="#ringPath" startOffset="0%">SWEAR BAND &#8226; SWEAR BAND &#8226; SWEAR BAND &#8226; </textPath>
+              </text>
+            </g>
+          </svg>
+        </div>
+        <p class="demo-tap-hint">↑ tap the band to pop it</p>
+        <p class="tally">WORDS CAUGHT TODAY: <b id="tallyCount">0</b></p>
+        <button class="tally-reset" id="tallyReset">reset counter</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON -->
+  <section class="compare light">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">The obvious question</span>
+        <h2>Why not just grab a rubber band off your desk?</h2>
+        <p>Fair question. Here's what an actual habit tool does that a stray office band doesn't.</p>
+      </div>
+
+      <div class="compare-table">
+        <div class="compare-row">
+          <div class="cell">&nbsp;</div>
+          <div class="cell">Office rubber band</div>
+          <div class="cell">Swear Band</div>
+        </div>
+        <div class="compare-row">
+          <div class="cell">Built for a wrist</div>
+          <div class="cell no">Sized for paper &amp; produce — slips off or cuts in</div>
+          <div class="cell yes"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>One adult size, cut for a wrist</div>
+        </div>
+        <div class="compare-row">
+          <div class="cell">Snap without injury</div>
+          <div class="cell no">Thin gauge, snaps a hard, unpredictable pinch</div>
+          <div class="cell yes"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Thicker silicone-blend — a firm snap, not a cut</div>
+        </div>
+        <div class="cell-note" style="display:none;"></div>
+        <div class="compare-row">
+          <div class="cell">Visible reminder</div>
+          <div class="cell no">Just a band — no message, no accountability</div>
+          <div class="cell yes"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Your reminder printed right on it, visible to you and everyone else</div>
+        </div>
+        <div class="compare-row">
+          <div class="cell">Lasts / durable</div>
+          <div class="cell no">Dries out and snaps clean off in days</div>
+          <div class="cell yes"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Built to last — plus a 90-day replacement guarantee</div>
+        </div>
+        <div class="compare-row">
+          <div class="cell">Always a spare</div>
+          <div class="cell no">Once it snaps, you're back to bare-wristed and swearing</div>
+          <div class="cell yes"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Multi-packs mean a backup is already in the drawer</div>
+        </div>
+      </div>
+
+      <div class="why-strip">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <p><strong>The honest answer:</strong> the rubber band trick works because it's immediate, physical, and slightly annoying. A real habit tool just makes sure that jolt is <em>consistent</em> — same snap, same reminder, every single time — instead of whatever's rattling around in your desk drawer that day.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="works">
+    <div class="wrap">
+      <div class="sec-head dark">
+        <span class="eyebrow">Three steps. That's the whole system.</span>
+        <h2>Wear it. Say it. Pop it.</h2>
+        <p>No app, no streaks to log, nothing to charge. The correction happens on your wrist, in the moment, every time.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="num">01 — WEAR</span>
+          <h3>Slide it on.</h3>
+          <p>Pick a saying, pick a color, wear it like any wristband. It sits loose enough to forget about — until you need it.</p>
+        </div>
+        <div class="step">
+          <span class="num">02 — SAY</span>
+          <h3>Catch the word.</h3>
+          <p>The second it slips out — mid-sentence, mid-traffic, mid-meeting — you already know. That's the whole point.</p>
+        </div>
+        <div class="step">
+          <span class="num">03 — POP</span>
+          <h3>Snap it back.</h3>
+          <p>One quick pop against the wrist. Harmless, immediate, impossible to ignore. Your brain starts connecting the two.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAYINGS -->
+  <section class="sayings" id="sayings">
+    <div class="wrap">
+      <div class="sec-head light">
+        <span class="eyebrow">Pick your reminder</span>
+        <h2>Say what you mean. Wear what you need.</h2>
+        <p>Every band ships with a saying printed on the outside — pick the one that'll actually stop you mid-word.</p>
+      </div>
+      <div class="say-grid">
+        <div class="say-card c1"><span class="tag">Direct</span><span class="say">Mind Your Mouth.</span></div>
+        <div class="say-card c2"><span class="tag">Blunt</span><span class="say">Say It. Pay For It.</span></div>
+        <div class="say-card c3"><span class="tag">Simple</span><span class="say">Break The Habit, Not The Band.</span></div>
+        <div class="say-card c4"><span class="tag">Practical</span><span class="say">Watch Your Mouth.</span></div>
+        <div class="say-card c5"><span class="tag">Snappy</span><span class="say">Pop It. Stop It.</span></div>
+        <div class="say-card c6"><span class="tag">Plain</span><span class="say">Bad Word. Bad Idea.</span></div>
+        <div class="say-card c7"><span class="tag">Teacher-approved</span><span class="say">Curse. Pop. Learn.</span></div>
+        <div class="say-card c8"><span class="tag">Ambitious</span><span class="say">Mind Your Mouth. Change Your Life.</span></div>
+      </div>
+      <p class="say-note">Ordering for a team, a classroom, or the whole family? Every pack lets you mix sayings — no two wrists have to match.</p>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="wrap">
+      <div class="sec-head dark">
+        <span class="eyebrow">Pre-launch pricing</span>
+        <h2>Fewer bands cost more per band. Simple as that.</h2>
+        <p>Pick a pack — the total updates as you go, shipping included.</p>
+      </div>
+
+      <div class="price-layout">
+        <div class="packs" id="packs">
+          <button class="pack" data-qty="1" data-price="7" data-label="Single Band">
+            <span class="radio"></span>
+            <span>
+              <span class="name">Single Band</span><br>
+              <span class="sub">1 band, 1 saying of your choice</span>
+            </span>
+            <span class="price">$7</span>
+          </button>
+          <button class="pack" data-qty="3" data-price="15" data-label="3-Pack">
+            <span class="radio"></span>
+            <span>
+              <span class="name">3-Pack</span><br>
+              <span class="sub">$5.00 / band</span><br>
+              <span class="badge">Save 29%</span>
+            </span>
+            <span class="price">$15</span>
+          </button>
+          <button class="pack" data-qty="5" data-price="20" data-label="5-Pack">
+            <span class="radio"></span>
+            <span>
+              <span class="name">5-Pack</span><br>
+              <span class="sub">$4.00 / band</span><br>
+              <span class="badge">Save 43% + free shipping</span>
+            </span>
+            <span class="price">$20</span>
+          </button>
+        </div>
+
+        <div class="summary">
+          <h3>Order summary</h3>
+          <div class="sum-row"><span id="sumLabel">3-Pack</span><span id="sumQty">3 bands</span></div>
+          <div class="sum-row"><span>Subtotal</span><span id="sumSubtotal">$15.00</span></div>
+          <div class="sum-row"><span>Shipping</span><span id="sumShip">$3.99</span></div>
+          <div class="sum-row total"><span>Total</span><span id="sumTotal">$18.99</span></div>
+          <p class="ship-note" id="shipNote"></p>
+          <a href="#join" class="btn btn-snap">Reserve at this price</a>
+          <p class="fine">Pricing is pre-launch and may be finalized before bands ship. Flat $3.99 shipping, free automatically over $20.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="wrap">
+      <div class="sec-head light">
+        <span class="eyebrow">Before you order</span>
+        <h2>Questions, answered directly.</h2>
+      </div>
+      <div class="faq-list">
+        <details open>
+          <summary>Does it actually hurt?<span class="plus"></span></summary>
+          <p>No — it's built to be noticeable, not painful. Think firm snap, not injury. The goal is a jolt sharp enough that your brain files it under "don't do that again," nothing more.</p>
+        </details>
+        <details>
+          <summary>What's it made of?<span class="plus"></span></summary>
+          <p>A thicker silicone-blend band, cut wider and rounder at the edges than a standard office rubber band so it snaps flat against skin instead of pinching a fold of it.</p>
+        </details>
+        <details>
+          <summary>What size is it?<span class="plus"></span></summary>
+          <p>One universal adult size, fitting roughly a 5.5"–8" wrist. Let us know in your order notes if you need a petite or XL fit — we're sizing a second run based on early demand.</p>
+        </details>
+        <details>
+          <summary>Can I choose my own saying?<span class="plus"></span></summary>
+          <p>Yes. Every pack lets you pick from the full saying library, and multi-packs can mix and match — no two bands have to say the same thing.</p>
+        </details>
+        <details>
+          <summary>What if one snaps or wears out?<span class="plus"></span></summary>
+          <p>We'll replace it free within 90 days of normal use. That's the deal — a habit tool that quits on you before the habit does isn't worth wearing.</p>
+        </details>
+        <details>
+          <summary>Do you do bulk or team orders?<span class="plus"></span></summary>
+          <p>Absolutely — classrooms, offices, and sports teams running a group "swear jar" challenge get a discount past 10 bands. Join the list below and mention it in your first email.</p>
+        </details>
+        <details>
+          <summary>When do bands actually ship?<span class="plus"></span></summary>
+          <p>We're pre-launch and finalizing our first production run now. Reserve your pack and we'll email the moment bands are ready to ship — pricing shown today is honored for everyone on the list.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="join">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <span class="eyebrow" style="color:var(--mustard);">Get in early</span>
+        <h2>Be the first to hear when bands ship.</h2>
+        <p>No spam — just a launch date, tracking, and early access to new sayings before they go public.</p>
+        <form class="signup" id="signupForm">
+          <input type="email" required placeholder="you@email.com" aria-label="Email address" id="signupEmail">
+          <button type="submit" class="btn btn-snap">Join the pre-launch list</button>
+        </form>
+        <p class="signup-msg" id="signupMsg"></p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-links">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="#pricing">Single band — $7</a></li>
+            <li><a href="#pricing">3-pack — $15</a></li>
+            <li><a href="#pricing">5-pack — $20</a></li>
+            <li><a href="#sayings">All sayings</a></li>
+          </ul>
+        </div>
+        <div class="foot-links">
+          <h4>Shipping</h4>
+          <ul>
+            <li>Flat rate $3.99</li>
+            <li>Free over $20</li>
+            <li>90-day snap guarantee</li>
+            <li><a href="#faq">Full FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>SWEAR BAND — a habit tool, not a punishment.</span>
+      <span>Concept site for internal review · pricing subject to change</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // mobile nav
+  var burger = document.getElementById('hamburger');
+  var links = document.getElementById('navLinks');
+  burger.addEventListener('click', function(){
+    var open = links.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  links.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ links.classList.remove('open'); burger.setAttribute('aria-expanded','false'); });
+  });
+
+  // color swatches shared by demo
+  var colors = [
+    {hex:'#FF4300', name:'Snap Orange'},
+    {hex:'#15130F', name:'Ink Black'},
+    {hex:'#1E7A7A', name:'Teal'},
+    {hex:'#5C6B3F', name:'Olive'},
+    {hex:'#1F3A52', name:'Navy'},
+    {hex:'#D8A24A', name:'Mustard'}
+  ];
+  var swatchWrap = document.getElementById('swatches');
+  colors.forEach(function(c, i){
+    var b = document.createElement('button');
+    b.className = 'swatch' + (i===0 ? ' active' : '');
+    b.style.background = c.hex;
+    b.setAttribute('aria-label', c.name);
+    b.addEventListener('click', function(){
+      swatchWrap.querySelectorAll('.swatch').forEach(function(s){ s.classList.remove('active'); });
+      b.classList.add('active');
+      document.getElementById('ringColor').setAttribute('stroke', c.hex);
+      var textFill = (c.hex === '#D8A24A' || c.hex === '#FF4300') ? '#15130F' : '#F2EEE3';
+      document.getElementById('ringText').setAttribute('fill', textFill);
+    });
+    swatchWrap.appendChild(b);
+  });
+
+  // pop demo
+  var ring = document.getElementById('bandRing');
+  var burst = document.getElementById('burst');
+  var tallyEl = document.getElementById('tallyCount');
+  var count = 0;
+  try { count = parseInt(localStorage.getItem('swearband_tally') || '0', 10) || 0; } catch(e){}
+  tallyEl.textContent = count;
+
+  function pop(){
+    count++;
+    tallyEl.textContent = count;
+    try { localStorage.setItem('swearband_tally', String(count)); } catch(e){}
+    ring.classList.remove('snap'); void ring.offsetWidth; ring.classList.add('snap');
+    burst.classList.remove('go'); void burst.offsetWidth; burst.classList.add('go');
+  }
+  document.querySelector('.band-stage').addEventListener('click', pop);
+  document.querySelector('.band-stage').style.cursor = 'pointer';
+
+  document.getElementById('tallyReset').addEventListener('click', function(){
+    count = 0; tallyEl.textContent = 0;
+    try { localStorage.setItem('swearband_tally', '0'); } catch(e){}
+  });
+
+  // pricing calculator
+  var packs = document.querySelectorAll('.pack');
+  var sumLabel = document.getElementById('sumLabel');
+  var sumQty = document.getElementById('sumQty');
+  var sumSubtotal = document.getElementById('sumSubtotal');
+  var sumShip = document.getElementById('sumShip');
+  var sumTotal = document.getElementById('sumTotal');
+  var shipNote = document.getElementById('shipNote');
+
+  function selectPack(pack){
+    packs.forEach(function(p){ p.classList.remove('active'); });
+    pack.classList.add('active');
+    var qty = parseInt(pack.dataset.qty, 10);
+    var price = parseFloat(pack.dataset.price);
+    var label = pack.dataset.label;
+    var shipping = price >= 20 ? 0 : 3.99;
+    var total = price + shipping;
+
+    sumLabel.textContent = label;
+    sumQty.textContent = qty + (qty === 1 ? ' band' : ' bands');
+    sumSubtotal.textContent = '$' + price.toFixed(2);
+    sumShip.textContent = shipping === 0 ? 'FREE' : '$' + shipping.toFixed(2);
+    sumTotal.textContent = '$' + total.toFixed(2);
+
+    if (shipping === 0) {
+      shipNote.textContent = "You've unlocked free shipping.";
+    } else {
+      var needed = (20 - price).toFixed(2);
+      shipNote.textContent = 'Add $' + needed + ' more to get free shipping.';
+    }
+  }
+  packs.forEach(function(p){ p.addEventListener('click', function(){ selectPack(p); }); });
+  selectPack(packs[1]);
+
+  // mock signup
+  document.getElementById('signupForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var email = document.getElementById('signupEmail').value;
+    document.getElementById('signupMsg').textContent = "You're on the list — we'll email " + email + " the moment bands ship.";
+    this.reset();
+  });
+})();
+</script>
+
+</body>
+</html>
