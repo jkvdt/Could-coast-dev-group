@@ -838,15 +838,39 @@
     try {
       audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
       var t = audioCtx.currentTime;
-      var osc = audioCtx.createOscillator();
-      var gain = audioCtx.createGain();
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(900, t);
-      osc.frequency.exponentialRampToValueAtTime(120, t + 0.09);
-      gain.gain.setValueAtTime(0.22, t);
-      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
-      osc.connect(gain).connect(audioCtx.destination);
-      osc.start(t); osc.stop(t + 0.13);
+
+      // the "crack" — a short burst of filtered noise, like rubber against skin
+      var dur = 0.09;
+      var len = Math.max(1, Math.round(audioCtx.sampleRate * dur));
+      var buffer = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
+      var data = buffer.getChannelData(0);
+      for (var i = 0; i < len; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.2);
+      }
+      var noise = audioCtx.createBufferSource();
+      noise.buffer = buffer;
+      var bandpass = audioCtx.createBiquadFilter();
+      bandpass.type = 'bandpass';
+      bandpass.frequency.setValueAtTime(2600, t);
+      bandpass.frequency.exponentialRampToValueAtTime(1200, t + dur);
+      bandpass.Q.value = 0.9;
+      var noiseGain = audioCtx.createGain();
+      noiseGain.gain.setValueAtTime(0.9, t);
+      noiseGain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+      noise.connect(bandpass).connect(noiseGain).connect(audioCtx.destination);
+
+      // the "thud" — a quick low-end thump for skin contact
+      var thump = audioCtx.createOscillator();
+      var thumpGain = audioCtx.createGain();
+      thump.type = 'sine';
+      thump.frequency.setValueAtTime(190, t);
+      thump.frequency.exponentialRampToValueAtTime(60, t + 0.055);
+      thumpGain.gain.setValueAtTime(0.5, t);
+      thumpGain.gain.exponentialRampToValueAtTime(0.001, t + 0.06);
+      thump.connect(thumpGain).connect(audioCtx.destination);
+
+      noise.start(t); noise.stop(t + dur);
+      thump.start(t); thump.stop(t + 0.06);
     } catch(e){}
   }
   soundBtn.addEventListener('click', function(){
